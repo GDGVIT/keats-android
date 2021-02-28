@@ -4,32 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.auth.SignInFragment">
-
+    tools:context=".ui.auth.VerifyOtpFragment">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/phone_text_input_layout"
+        android:id="@+id/otp_text_input_layout"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Enter Phone"
-        app:layout_constraintBottom_toTopOf="@+id/send_otp"
+        android:hint="Enter OTP"
+        app:layout_constraintBottom_toTopOf="@+id/verify_otp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.8">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/phone_number"
+            android:id="@+id/sent_otp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/send_otp"
+        android:id="@+id/verify_otp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Send OTP"
+        android:text="Verify OTP"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
