@@ -1,4 +1,4 @@
-package com.dscvit.keats
+package com.dscvit.keats.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
