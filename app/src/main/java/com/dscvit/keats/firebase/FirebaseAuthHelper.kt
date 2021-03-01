@@ -3,7 +3,6 @@ package com.dscvit.keats.firebase
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
-import android.view.View
 import androidx.core.content.edit
 import androidx.navigation.findNavController
 import com.dscvit.keats.R
@@ -23,11 +22,16 @@ import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
-class AuthHelper(val context: Context, private val view: View, private val activity: Activity) {
-    val sharedPref: SharedPreferences = activity.getSharedPreferences(PREF_NAME, PRIVATE_MODE)
+class FirebaseAuthHelper @Inject constructor(
+    val context: Context,
+    private val activity: Activity
+) {
+    val sharedPref: SharedPreferences =
+        activity.getSharedPreferences(PREF_NAME, PRIVATE_MODE)
     var verificationId = ""
-    lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
+    private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val navController by lazy {
         activity.findNavController(R.id.nav_host_fragment)
