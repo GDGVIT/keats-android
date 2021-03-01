@@ -19,7 +19,7 @@ open class BaseRepo {
                 emit(Result.success(response.data))
             }
             Result.Status.ERROR -> {
-                emit(Result.error(data = null, message = response.message ?: "Error"))
+                emit(Result.error(response.message ?: "Error", null))
             }
             else -> {
             }

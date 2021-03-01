@@ -33,9 +33,8 @@ class SignInFragment : Fragment() {
         val sharedPreferences: SharedPreferences =
             PreferenceHelper.customPrefs(requireContext(), Constants.PREF_NAME)
         binding.sendOtp.setOnClickListener {
-//            viewModel.sendOtp(binding.phoneNumber)
-            val authHelper = FirebaseAuthHelper(requireContext(), requireActivity())
-            authHelper.sendOtp(binding.phoneNumber)
+            val authHelper = FirebaseAuthHelper(requireContext(), requireActivity(), viewModel)
+            authHelper.sendOtp(binding.phoneNumber.text.toString())
             sharedPreferences[Constants.PREF_PHONE_NUMBER] = binding.phoneNumber.text.toString()
         }
     }

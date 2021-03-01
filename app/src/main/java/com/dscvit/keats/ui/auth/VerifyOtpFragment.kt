@@ -1,7 +1,6 @@
 package com.dscvit.keats.ui.auth
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,10 +33,8 @@ class VerifyOtpFragment : Fragment() {
         PreferenceHelper.customPrefs(requireContext(), Constants.PREF_NAME)
         binding.verifyOtp.setOnClickListener {
             if (binding.sentOtp.text?.length == 6) {
-                val authHelper = FirebaseAuthHelper(requireContext(), requireActivity())
-                val token = authHelper.authenticate(binding.sentOtp).toString()
-//                val token = viewModel.verifyOtp(binding.sentOtp).toString()
-                Log.i("I/ID_TOKEN", token)
+                val authHelper = FirebaseAuthHelper(requireContext(), requireActivity(), viewModel)
+                authHelper.authenticate(binding.sentOtp.text.toString())
             } else {
                 requireContext().shortToast("Enter a six digit OTP")
             }
