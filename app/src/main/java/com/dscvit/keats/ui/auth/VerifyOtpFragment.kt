@@ -12,7 +12,9 @@ import com.dscvit.keats.firebase.AuthHelper
 import com.dscvit.keats.utils.Constants
 import com.dscvit.keats.utils.PreferenceHelper
 import com.dscvit.keats.utils.shortToast
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class VerifyOtpFragment : Fragment() {
     private lateinit var binding: FragmentVerifyOtpBinding
     override fun onCreateView(
@@ -27,17 +29,15 @@ class VerifyOtpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {}
-        val sharedPrefs = PreferenceHelper.customPrefs(requireContext(), Constants.PREF_NAME)
-        lateinit var token: String
+        PreferenceHelper.customPrefs(requireContext(), Constants.PREF_NAME)
         binding.verifyOtp.setOnClickListener {
             if (binding.sentOtp.text?.length == 6) {
                 val authHelper = AuthHelper(requireContext(), view, requireActivity())
-                token = authHelper.authenticate(binding.sentOtp).toString()
+                val token = authHelper.authenticate(binding.sentOtp).toString()
+                Log.i("I/ID_TOKEN", token)
             } else {
                 requireContext().shortToast("Enter a six digit OTP")
-                token = "Random Token"
             }
         }
-        token.let { Log.i("I/VerifyOTP", it) }
     }
 }
