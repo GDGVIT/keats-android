@@ -1,5 +1,11 @@
 package com.dscvit.keats.repository
 
+import com.dscvit.keats.model.login.LoginRequest
+import com.dscvit.keats.network.ApiClient
 import javax.inject.Inject
 
-class AppRepository @Inject constructor() : BaseRepo()
+class AppRepository @Inject constructor(private val apiClient: ApiClient) : BaseRepo() {
+    fun loginUser(loginRequest: LoginRequest) = makeRequest {
+        apiClient.loginUser(loginRequest)
+    }
+}

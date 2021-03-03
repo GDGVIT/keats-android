@@ -81,4 +81,19 @@ dependencies {
     implementation platform("com.google.firebase:firebase-bom:$firebase_bom_version")
     implementation "com.google.firebase:firebase-analytics-ktx"
     implementation 'com.google.firebase:firebase-auth'
+
+    // Retrofit
+    def retrofit_version = "2.9.0"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
+
+    // Moshi
+    def moshi_version = "1.11.0"
+    implementation "com.squareup.moshi:moshi:$moshi_version"
+    implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
+
+    def glide_version = '4.12.0'
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
 }

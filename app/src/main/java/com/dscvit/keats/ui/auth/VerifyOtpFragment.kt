@@ -31,9 +31,14 @@ class VerifyOtpFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {}
         PreferenceHelper.customPrefs(requireContext(), Constants.PREF_NAME)
+        val authHelper = FirebaseAuthHelper(
+            viewLifecycleOwner,
+            requireContext(),
+            requireActivity(),
+            viewModel
+        )
         binding.verifyOtp.setOnClickListener {
             if (binding.sentOtp.text?.length == 6) {
-                val authHelper = FirebaseAuthHelper(requireContext(), requireActivity(), viewModel)
                 authHelper.authenticate(binding.sentOtp.text.toString())
             } else {
                 requireContext().shortToast("Enter a six digit OTP")

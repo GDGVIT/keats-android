@@ -12,6 +12,7 @@ import com.dscvit.keats.firebase.FirebaseAuthHelper
 import com.dscvit.keats.utils.Constants
 import com.dscvit.keats.utils.PreferenceHelper
 import com.dscvit.keats.utils.PreferenceHelper.set
+import com.dscvit.keats.utils.shortToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,10 +33,20 @@ class SignInFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val sharedPreferences: SharedPreferences =
             PreferenceHelper.customPrefs(requireContext(), Constants.PREF_NAME)
+        val authHelper = FirebaseAuthHelper(
+            viewLifecycleOwner,
+            requireContext(),
+            requireActivity(),
+            viewModel
+        )
         binding.sendOtp.setOnClickListener {
-            val authHelper = FirebaseAuthHelper(requireContext(), requireActivity(), viewModel)
-            authHelper.sendOtp(binding.phoneNumber.text.toString())
-            sharedPreferences[Constants.PREF_PHONE_NUMBER] = binding.phoneNumber.text.toString()
+            val phone = binding.phoneNumber.text.toString()
+            if (phone.length != 10) {
+                requireContext().shortToast("Enter a valid phone number")
+            } else {
+                authHelper.sendOtp(phone)
+                sharedPreferences[Constants.PREF_PHONE_NUMBER] = phone
+            }
         }
     }
 }

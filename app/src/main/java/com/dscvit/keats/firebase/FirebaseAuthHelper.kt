@@ -4,12 +4,16 @@ import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
+import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.findNavController
 import com.dscvit.keats.R
+import com.dscvit.keats.model.Result
+import com.dscvit.keats.model.login.LoginRequest
 import com.dscvit.keats.ui.auth.AuthViewModel
 import com.dscvit.keats.ui.auth.SignInFragmentDirections
-import com.dscvit.keats.utils.Constants.PREF_NAME
-import com.dscvit.keats.utils.Constants.PRIVATE_MODE
+import com.dscvit.keats.utils.Constants
+import com.dscvit.keats.utils.PreferenceHelper
+import com.dscvit.keats.utils.PreferenceHelper.get
 import com.dscvit.keats.utils.longToast
 import com.dscvit.keats.utils.shortToast
 import com.google.android.gms.tasks.Task
@@ -24,12 +28,13 @@ import com.google.firebase.auth.PhoneAuthProvider
 import java.util.concurrent.TimeUnit
 
 class FirebaseAuthHelper(
+    private val lifecycleOwner: LifecycleOwner,
     val context: Context,
     private val activity: Activity,
     private val viewModel: AuthViewModel
 ) {
     val sharedPref: SharedPreferences =
-        activity.getSharedPreferences(PREF_NAME, PRIVATE_MODE)
+        PreferenceHelper.customPrefs(context, Constants.PREF_NAME)
     var verificationId = ""
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -80,26 +85,45 @@ class FirebaseAuthHelper(
     }
 
     private fun signIn(credential: PhoneAuthCredential) {
-        auth.signInWithCredential(credential)
-            .addOnCompleteListener { task: Task<AuthResult> ->
-                if (task.isSuccessful) {
-                    context.shortToast("OTP Verified")
-                    task.result?.user?.getIdToken(true)
-                        ?.addOnCompleteListener {
-                            if (it.isSuccessful) {
-                                viewModel.signIn(context, it.result?.token.toString())
-                            } else {
-                                context.longToast("Error in getting ID Token")
+        auth.signInWithCredential(credential).addOnCompleteListener { task: Task<AuthResult> ->
+            if (task.isSuccessful) {
+                context.shortToast("OTP Verified")
+                task.result?.user?.getIdToken(true)?.addOnCompleteListener { tokenTask ->
+                    if (tokenTask.isSuccessful) {
+                        val loginRequest = LoginRequest(IdToken = tokenTask.result?.token.toString())
+                        viewModel.signIn(loginRequest).observe(
+                            lifecycleOwner,
+                            {
+                                when (it.status) {
+                                    Result.Status.LOADING -> {
+                                    }
+                                    Result.Status.SUCCESS -> {
+                                        if (it.data?.Status == "success") {
+                                            context.longToast(it.data.Token)
+                                            sharedPref.edit {
+                                                putString(Constants.PREF_AUTH_KEY, it.data.Token)
+                                                commit()
+                                            }
+                                        }
+                                    }
+                                    Result.Status.ERROR -> {
+                                        context.longToast("There was an error calling backend")
+                                    }
+                                }
                             }
-                        }
-                } else {
-                    context.longToast("Wrong OTP")
+                        )
+                    } else {
+                        context.longToast("Error in getting ID Token")
+                    }
                 }
+            } else {
+                context.longToast("Wrong OTP")
             }
+        }
     }
 
     fun authenticate(otp: String) {
-        val verId = sharedPref.getString("VER_ID", "")
+        val verId = sharedPref["VER_ID", ""]
         val credential: PhoneAuthCredential = PhoneAuthProvider.getCredential(verId!!, otp)
         signIn(credential)
     }
