@@ -6,6 +6,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import timber.log.Timber
 
 object PreAuthApiService {
     fun createRetrofit(moshi: Moshi): ApiInterface {
@@ -20,7 +21,7 @@ object PreAuthApiService {
 
     private fun getOkHttpClient(): OkHttpClient {
         val httpClient = OkHttpClient.Builder()
-        val logging = HttpLoggingInterceptor()
+        val logging = HttpLoggingInterceptor { message -> Timber.tag("OkHttp").d(message) }
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
         httpClient.addInterceptor { chain ->
             val original = chain.request()
