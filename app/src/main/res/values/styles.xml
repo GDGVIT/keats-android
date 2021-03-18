@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="BerlinButtonStyle" parent="Widget.MaterialComponents.Button.OutlinedButton">
+    <style name="BerlinButtonStyle" parent="Widget.MaterialComponents.Button">
         <item name="android:fontFamily">@font/berlin_regular</item>
     </style>
 

@@ -12,5 +12,5 @@ object Constants {
     const val PREF_TOKEN_IS_UPDATED = "PREF_TOKEN_IS_UPDATED"
     const val PREF_USER_ID = "PREF_USER_ID"
     const val PREF_CURR_CHAT_ROOM = "PREF_CURR_CHAT_ROOM"
-    const val SPLASH_SCREEN_DELAY: Long = 1000
+    const val SPLASH_SCREEN_DELAY: Long = 700
 }
