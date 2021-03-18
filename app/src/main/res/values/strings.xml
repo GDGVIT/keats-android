@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Keats</string>
+    <string name="enter_your_phone_number">Enter your phone number</string>
+    <string name="get_otp">Get OTP</string>
+    <string name="keats_logo">Keats Logo</string>
+    <string name="login_page_keats_svg">Login Page Keats SVG</string>
+    <string name="welcome_to_keats">Welcome to Keats!</string>
+    <string name="enter_phone_message">Enter your phone number to get started</string>
+    <string name="please_enter_your_otp_to_login">Please enter your OTP to login</string>
+    <string name="verify_otp">Verify OTP</string>
+    <string name="enter_otp">Enter OTP</string>
 </resources>

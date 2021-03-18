@@ -4,35 +4,89 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".ui.auth.SignInFragment">
 
+    <ImageView
+        android:id="@+id/top_keats_logo_svg"
+        android:layout_width="match_parent"
+        android:layout_height="393dp"
+        android:contentDescription="@string/login_page_keats_svg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_login_bg_component" />
+
+    <TextView
+        android:id="@+id/welcome_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/berlin_bold"
+        android:text="@string/welcome_to_keats"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.284"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_keats_logo_svg" />
+
+    <TextView
+        android:id="@+id/get_started_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="@string/enter_phone_message"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.284"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/welcome_text" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/phone_text_input_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Enter Phone"
-        app:layout_constraintBottom_toTopOf="@+id/send_otp"
+        android:layout_marginTop="24dp"
+        app:boxBackgroundColor="@color/box_stroke"
+        app:boxStrokeColor="@color/box_stroke"
+        app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8">
+        app:layout_constraintTop_toBottomOf="@+id/get_started_text">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/phone_number"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="50dp"
+            android:hint="@string/enter_your_phone_number"
+            android:inputType="phone"
+            tools:text="@tools:sample/us_phones"
+            style="@style/text_input_layout_style" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/send_otp"
+        style="@style/BerlinButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Send OTP"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:text="@string/get_otp"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.157"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/phone_text_input_layout"
+        app:layout_constraintVertical_bias="0.107"
+        app:strokeColor="@color/purple_500"
+        app:strokeWidth="3dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
