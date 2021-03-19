@@ -41,7 +41,9 @@ class SignInFragment : Fragment() {
             viewLifecycleOwner,
             requireContext(),
             requireActivity(),
-            viewModel
+            viewModel,
+            binding,
+            null
         )
         binding.sendOtp.setOnClickListener {
             val phone = binding.phoneNumber.text.toString()

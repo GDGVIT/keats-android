@@ -39,7 +39,9 @@ class VerifyOtpFragment : Fragment() {
             viewLifecycleOwner,
             requireContext(),
             requireActivity(),
-            viewModel
+            viewModel,
+            null,
+            binding
         )
         binding.verifyOtp.setOnClickListener {
             if (binding.sentOtp.text?.length == 6) {
