@@ -9,4 +9,5 @@
     <string name="please_enter_your_otp_to_login">Please enter your OTP to login</string>
     <string name="verify_otp">Verify OTP</string>
     <string name="enter_otp">Enter OTP</string>
+    <string name="default_svg_when_no_clubs">Default SVG when no clubs</string>
 </resources>

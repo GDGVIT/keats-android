@@ -2,6 +2,7 @@ package com.dscvit.keats.firebase
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import androidx.lifecycle.LifecycleOwner
@@ -9,6 +10,7 @@ import androidx.navigation.findNavController
 import com.dscvit.keats.R
 import com.dscvit.keats.model.Result
 import com.dscvit.keats.model.login.LoginRequest
+import com.dscvit.keats.ui.PostAuthActivity
 import com.dscvit.keats.ui.auth.AuthViewModel
 import com.dscvit.keats.ui.auth.SignInFragmentDirections
 import com.dscvit.keats.utils.Constants
@@ -90,7 +92,8 @@ class FirebaseAuthHelper(
                 context.shortToast("OTP Verified")
                 task.result?.user?.getIdToken(true)?.addOnCompleteListener { tokenTask ->
                     if (tokenTask.isSuccessful) {
-                        val loginRequest = LoginRequest(IdToken = tokenTask.result?.token.toString())
+                        val loginRequest =
+                            LoginRequest(IdToken = tokenTask.result?.token.toString())
                         viewModel.signIn(loginRequest).observe(
                             lifecycleOwner,
                             {
@@ -104,6 +107,10 @@ class FirebaseAuthHelper(
                                                 putString(Constants.PREF_AUTH_KEY, it.data.Token)
                                                 commit()
                                             }
+                                            val intent =
+                                                Intent(context, PostAuthActivity::class.java)
+                                            activity.startActivity(intent)
+                                            activity.finish()
                                         }
                                     }
                                     Result.Status.ERROR -> {

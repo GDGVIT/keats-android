@@ -11,7 +11,11 @@ import com.dscvit.keats.databinding.FragmentVerifyOtpBinding
 import com.dscvit.keats.firebase.FirebaseAuthHelper
 import com.dscvit.keats.utils.Constants
 import com.dscvit.keats.utils.PreferenceHelper
+import com.dscvit.keats.utils.disable
+import com.dscvit.keats.utils.enable
+import com.dscvit.keats.utils.hide
 import com.dscvit.keats.utils.shortToast
+import com.dscvit.keats.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -39,6 +43,10 @@ class VerifyOtpFragment : Fragment() {
         )
         binding.verifyOtp.setOnClickListener {
             if (binding.sentOtp.text?.length == 6) {
+                binding.verifyOtp.disable()
+                binding.verifyOtp.hide()
+                binding.verifyOtpProgressBar.enable()
+                binding.verifyOtpProgressBar.show()
                 authHelper.authenticate(binding.sentOtp.text.toString())
             } else {
                 requireContext().shortToast("Enter a six digit OTP")
