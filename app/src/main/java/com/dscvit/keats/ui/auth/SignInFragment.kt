@@ -54,7 +54,9 @@ class SignInFragment : Fragment() {
                 it.hide()
                 binding.getOtpProgressBar.show()
                 binding.getOtpProgressBar.enable()
-                authHelper.sendOtp(phone)
+                val countryCode = binding.countryCodePicker.selectedCountryCodeWithPlus
+                val finalPhoneNumber = "$countryCode$phone"
+                authHelper.sendOtp(finalPhoneNumber)
                 sharedPreferences[Constants.PREF_PHONE_NUMBER] = phone
             }
         }

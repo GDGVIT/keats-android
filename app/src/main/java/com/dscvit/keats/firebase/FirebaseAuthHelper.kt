@@ -83,9 +83,8 @@ class FirebaseAuthHelper(
 
     fun sendOtp(number: String) {
         verificationCallbacks()
-        val phoneNumber = "+91$number"
         val options = PhoneAuthOptions.newBuilder(auth)
-            .setPhoneNumber(phoneNumber) // Phone number to verify
+            .setPhoneNumber(number) // Phone number to verify
             .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
             .setActivity(activity) // Activity (for callback binding)
             .setCallbacks(callbacks) // OnVerificationStateChangedCallbacks
@@ -154,7 +153,7 @@ class FirebaseAuthHelper(
 
     private fun hideProgressBarAndShowButtonSignIn() {
         fragmentSignInBinding?.getOtpProgressBar?.disable()
-        fragmentSignInBinding?.getOtpProgressBar?.disable()
+        fragmentSignInBinding?.getOtpProgressBar?.hide()
         fragmentSignInBinding?.sendOtp?.enable()
         fragmentSignInBinding?.sendOtp?.show()
     }

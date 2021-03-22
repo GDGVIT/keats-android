@@ -42,6 +42,7 @@
         android:layout_marginTop="25dp"
         app:boxBackgroundColor="@color/box_stroke"
         app:boxStrokeColor="@color/box_stroke"
+        android:background="@drawable/edit_text_box_bg"
         app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
