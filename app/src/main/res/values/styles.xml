@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="BerlinButtonStyle" parent="Widget.MaterialComponents.Button">
-        <item name="android:fontFamily">@font/berlin_regular</item>
+    <style name="CircularSTDButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="android:fontFamily">@font/circular_std_book</item>
     </style>
 
     <style name="text_input_layout_style">

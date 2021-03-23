@@ -29,6 +29,7 @@
         android:text="@string/please_enter_your_otp_to_login"
         android:textColor="@color/white"
         android:textSize="23sp"
+        android:fontFamily="@font/circular_std_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="@+id/top_keats_logo_svg"
@@ -66,7 +67,7 @@
 
     <Button
         android:id="@+id/verify_otp"
-        style="@style/BerlinButtonStyle"
+        style="@style/CircularSTDButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="20dp"
