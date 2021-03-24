@@ -111,6 +111,7 @@ class FirebaseAuthHelper(
                                             context.longToast(it.data.Token)
                                             sharedPref.edit {
                                                 putString(Constants.PREF_AUTH_KEY, it.data.Token)
+                                                putBoolean(Constants.PREF_IS_LOGGED_IN, true)
                                                 commit()
                                             }
                                             val intent =
