@@ -6,6 +6,7 @@ plugins {
     id "androidx.navigation.safeargs"
     id 'dagger.hilt.android.plugin'
     id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -80,7 +81,8 @@ dependencies {
     def firebase_bom_version = "26.5.0"
     implementation platform("com.google.firebase:firebase-bom:$firebase_bom_version")
     implementation "com.google.firebase:firebase-analytics-ktx"
-    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
 
     // Retrofit
     def retrofit_version = "2.9.0"
