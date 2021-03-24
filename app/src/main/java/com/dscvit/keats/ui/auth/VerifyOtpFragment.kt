@@ -20,6 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class VerifyOtpFragment : Fragment() {
+
     private val viewModel: AuthViewModel by viewModels()
     private lateinit var binding: FragmentVerifyOtpBinding
     override fun onCreateView(

@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="box_stroke">#333540</color>
+    <color name="black_one">#1C1C1C</color>
 </resources>

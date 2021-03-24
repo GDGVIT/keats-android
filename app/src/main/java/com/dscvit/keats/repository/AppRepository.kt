@@ -8,4 +8,8 @@ class AppRepository @Inject constructor(private val apiClient: ApiClient) : Base
     fun loginUser(loginRequest: LoginRequest) = makeRequest {
         apiClient.loginUser(loginRequest)
     }
+
+    fun getClubs() = makeRequest {
+        apiClient.getClubs()
+    }
 }

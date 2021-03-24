@@ -7,5 +7,5 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ClubsListViewModel @Inject constructor(private val repo: AppRepository) : ViewModel() {
-    // TODO: Implement the ViewModel
+    fun getClubs() = repo.getClubs()
 }
