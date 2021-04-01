@@ -18,4 +18,5 @@
     <string name="club_host_url">club host photo</string>
     <string name="club_type_private">Private</string>
     <string name="club_type_public">Public</string>
+    <string name="user_profile_photo">User Profile Photo</string>
 </resources>

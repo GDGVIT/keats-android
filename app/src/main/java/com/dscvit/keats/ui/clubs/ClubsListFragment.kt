@@ -11,6 +11,7 @@ import com.dscvit.keats.R
 import com.dscvit.keats.adapter.ClubListAdapter
 import com.dscvit.keats.databinding.FragmentClubsListBinding
 import com.dscvit.keats.model.Result
+import com.dscvit.keats.ui.PostAuthActivity
 import com.dscvit.keats.utils.disable
 import com.dscvit.keats.utils.enable
 import com.dscvit.keats.utils.hide
@@ -58,6 +59,7 @@ class ClubsListFragment : Fragment() {
                     }
                     Result.Status.SUCCESS -> {
                         if (it.data?.Status == "success") {
+                            (requireActivity() as PostAuthActivity).setProfilePhoto(it.data.Data.User.ProfilePic)
                             val clubs = it.data.Data.Clubs
                             if (clubs != null) {
                                 clubsExistsShowViews()

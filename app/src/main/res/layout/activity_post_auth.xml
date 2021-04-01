@@ -20,7 +20,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:padding="5dp">
 
             <ImageView
                 android:id="@+id/keats_logo"
@@ -40,14 +41,32 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginBottom="25dp"
                 android:layout_toEndOf="@+id/keats_logo"
                 android:fontFamily="@font/circular_std_bold"
-                android:padding="5dp"
                 android:text="@string/app_name"
                 android:textColor="@color/white"
-                android:textSize="32sp" />
+                android:textSize="32sp"
+                tools:ignore="RelativeOverlap" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/profile_pic_card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="25dp"
+                app:cardCornerRadius="50dp">
+
+                <ImageView
+                    android:id="@+id/profile_pic"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:contentDescription="@string/user_profile_photo"
+                    app:srcCompat="@drawable/ic_default_photo" />
+            </androidx.cardview.widget.CardView>
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
 

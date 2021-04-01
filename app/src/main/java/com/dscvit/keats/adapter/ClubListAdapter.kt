@@ -2,6 +2,7 @@ package com.dscvit.keats.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -35,10 +36,12 @@ class ClubListAdapter :
                 "Public"
             }
             val clubHostImg = binding.clubHostPhoto
+            val imgUrl = clubs.HostProfile.toUri().buildUpon().scheme("https").build()
             Glide.with(clubHostImg.context)
-                .load(clubs.HostProfile)
+                .load(imgUrl)
                 .apply(
                     RequestOptions()
+                        .placeholder(R.drawable.ic_default_photo)
                         .error(R.drawable.ic_broken_image)
                 )
                 .into(clubHostImg)
