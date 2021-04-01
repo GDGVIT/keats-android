@@ -79,11 +79,12 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
     // Firebase
-    def firebase_bom_version = "26.5.0"
+    def firebase_bom_version = "26.8.0"
     implementation platform("com.google.firebase:firebase-bom:$firebase_bom_version")
     implementation "com.google.firebase:firebase-analytics-ktx"
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-storage-ktx'
 
     // Retrofit
     def retrofit_version = "2.9.0"
