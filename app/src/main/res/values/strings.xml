@@ -20,4 +20,7 @@
     <string name="club_type_public">Public</string>
     <string name="user_profile_photo">User Profile Photo</string>
     <string name="error_text">Oops! An error occurred</string>
+    <string name="profile_svg">Profile SVG</string>
+    <string name="bio_svg">Bio Svg</string>
+    <string name="cover_photo">Cover Photo</string>
 </resources>

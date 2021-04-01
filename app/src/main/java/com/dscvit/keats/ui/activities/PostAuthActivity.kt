@@ -63,4 +63,14 @@ class PostAuthActivity : AppCompatActivity() {
         binding.profilePic.show()
         binding.profilePic.enable()
     }
+
+    fun hideToolbar() {
+        binding.toolbar.hide()
+        binding.toolbar.disable()
+    }
+
+    fun showToolbar() {
+        binding.toolbar.show()
+        binding.toolbar.enable()
+    }
 }

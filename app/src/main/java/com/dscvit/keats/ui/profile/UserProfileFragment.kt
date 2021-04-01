@@ -13,7 +13,9 @@ import com.dscvit.keats.R
 import com.dscvit.keats.databinding.FragmentUserProfileBinding
 import com.dscvit.keats.model.Result
 import com.dscvit.keats.model.profile.UserEntity
+import com.dscvit.keats.ui.activities.PostAuthActivity
 import com.dscvit.keats.ui.clubs.UserProfileViewModel
+import com.dscvit.keats.utils.Constants
 import com.dscvit.keats.utils.disable
 import com.dscvit.keats.utils.enable
 import com.dscvit.keats.utils.hide
@@ -61,6 +63,8 @@ class UserProfileFragment : Fragment() {
     private fun showUserProfileViews(user: UserEntity) {
         binding.progressBar.hide()
         binding.progressBar.disable()
+        binding.coverPhoto.show()
+        binding.coverPhoto.enable()
         binding.profilePhoto.show()
         binding.profilePhoto.enable()
         binding.userContactCard.show()
@@ -81,5 +85,24 @@ class UserProfileFragment : Fragment() {
                     .error(R.drawable.ic_broken_image)
             )
             .into(profilePicImg)
+        val coverPicImg = binding.coverPhoto
+        val coverImgUri = Constants.COVER_PHOTO_URL.toUri().buildUpon().scheme("https").build()
+        Glide.with(coverPicImg.context)
+            .load(coverImgUri)
+            .apply(
+                RequestOptions()
+                    .error(R.drawable.ic_broken_image)
+            )
+            .into(coverPicImg)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (requireActivity() as PostAuthActivity).hideToolbar()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        (requireActivity() as PostAuthActivity).showToolbar()
     }
 }
