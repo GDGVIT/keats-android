@@ -12,7 +12,7 @@ import com.dscvit.keats.databinding.FragmentSignInBinding
 import com.dscvit.keats.databinding.FragmentVerifyOtpBinding
 import com.dscvit.keats.model.Result
 import com.dscvit.keats.model.login.LoginRequest
-import com.dscvit.keats.ui.PostAuthActivity
+import com.dscvit.keats.ui.activities.PostAuthActivity
 import com.dscvit.keats.ui.auth.AuthViewModel
 import com.dscvit.keats.ui.auth.SignInFragmentDirections
 import com.dscvit.keats.utils.Constants

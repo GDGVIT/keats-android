@@ -11,7 +11,7 @@ import com.dscvit.keats.R
 import com.dscvit.keats.adapter.ClubListAdapter
 import com.dscvit.keats.databinding.FragmentClubsListBinding
 import com.dscvit.keats.model.Result
-import com.dscvit.keats.ui.PostAuthActivity
+import com.dscvit.keats.ui.activities.PostAuthActivity
 import com.dscvit.keats.utils.disable
 import com.dscvit.keats.utils.enable
 import com.dscvit.keats.utils.hide
@@ -68,12 +68,19 @@ class ClubsListFragment : Fragment() {
                                 adapter.submitList(clubs)
                             } else {
                                 noClubsShowViews()
+                                if (fromSwipeRefresh) {
+                                    binding.clubsList.disable()
+                                    binding.clubsList.hide()
+                                }
                             }
                         }
                     }
                     Result.Status.ERROR -> {
-                        binding.progressBar.hide()
-                        binding.progressBar.disable()
+                        if (fromSwipeRefresh) {
+                            binding.clubsList.disable()
+                            binding.clubsList.hide()
+                        }
+                        errorOccurredShowViews()
                     }
                 }
             }
@@ -100,5 +107,18 @@ class ClubsListFragment : Fragment() {
         binding.createClub.enable()
         binding.joinClub.show()
         binding.joinClub.enable()
+    }
+
+    private fun errorOccurredShowViews() {
+        binding.progressBar.hide()
+        binding.progressBar.disable()
+        binding.clubsList.disable()
+        binding.clubsList.hide()
+        binding.lyingDownReadingSvg.setImageResource(R.drawable.ic_error_book)
+        binding.lyingDownReadingSvg.enable()
+        binding.lyingDownReadingSvg.show()
+        binding.joinFirstBookClubText.text = getString(R.string.error_text)
+        binding.joinFirstBookClubText.enable()
+        binding.joinFirstBookClubText.show()
     }
 }

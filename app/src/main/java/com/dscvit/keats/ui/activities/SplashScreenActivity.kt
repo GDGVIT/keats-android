@@ -1,4 +1,4 @@
-package com.dscvit.keats.ui
+package com.dscvit.keats.ui.activities
 
 import android.content.Intent
 import android.content.SharedPreferences

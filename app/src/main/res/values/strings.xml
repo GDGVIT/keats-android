@@ -19,4 +19,5 @@
     <string name="club_type_private">Private</string>
     <string name="club_type_public">Public</string>
     <string name="user_profile_photo">User Profile Photo</string>
+    <string name="error_text">Oops! An error occurred</string>
 </resources>
