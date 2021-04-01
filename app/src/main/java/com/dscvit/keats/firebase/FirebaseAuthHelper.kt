@@ -108,7 +108,7 @@ class FirebaseAuthHelper(
                                     }
                                     Result.Status.SUCCESS -> {
                                         if (it.data?.Status == "success") {
-                                            context.longToast(it.data.Token)
+                                            context.longToast("Login Success")
                                             sharedPref.edit {
                                                 putString(Constants.PREF_AUTH_KEY, it.data.Token)
                                                 putBoolean(Constants.PREF_IS_LOGGED_IN, true)

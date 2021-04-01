@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/black_one"
     tools:context=".ui.profile.UserProfileFragment">
 
     <ProgressBar
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:visibility="gone"
-        app:cardBackgroundColor="@color/black_one"
+        app:cardBackgroundColor="@color/black_two"
         app:cardCornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
@@ -79,7 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:visibility="gone"
-        app:cardBackgroundColor="@color/black_one"
+        app:cardBackgroundColor="@color/black_two"
         app:cardCornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

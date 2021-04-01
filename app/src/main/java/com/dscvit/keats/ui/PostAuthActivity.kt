@@ -1,9 +1,11 @@
 package com.dscvit.keats.ui
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.navigation.findNavController
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.dscvit.keats.R
@@ -30,13 +32,20 @@ class PostAuthActivity : AppCompatActivity() {
     }
 
     fun setProfilePhoto(profileImageUrl: String) {
+        val circularProgressDrawable = CircularProgressDrawable(this)
+        circularProgressDrawable.strokeWidth = 5f
+        circularProgressDrawable.centerRadius = 30f
+        circularProgressDrawable.setColorSchemeColors(
+            Color.argb(100, 244, 121, 18)
+        )
+        circularProgressDrawable.start()
         val profilePicImg = binding.profilePic
         val imgUri = profileImageUrl.toUri().buildUpon().scheme("https").build()
         Glide.with(profilePicImg.context)
             .load(imgUri)
             .apply(
                 RequestOptions()
-                    .placeholder(R.drawable.ic_default_photo)
+                    .placeholder(circularProgressDrawable)
                     .error(R.drawable.ic_broken_image)
             )
             .into(profilePicImg)

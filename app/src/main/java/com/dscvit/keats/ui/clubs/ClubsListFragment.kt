@@ -22,7 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class ClubsListFragment : Fragment() {
 
     private val viewModel: ClubsListViewModel by viewModels()
-    private val adapter = ClubListAdapter()
+    private lateinit var adapter: ClubListAdapter
     private lateinit var binding: FragmentClubsListBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,6 +30,7 @@ class ClubsListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentClubsListBinding.inflate(layoutInflater)
+        adapter = ClubListAdapter(requireContext())
         return binding.root
     }
 

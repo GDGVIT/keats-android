@@ -5,7 +5,6 @@
     android:id="@+id/main_club_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
     android:background="@drawable/club_list_item_bg_one"
     android:elevation="100dp"
@@ -45,7 +44,7 @@
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/club_name"
         app:layout_constraintTop_toBottomOf="@+id/club_name"
-        tools:text="host: testuser" />
+        tools:text="host:  test user" />
 
     <TextView
         android:id="@+id/club_type"
