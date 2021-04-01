@@ -30,7 +30,7 @@
         android:fontFamily="@font/circular_std_bold"
         android:text="@string/clubs"
         android:textColor="@color/white"
-        android:textSize="25sp"
+        android:textSize="28sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

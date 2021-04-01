@@ -1,4 +1,4 @@
-package com.dscvit.keats.model.clubs
+package com.dscvit.keats.model.profile
 
 import com.squareup.moshi.Json
 

@@ -2,7 +2,7 @@ package com.dscvit.keats.di.modules
 
 import android.content.Context
 import com.dscvit.keats.network.ApiInterface
-import com.dscvit.keats.network.AuthApiService
+import com.dscvit.keats.network.ApiService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -21,5 +21,5 @@ object AuthModule {
     fun authApiProvider(
         moshi: Moshi,
         @ApplicationContext context: Context
-    ): ApiInterface = AuthApiService.createRetrofit(moshi, context)
+    ): ApiInterface = ApiService.createRetrofit(moshi, context)
 }

@@ -10,7 +10,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import timber.log.Timber
 
-object AuthApiService {
+object ApiService {
     fun createRetrofit(moshi: Moshi, context: Context): ApiInterface {
         val retrofit = Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)

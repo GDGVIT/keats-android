@@ -104,4 +104,7 @@ dependencies {
 
     // Country Code Picker
     implementation 'com.hbb20:ccp:2.4.7'
+
+    // Circular Image View
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 }

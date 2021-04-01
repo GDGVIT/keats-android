@@ -9,5 +9,14 @@
         android:id="@+id/clubsListFragment"
         android:name="com.dscvit.keats.ui.clubs.ClubsListFragment"
         android:label="fragment_clubs_list"
-        tools:layout="@layout/fragment_clubs_list" />
+        tools:layout="@layout/fragment_clubs_list" >
+        <action
+            android:id="@+id/action_clubsListFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.dscvit.keats.ui.profile.UserProfileFragment"
+        android:label="fragment_user_profile"
+        tools:layout="@layout/fragment_user_profile" />
 </navigation>

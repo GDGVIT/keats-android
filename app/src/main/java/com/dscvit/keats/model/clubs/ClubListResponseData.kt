@@ -1,5 +1,6 @@
 package com.dscvit.keats.model.clubs
 
+import com.dscvit.keats.model.profile.UserEntity
 import com.squareup.moshi.Json
 
 data class ClubListResponseData(
