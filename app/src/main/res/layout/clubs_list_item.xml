@@ -2,18 +2,19 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_club_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
-    android:background="@drawable/club_list_item_bg"
+    android:background="@drawable/club_list_item_bg_one"
     android:elevation="100dp"
-    android:padding="6dp">
+    android:padding="8dp">
 
     <ImageView
         android:id="@+id/club_host_photo"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
         android:layout_margin="10dp"
         android:contentDescription="@string/club_host_url"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,22 +41,21 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:textColor="@color/white"
+        android:fontFamily="@font/circular_std_book_italic"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/club_host_photo"
         app:layout_constraintStart_toStartOf="@+id/club_name"
         app:layout_constraintTop_toBottomOf="@+id/club_name"
-        app:layout_constraintVertical_bias="1.0"
-        tools:text="test user" />
+        tools:text="host: testuser" />
 
     <TextView
         android:id="@+id/club_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="1dp"
         android:layout_marginEnd="10dp"
+        android:padding="1dp"
         android:textColor="@color/white"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@id/club_host_name"
+        app:layout_constraintBottom_toBottomOf="@+id/club_host_photo"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="Private" />
 

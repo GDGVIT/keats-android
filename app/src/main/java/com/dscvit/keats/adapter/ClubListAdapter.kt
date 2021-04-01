@@ -21,15 +21,22 @@ class ClubListAdapter :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(item, position)
     }
 
     class ViewHolder(private var binding: ClubsListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(clubs: ClubEntity) {
+        fun bind(clubs: ClubEntity, position: Int) {
+            val background = if (position % 2 == 1) {
+                R.drawable.club_list_item_bg_one
+            } else {
+                R.drawable.club_list_item_bg_two
+            }
+            binding.mainClubCard.setBackgroundResource(background)
+            val hostNameText = "Host: ${clubs.HostName}"
             binding.clubName.text = clubs.ClubName
-            binding.clubHostName.text = clubs.HostName
+            binding.clubHostName.text = hostNameText
             binding.clubType.text = if (clubs.Private) {
                 "Private"
             } else {

@@ -133,7 +133,7 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:maxImageSize="17dp"
+        app:maxImageSize="14dp"
         app:srcCompat="@drawable/ic_plus"
         tools:visibility="visible" />
 
