@@ -6,6 +6,7 @@ plugins {
     id "androidx.navigation.safeargs"
     id 'dagger.hilt.android.plugin'
     id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -37,6 +38,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+        useIR = true
     }
 }
 
@@ -46,24 +48,24 @@ dependencies {
 
     // Core Modules
     def preference_version = "1.1.1"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation "androidx.legacy:legacy-support-v4:1.0.0"
-    implementation "androidx.fragment:fragment-ktx:1.3.0"
+    implementation "androidx.fragment:fragment-ktx:1.3.2"
     implementation "androidx.preference:preference-ktx:$preference_version"
 
     // UI
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
     // App lifecycle management
-    def lifecycle_version = "2.3.0"
+    def lifecycle_version = "2.3.1"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
     // Navigation
-    def navigation_version = "2.3.3"
+    def navigation_version = "2.3.4"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
 
@@ -77,10 +79,12 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
     // Firebase
-    def firebase_bom_version = "26.5.0"
+    def firebase_bom_version = "26.8.0"
     implementation platform("com.google.firebase:firebase-bom:$firebase_bom_version")
     implementation "com.google.firebase:firebase-analytics-ktx"
-    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-storage-ktx'
 
     // Retrofit
     def retrofit_version = "2.9.0"
@@ -98,4 +102,10 @@ dependencies {
     // Logging
     implementation 'com.jakewharton.timber:timber:4.7.1'
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
+
+    // Country Code Picker
+    implementation 'com.hbb20:ccp:2.4.7'
+
+    // Circular Image View
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 }

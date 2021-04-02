@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_club_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/club_list_item_bg_one"
+    android:elevation="100dp"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/club_photo"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:scaleType="fitXY"
+        android:layout_margin="10dp"
+        android:contentDescription="@string/club_url"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/club_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:fontFamily="@font/circular_std_bold"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/club_photo"
+        app:layout_constraintTop_toTopOf="@+id/club_photo"
+        app:layout_constraintVertical_bias="1.0"
+        tools:text="Flutter Lovers" />
+
+    <TextView
+        android:id="@+id/club_host_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/circular_std_book_italic"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/club_name"
+        app:layout_constraintTop_toBottomOf="@+id/club_name"
+        tools:text="host:  test user" />
+
+    <TextView
+        android:id="@+id/club_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:padding="1dp"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/club_photo"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="Private" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

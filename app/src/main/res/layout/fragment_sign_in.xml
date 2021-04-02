@@ -4,35 +4,123 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black_one"
     tools:context=".ui.auth.SignInFragment">
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/phone_text_input_layout"
-        android:layout_width="300dp"
+    <ImageView
+        android:id="@+id/top_keats_logo_svg"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Phone"
-        app:layout_constraintBottom_toTopOf="@+id/send_otp"
+        android:contentDescription="@string/login_page_keats_svg"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8">
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_login_bg_component" />
+
+    <TextView
+        android:id="@+id/welcome_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/circular_std_bold"
+        android:text="@string/welcome_to_keats"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="@+id/top_keats_logo_svg"
+        app:layout_constraintTop_toBottomOf="@+id/top_keats_logo_svg" />
+
+    <TextView
+        android:id="@+id/get_started_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="2dp"
+        android:paddingEnd="2dp"
+        android:text="@string/enter_phone_message"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/welcome_text"
+        app:layout_constraintTop_toBottomOf="@+id/welcome_text" />
+
+    <com.hbb20.CountryCodePicker
+        android:id="@+id/countryCodePicker"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edit_text_box_bg"
+        android:paddingTop="5dp"
+        app:ccpDialog_backgroundColor="@color/black_one"
+        app:ccpDialog_textColor="@color/white"
+        app:ccp_contentColor="@color/white"
+        app:ccp_showFlag="false"
+        app:ccp_showNameCode="false"
+        app:layout_constraintEnd_toStartOf="@+id/phone_text_input_layout"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/get_started_text"
+        app:layout_constraintTop_toBottomOf="@+id/get_started_text" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/phone_text_input_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edit_text_box_bg"
+        app:boxBackgroundColor="@color/box_stroke"
+        app:boxStrokeColor="@color/box_stroke"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/get_started_text"
+        app:layout_constraintTop_toBottomOf="@+id/get_started_text">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/phone_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
+            style="@style/text_input_layout_style"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:textSize="16sp"
+            android:background="@drawable/edit_text_box_bg"
+            android:hint="@string/enter_your_phone_number"
+            android:inputType="phone"
+            android:maxLength="10" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/send_otp"
+        style="@style/CircularSTDButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Send OTP"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="8dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:text="@string/get_otp"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/countryCodePicker"
+        app:layout_constraintTop_toBottomOf="@+id/countryCodePicker" />
+
+    <ProgressBar
+        android:id="@+id/get_otp_progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/countryCodePicker"
+        app:layout_constraintTop_toBottomOf="@+id/countryCodePicker"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

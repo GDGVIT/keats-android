@@ -12,7 +12,11 @@ import com.dscvit.keats.firebase.FirebaseAuthHelper
 import com.dscvit.keats.utils.Constants
 import com.dscvit.keats.utils.PreferenceHelper
 import com.dscvit.keats.utils.PreferenceHelper.set
+import com.dscvit.keats.utils.disable
+import com.dscvit.keats.utils.enable
+import com.dscvit.keats.utils.hide
 import com.dscvit.keats.utils.shortToast
+import com.dscvit.keats.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,14 +41,22 @@ class SignInFragment : Fragment() {
             viewLifecycleOwner,
             requireContext(),
             requireActivity(),
-            viewModel
+            viewModel,
+            binding,
+            null
         )
         binding.sendOtp.setOnClickListener {
             val phone = binding.phoneNumber.text.toString()
             if (phone.length != 10) {
                 requireContext().shortToast("Enter a valid phone number")
             } else {
-                authHelper.sendOtp(phone)
+                it.disable()
+                it.hide()
+                binding.getOtpProgressBar.show()
+                binding.getOtpProgressBar.enable()
+                val countryCode = binding.countryCodePicker.selectedCountryCodeWithPlus
+                val finalPhoneNumber = "$countryCode$phone"
+                authHelper.sendOtp(finalPhoneNumber)
                 sharedPreferences[Constants.PREF_PHONE_NUMBER] = phone
             }
         }

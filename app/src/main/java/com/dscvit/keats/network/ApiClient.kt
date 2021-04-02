@@ -4,9 +4,17 @@ import com.dscvit.keats.model.login.LoginRequest
 import javax.inject.Inject
 
 class ApiClient @Inject constructor(
-    private val preAuthApi: ApiInterface
+    private val api: ApiInterface
 ) : BaseApiClient() {
     suspend fun loginUser(loginRequest: LoginRequest) = getResult {
-        preAuthApi.loginUser(loginRequest)
+        api.loginUser(loginRequest)
+    }
+
+    suspend fun getClubs() = getResult {
+        api.getClubs()
+    }
+
+    suspend fun getUserProfile() = getResult {
+        api.getUserProfile()
     }
 }

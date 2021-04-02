@@ -4,34 +4,97 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black_one"
     tools:context=".ui.auth.VerifyOtpFragment">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/otp_text_input_layout"
-        android:layout_width="300dp"
+    <ImageView
+        android:id="@+id/top_keats_logo_svg"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Enter OTP"
-        app:layout_constraintBottom_toTopOf="@+id/verify_otp"
+        android:contentDescription="@string/login_page_keats_svg"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8">
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_login_bg_component" />
+
+    <TextView
+        android:id="@+id/enter_otp_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="3dp"
+        android:text="@string/please_enter_your_otp_to_login"
+        android:textColor="@color/white"
+        android:textSize="23sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="@+id/top_keats_logo_svg"
+        app:layout_constraintTop_toBottomOf="@+id/top_keats_logo_svg" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/otp_text_input_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        app:boxBackgroundColor="@color/box_stroke"
+        app:boxStrokeColor="@color/box_stroke"
+        android:background="@drawable/edit_text_box_bg"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@+id/enter_otp_text"
+        app:layout_constraintTop_toBottomOf="@+id/enter_otp_text">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/sent_otp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_otp"
+            android:inputType="number"
+            android:maxLength="6"
+            android:background="@drawable/edit_text_box_bg"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/verify_otp"
+        style="@style/CircularSTDButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Verify OTP"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:text="@string/verify_otp"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@+id/enter_otp_text"
+        app:layout_constraintTop_toBottomOf="@+id/otp_text_input_layout"
+        app:layout_constraintVertical_bias="0.06" />
+
+    <ProgressBar
+        android:id="@+id/verify_otp_progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@+id/enter_otp_text"
+        app:layout_constraintTop_toBottomOf="@+id/otp_text_input_layout"
+        app:layout_constraintVertical_bias="0.06"
+        tools:visibility="visible" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
