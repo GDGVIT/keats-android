@@ -14,7 +14,6 @@ import com.dscvit.keats.databinding.FragmentUserProfileBinding
 import com.dscvit.keats.model.Result
 import com.dscvit.keats.model.profile.UserEntity
 import com.dscvit.keats.ui.activities.PostAuthActivity
-import com.dscvit.keats.ui.clubs.UserProfileViewModel
 import com.dscvit.keats.utils.Constants
 import com.dscvit.keats.utils.disable
 import com.dscvit.keats.utils.enable

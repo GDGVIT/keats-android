@@ -1,4 +1,4 @@
-package com.dscvit.keats.ui.clubs
+package com.dscvit.keats.ui.profile
 
 import androidx.lifecycle.ViewModel
 import com.dscvit.keats.repository.AppRepository
