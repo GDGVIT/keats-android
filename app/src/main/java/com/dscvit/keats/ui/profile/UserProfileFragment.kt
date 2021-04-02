@@ -43,18 +43,8 @@ class UserProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val sharedPreferences: SharedPreferences =
-            PreferenceHelper.customPrefs(requireContext(), Constants.PREF_NAME)
         binding.logoutButton.setOnClickListener {
-            sharedPreferences.edit {
-                remove(Constants.PREF_AUTH_KEY)
-                remove(Constants.PREF_IS_LOGGED_IN)
-                commit()
-            }
-            val intent = Intent(requireActivity(), PreAuthActivity::class.java)
-            requireActivity().startActivity(intent)
-            requireActivity().finish()
-            context?.shortToast("Successfully Logged Out")
+            logout()
         }
         viewModel.getUserProfile().observe(
             viewLifecycleOwner,
@@ -78,6 +68,20 @@ class UserProfileFragment : Fragment() {
         )
     }
 
+    private fun logout() {
+        val sharedPreferences: SharedPreferences =
+            PreferenceHelper.customPrefs(requireContext(), Constants.PREF_NAME)
+        sharedPreferences.edit {
+            remove(Constants.PREF_AUTH_KEY)
+            remove(Constants.PREF_IS_LOGGED_IN)
+            commit()
+        }
+        val intent = Intent(requireActivity(), PreAuthActivity::class.java)
+        requireActivity().startActivity(intent)
+        requireActivity().finish()
+        context?.shortToast("Successfully Logged Out")
+    }
+
     private fun showUserProfileViews(user: UserEntity) {
         binding.progressBar.hide()
         binding.progressBar.disable()
@@ -87,10 +91,10 @@ class UserProfileFragment : Fragment() {
         binding.coverPhoto.enable()
         binding.profilePhoto.show()
         binding.profilePhoto.enable()
-        binding.userContactCard.show()
-        binding.userContactCard.enable()
         binding.userInfoCard.show()
         binding.userInfoCard.enable()
+        binding.coverPhoto.show()
+        binding.coverPhoto.enable()
         binding.userName.text = user.UserName
         binding.userBio.text = user.UserBio
         binding.userEmail.text = user.Email
@@ -105,15 +109,6 @@ class UserProfileFragment : Fragment() {
                     .error(R.drawable.ic_broken_image)
             )
             .into(profilePicImg)
-        val coverPicImg = binding.coverPhoto
-        val coverImgUri = Constants.COVER_PHOTO_URL.toUri().buildUpon().scheme("https").build()
-        Glide.with(coverPicImg.context)
-            .load(coverImgUri)
-            .apply(
-                RequestOptions()
-                    .error(R.drawable.ic_broken_image)
-            )
-            .into(coverPicImg)
     }
 
     override fun onResume() {
