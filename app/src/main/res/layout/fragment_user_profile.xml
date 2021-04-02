@@ -39,8 +39,8 @@
         android:visibility="gone"
         app:civ_border_color="@color/white"
         app:civ_border_width="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/cover_photo"
+        app:layout_constraintStart_toStartOf="@+id/cover_photo"
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
 
@@ -53,7 +53,6 @@
         app:cardBackgroundColor="@color/black_two"
         app:cardCornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_photo"
         tools:visibility="visible">
@@ -134,5 +133,18 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/logout_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:contentDescription="@string/logout_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="18dp"
+        app:srcCompat="@drawable/ic_logout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
