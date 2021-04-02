@@ -57,7 +57,7 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/edit_text_box_bg"
         android:paddingTop="5dp"
-        app:ccpDialog_backgroundColor="@color/black"
+        app:ccpDialog_backgroundColor="@color/black_one"
         app:ccpDialog_textColor="@color/white"
         app:ccp_contentColor="@color/white"
         app:ccp_showFlag="false"
