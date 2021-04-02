@@ -9,6 +9,8 @@ data class ClubEntity(
     val ClubName: String,
     @Json(name = "file_url")
     val FileUrl: String,
+    @Json(name = "club_pic")
+    val ClubPic: String,
     @Json(name = "page_no")
     val PageNo: String,
     @Json(name = "private")

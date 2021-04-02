@@ -11,11 +11,12 @@
     android:padding="8dp">
 
     <ImageView
-        android:id="@+id/club_host_photo"
+        android:id="@+id/club_photo"
         android:layout_width="85dp"
         android:layout_height="85dp"
+        android:scaleType="fitXY"
         android:layout_margin="10dp"
-        android:contentDescription="@string/club_host_url"
+        android:contentDescription="@string/club_url"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -29,8 +30,8 @@
         android:fontFamily="@font/circular_std_bold"
         android:textColor="@color/white"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/club_host_photo"
-        app:layout_constraintTop_toTopOf="@+id/club_host_photo"
+        app:layout_constraintStart_toEndOf="@+id/club_photo"
+        app:layout_constraintTop_toTopOf="@+id/club_photo"
         app:layout_constraintVertical_bias="1.0"
         tools:text="Flutter Lovers" />
 
@@ -54,7 +55,7 @@
         android:padding="1dp"
         android:textColor="@color/white"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/club_host_photo"
+        app:layout_constraintBottom_toBottomOf="@+id/club_photo"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="Private" />
 

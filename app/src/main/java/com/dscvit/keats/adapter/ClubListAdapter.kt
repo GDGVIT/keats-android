@@ -3,6 +3,7 @@ package com.dscvit.keats.adapter
 import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
@@ -15,11 +16,11 @@ import com.dscvit.keats.R
 import com.dscvit.keats.databinding.ClubsListItemBinding
 import com.dscvit.keats.model.clubs.ClubEntity
 
-class ClubListAdapter(val context: Context) :
+class ClubListAdapter(val context: Context, private val onClubListener: OnClubListener) :
     ListAdapter<ClubEntity, ClubListAdapter.ViewHolder>(ClubListDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent)
+        return ViewHolder.from(parent, onClubListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -27,20 +28,27 @@ class ClubListAdapter(val context: Context) :
         holder.bind(item, context)
     }
 
-    class ViewHolder(private var binding: ClubsListItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    fun getClubId(position: Int): String {
+        val item = getItem(position)
+        return item.ClubId
+    }
+
+    class ViewHolder(
+        private var binding: ClubsListItemBinding,
+        private var onClubListener: OnClubListener
+    ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
         fun bind(clubs: ClubEntity, context: Context) {
-            val hostNameText = "Host: ${clubs.HostName}"
+            binding.mainClubCard.setOnClickListener(this)
             binding.clubName.text = clubs.ClubName
-            binding.clubHostName.text = hostNameText
+            binding.clubHostName.text = context.getString(R.string.club_host_text, clubs.HostName)
             binding.clubType.text = if (clubs.Private) {
-                "Private"
+                context.getString(R.string.club_type_private)
             } else {
-                "Public"
+                context.getString(R.string.club_type_public)
             }
-            val clubHostImg = binding.clubHostPhoto
-            val imgUrl = clubs.HostProfile.toUri().buildUpon().scheme("https").build()
+            val clubImg = binding.clubPhoto
+            val imgUrl = clubs.ClubPic.toUri().buildUpon().scheme("https").build()
             val circularProgressDrawable = CircularProgressDrawable(context)
             circularProgressDrawable.strokeWidth = 5f
             circularProgressDrawable.centerRadius = 30f
@@ -48,29 +56,37 @@ class ClubListAdapter(val context: Context) :
                 Color.argb(100, 244, 121, 18)
             )
             circularProgressDrawable.start()
-            Glide.with(clubHostImg.context)
+            Glide.with(clubImg.context)
                 .load(imgUrl)
                 .apply(
                     RequestOptions()
                         .placeholder(circularProgressDrawable)
                         .error(R.drawable.ic_broken_image)
                 )
-                .into(clubHostImg)
+                .into(clubImg)
         }
 
         companion object {
-            fun from(parent: ViewGroup): ViewHolder {
+            fun from(parent: ViewGroup, onClubListener: OnClubListener): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ClubsListItemBinding.inflate(layoutInflater, parent, false)
-                return ViewHolder(binding)
+                return ViewHolder(binding, onClubListener)
             }
         }
+
+        override fun onClick(v: View?) {
+            onClubListener.onClubClick(adapterPosition)
+        }
+    }
+
+    interface OnClubListener {
+        fun onClubClick(position: Int)
     }
 }
 
 class ClubListDiffCallback : DiffUtil.ItemCallback<ClubEntity>() {
     override fun areItemsTheSame(oldItem: ClubEntity, newItem: ClubEntity): Boolean {
-        return oldItem.ClubName == newItem.ClubName
+        return oldItem.ClubId == newItem.ClubId
     }
 
     override fun areContentsTheSame(oldItem: ClubEntity, newItem: ClubEntity): Boolean {

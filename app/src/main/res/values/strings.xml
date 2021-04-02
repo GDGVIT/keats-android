@@ -15,7 +15,7 @@
     <string name="clubs">Clubs</string>
     <string name="create_or_join_club">Create or Join Club</string>
     <string name="join_your_first_book_club">Join your first book club!</string>
-    <string name="club_host_url">club host photo</string>
+    <string name="club_url">club photo</string>
     <string name="club_type_private">Private</string>
     <string name="club_type_public">Public</string>
     <string name="user_profile_photo">User Profile Photo</string>
@@ -23,4 +23,5 @@
     <string name="profile_svg">Profile SVG</string>
     <string name="bio_svg">Bio Svg</string>
     <string name="cover_photo">Cover Photo</string>
+    <string name="club_host_text">Host: %1$s</string>
 </resources>

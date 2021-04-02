@@ -15,11 +15,12 @@ import com.dscvit.keats.ui.activities.PostAuthActivity
 import com.dscvit.keats.utils.disable
 import com.dscvit.keats.utils.enable
 import com.dscvit.keats.utils.hide
+import com.dscvit.keats.utils.shortToast
 import com.dscvit.keats.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ClubsListFragment : Fragment() {
+class ClubsListFragment : Fragment(), ClubListAdapter.OnClubListener {
 
     private val viewModel: ClubsListViewModel by viewModels()
     private lateinit var adapter: ClubListAdapter
@@ -30,7 +31,7 @@ class ClubsListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentClubsListBinding.inflate(layoutInflater)
-        adapter = ClubListAdapter(requireContext())
+        adapter = ClubListAdapter(requireContext(), this)
         return binding.root
     }
 
@@ -120,5 +121,10 @@ class ClubsListFragment : Fragment() {
         binding.joinFirstBookClubText.text = getString(R.string.error_text)
         binding.joinFirstBookClubText.enable()
         binding.joinFirstBookClubText.show()
+    }
+
+    override fun onClubClick(position: Int) {
+        val clubId = adapter.getClubId(position)
+        context?.shortToast(clubId)
     }
 }
