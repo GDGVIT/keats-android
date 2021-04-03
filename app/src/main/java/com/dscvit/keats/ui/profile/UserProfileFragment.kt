@@ -16,7 +16,6 @@ import com.dscvit.keats.R
 import com.dscvit.keats.databinding.FragmentUserProfileBinding
 import com.dscvit.keats.model.Result
 import com.dscvit.keats.model.profile.UserEntity
-import com.dscvit.keats.ui.activities.PostAuthActivity
 import com.dscvit.keats.ui.activities.PreAuthActivity
 import com.dscvit.keats.utils.Constants
 import com.dscvit.keats.utils.PreferenceHelper
@@ -77,8 +76,9 @@ class UserProfileFragment : Fragment() {
             commit()
         }
         val intent = Intent(requireActivity(), PreAuthActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         requireActivity().startActivity(intent)
-        requireActivity().finish()
+        requireActivity().finishAffinity()
         context?.shortToast("Successfully Logged Out")
     }
 
@@ -109,15 +109,5 @@ class UserProfileFragment : Fragment() {
                     .error(R.drawable.ic_broken_image)
             )
             .into(profilePicImg)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        (requireActivity() as PostAuthActivity).hideToolbar()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        (requireActivity() as PostAuthActivity).showToolbar()
     }
 }

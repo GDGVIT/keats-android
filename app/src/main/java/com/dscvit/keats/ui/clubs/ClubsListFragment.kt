@@ -37,7 +37,6 @@ class ClubsListFragment : Fragment(), ClubListAdapter.OnClubListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (requireActivity() as PostAuthActivity).showProfilePic()
         binding.clubsList.adapter = adapter
         getClubs(false)
         binding.swipeContainer.setOnRefreshListener {

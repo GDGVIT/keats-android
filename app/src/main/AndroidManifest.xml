@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Keats">
+        <activity android:name=".ui.activities.UserProfileActivity"></activity>
         <activity
             android:name=".ui.activities.PostAuthActivity"
             android:screenOrientation="portrait" />
