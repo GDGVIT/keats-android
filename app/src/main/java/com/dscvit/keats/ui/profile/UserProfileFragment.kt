@@ -2,6 +2,7 @@ package com.dscvit.keats.ui.profile
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.core.content.edit
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.dscvit.keats.R
@@ -44,9 +46,22 @@ class UserProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        loadUserprofile()
         binding.logoutButton.setOnClickListener {
             logout()
         }
+        binding.startEdit.setOnClickListener {
+            startEdit()
+        }
+        binding.endEdit.setOnClickListener {
+            updateDetails()
+        }
+        binding.phoneNumberEditText.setOnClickListener {
+            context?.shortToast("Phone number cannot be edited")
+        }
+    }
+
+    private fun loadUserprofile() {
         viewModel.getUserProfile().observe(
             viewLifecycleOwner,
             {
@@ -67,15 +82,6 @@ class UserProfileFragment : Fragment() {
                 }
             }
         )
-        binding.startEdit.setOnClickListener {
-            startEdit()
-        }
-        binding.endEdit.setOnClickListener {
-            updateDetails()
-        }
-        binding.phoneNumberEditText.setOnClickListener {
-            context?.shortToast("Phone number cannot be edited")
-        }
     }
 
     private fun logout() {
@@ -198,12 +204,19 @@ class UserProfileFragment : Fragment() {
         binding.phoneNumberEditText.setText(user.PhoneNumber)
         val profilePicImg = binding.profilePhoto
         val imgUri = user.ProfilePic.toUri().buildUpon().scheme("https").build()
+        val circularProgressDrawable = CircularProgressDrawable(requireContext())
+        circularProgressDrawable.strokeWidth = 5f
+        circularProgressDrawable.centerRadius = 30f
+        circularProgressDrawable.setColorSchemeColors(
+            Color.argb(100, 244, 121, 18)
+        )
+        circularProgressDrawable.start()
         Glide.with(profilePicImg.context)
             .load(imgUri)
             .apply(
                 RequestOptions()
-                    .placeholder(R.drawable.ic_default_photo)
-                    .error(R.drawable.ic_broken_image)
+                    .placeholder(circularProgressDrawable)
+                    .error(R.drawable.ic_default_photo)
             )
             .into(profilePicImg)
     }

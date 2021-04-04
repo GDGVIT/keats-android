@@ -38,7 +38,7 @@ class PostAuthActivity : AppCompatActivity() {
             .apply(
                 RequestOptions()
                     .placeholder(circularProgressDrawable)
-                    .error(R.drawable.ic_broken_image)
+                    .error(R.drawable.ic_default_photo)
             )
             .into(profilePicImg)
     }
