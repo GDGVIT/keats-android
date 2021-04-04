@@ -27,4 +27,12 @@
     <string name="logout_button">Logout Button</string>
     <string name="logout">Logout</string>
     <string name="edit_user_details">Edit User Details</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="enter_your_bio">Enter your bio</string>
+    <string name="enter_your_email_address">Enter your email address</string>
+    <string name="user_profile_icon">User profile icon</string>
+    <string name="user_bio_icon">User bio icon</string>
+    <string name="user_email_icon">User email icon</string>
+    <string name="user_phone_icon">User phone icon</string>
+    <string name="save_edited_user_details">Save edited user details</string>
 </resources>

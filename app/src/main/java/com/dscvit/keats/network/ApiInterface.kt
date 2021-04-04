@@ -4,9 +4,12 @@ import com.dscvit.keats.model.clubs.ClubsListResponse
 import com.dscvit.keats.model.login.LoginRequest
 import com.dscvit.keats.model.login.LoginResponse
 import com.dscvit.keats.model.profile.GetUserProfileResponse
+import com.dscvit.keats.model.profile.UpdateUserRequest
+import com.dscvit.keats.model.profile.UpdateUserResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 
 interface ApiInterface {
@@ -19,4 +22,7 @@ interface ApiInterface {
 
     @GET("api/user/clubs")
     suspend fun getClubs(): Response<ClubsListResponse>
+
+    @PATCH("api/user/")
+    suspend fun updateUser(@Body updateUserRequest: UpdateUserRequest): Response<UpdateUserResponse>
 }

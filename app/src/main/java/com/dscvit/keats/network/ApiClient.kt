@@ -1,6 +1,7 @@
 package com.dscvit.keats.network
 
 import com.dscvit.keats.model.login.LoginRequest
+import com.dscvit.keats.model.profile.UpdateUserRequest
 import javax.inject.Inject
 
 class ApiClient @Inject constructor(
@@ -16,5 +17,9 @@ class ApiClient @Inject constructor(
 
     suspend fun getUserProfile() = getResult {
         api.getUserProfile()
+    }
+
+    suspend fun updateUserProfile(updateUserRequest: UpdateUserRequest) = getResult {
+        api.updateUser(updateUserRequest)
     }
 }
