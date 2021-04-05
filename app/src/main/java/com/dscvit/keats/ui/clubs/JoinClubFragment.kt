@@ -92,18 +92,23 @@ class JoinClubFragment : Fragment(), ClubListAdapter.OnClubListener {
                         binding.publicClubsListProgressBar.enable()
                     }
                     Result.Status.SUCCESS -> {
+                        binding.publicClubsListProgressBar.hide()
+                        binding.publicClubsListProgressBar.disable()
                         if (it.data?.Status == "success") {
                             val clubs = it.data.Clubs
                             if (clubs != null) {
                                 adapter.submitList(clubs)
                             }
-                            binding.publicClubsListProgressBar.hide()
-                            binding.publicClubsListProgressBar.disable()
                             binding.publicClubsList.show()
                             binding.publicClubsList.enable()
                         }
                     }
                     Result.Status.ERROR -> {
+                        val status = it.message.toString()
+                        if (status == "404 Not Found") {
+                            binding.noClubsText.show()
+                            binding.noClubsText.enable()
+                        }
                         binding.publicClubsListProgressBar.hide()
                         binding.publicClubsListProgressBar.disable()
                     }

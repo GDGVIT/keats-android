@@ -124,6 +124,20 @@
         app:layout_constraintStart_toStartOf="@+id/join_club_text"
         app:layout_constraintTop_toBottomOf="@id/join_club_card" />
 
+    <TextView
+        android:id="@+id/no_clubs_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nothing_to_see_here"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/public_clubs_list"
+        app:layout_constraintEnd_toEndOf="@+id/public_clubs_list"
+        app:layout_constraintStart_toStartOf="@id/public_clubs_list"
+        app:layout_constraintTop_toBottomOf="@id/public_clubs_text"
+        tools:visibility="visible" />
+
     <ProgressBar
         android:id="@+id/public_clubs_list_progress_bar"
         android:layout_width="wrap_content"
