@@ -23,7 +23,6 @@
     <string name="profile_svg">Profile SVG</string>
     <string name="bio_svg">Bio Svg</string>
     <string name="cover_photo">Cover Photo</string>
-    <string name="club_host_text">Host: %1$s</string>
     <string name="logout_button">Logout Button</string>
     <string name="logout">Logout</string>
     <string name="edit_user_details">Edit User Details</string>

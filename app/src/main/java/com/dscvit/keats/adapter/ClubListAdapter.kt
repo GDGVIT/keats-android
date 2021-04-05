@@ -41,7 +41,7 @@ class ClubListAdapter(val context: Context, private val onClubListener: OnClubLi
         fun bind(clubs: ClubEntity, context: Context) {
             binding.mainClubCard.setOnClickListener(this)
             binding.clubName.text = clubs.ClubName
-            binding.clubHostName.text = context.getString(R.string.club_host_text, clubs.HostName)
+            binding.clubHostName.text = clubs.HostName
             binding.clubType.text = if (clubs.Private) {
                 context.getString(R.string.club_type_private)
             } else {

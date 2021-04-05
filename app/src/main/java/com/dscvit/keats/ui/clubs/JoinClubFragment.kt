@@ -11,12 +11,14 @@ import androidx.navigation.fragment.navArgs
 import com.dscvit.keats.adapter.ClubListAdapter
 import com.dscvit.keats.databinding.FragmentJoinClubBinding
 import com.dscvit.keats.model.Result
+import com.dscvit.keats.model.clubs.JoinClubRequest
 import com.dscvit.keats.utils.disable
 import com.dscvit.keats.utils.enable
 import com.dscvit.keats.utils.hide
 import com.dscvit.keats.utils.shortToast
 import com.dscvit.keats.utils.show
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class JoinClubFragment : Fragment(), ClubListAdapter.OnClubListener {
@@ -42,10 +44,40 @@ class JoinClubFragment : Fragment(), ClubListAdapter.OnClubListener {
         }
         binding.clubIdEditText.setText(args.scannedClubId)
         binding.joinClubButton.setOnClickListener {
-            context?.shortToast(binding.clubIdEditText.text.toString())
+            val clubId = binding.clubIdEditText.text.toString()
+            joinClub(clubId)
         }
         binding.publicClubsList.adapter = adapter
         getPublicClubs()
+    }
+
+    private fun joinClub(clubId: String) {
+        binding.joinClubButton.hide()
+        binding.joinClubButton.disable()
+        val joinClubRequest = JoinClubRequest(ClubId = clubId)
+        viewModel.joinClub(joinClubRequest).observe(
+            viewLifecycleOwner,
+            {
+                when (it.status) {
+                    Result.Status.LOADING -> {
+                        binding.joinClubProgressBar.show()
+                        binding.joinClubProgressBar.enable()
+                    }
+                    Result.Status.SUCCESS -> {
+                        if (it.data?.Status == "success") {
+                            context?.shortToast(it.data.Message)
+                            findNavController().navigate(JoinClubFragmentDirections.actionJoinClubFragmentToClubsListFragment())
+                        }
+                    }
+                    Result.Status.ERROR -> {
+                        context?.shortToast(it.message.toString())
+                        Timber.e("Error is: ${it.message}")
+                        binding.joinClubProgressBar.hide()
+                        binding.joinClubProgressBar.disable()
+                    }
+                }
+            }
+        )
     }
 
     private fun getPublicClubs() {
@@ -80,7 +112,6 @@ class JoinClubFragment : Fragment(), ClubListAdapter.OnClubListener {
 
     override fun onClubClick(position: Int) {
         val clubId = adapter.getClubId(position)
-        context?.shortToast(clubId)
         binding.clubIdEditText.setText(clubId)
     }
 }

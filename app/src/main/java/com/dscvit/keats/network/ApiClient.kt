@@ -1,5 +1,6 @@
 package com.dscvit.keats.network
 
+import com.dscvit.keats.model.clubs.JoinClubRequest
 import com.dscvit.keats.model.login.LoginRequest
 import com.dscvit.keats.model.profile.UpdateUserRequest
 import javax.inject.Inject
@@ -25,5 +26,9 @@ class ApiClient @Inject constructor(
 
     suspend fun getPublicClubsList() = getResult {
         api.getPublicClubsList()
+    }
+
+    suspend fun joinCLub(joinClubRequest: JoinClubRequest) = getResult {
+        api.joinClub(joinClubRequest)
     }
 }

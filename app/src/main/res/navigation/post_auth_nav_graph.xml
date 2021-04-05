@@ -28,6 +28,9 @@
         <argument
             android:name="scannedClubId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_joinClubFragment_to_clubsListFragment"
+            app:destination="@id/clubsListFragment" />
     </fragment>
     <fragment
         android:id="@+id/scanQRCodeFragment"

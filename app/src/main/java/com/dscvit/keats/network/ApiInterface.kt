@@ -1,6 +1,8 @@
 package com.dscvit.keats.network
 
 import com.dscvit.keats.model.clubs.ClubsListResponse
+import com.dscvit.keats.model.clubs.JoinClubRequest
+import com.dscvit.keats.model.clubs.JoinClubResponse
 import com.dscvit.keats.model.clubs.PublicClubsListResponse
 import com.dscvit.keats.model.login.LoginRequest
 import com.dscvit.keats.model.login.LoginResponse
@@ -29,4 +31,7 @@ interface ApiInterface {
 
     @GET("api/clubs/list")
     suspend fun getPublicClubsList(): Response<PublicClubsListResponse>
+
+    @POST("api/clubs/join")
+    suspend fun joinClub(@Body joinClubRequest: JoinClubRequest): Response<JoinClubResponse>
 }
