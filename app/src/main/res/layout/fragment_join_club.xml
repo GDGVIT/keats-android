@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_one"
+    tools:context=".ui.clubs.JoinClubFragment">
+
+    <TextView
+        android:id="@+id/join_club_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/circular_std_bold"
+        android:text="@string/join_a_club"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/join_club_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        app:cardBackgroundColor="@color/black_two"
+        app:cardCornerRadius="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/join_club_text"
+        app:layout_constraintTop_toBottomOf="@+id/join_club_text">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp">
+
+            <ImageView
+                android:id="@+id/scan_code"
+                android:layout_width="37dp"
+                android:layout_height="37dp"
+                android:layout_marginStart="4dp"
+                android:clickable="true"
+                android:contentDescription="@string/scan_qr_code_button_image"
+                android:focusable="true"
+                app:layout_constraintBottom_toBottomOf="@+id/club_id_edit_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/club_id_edit_text"
+                app:layout_constraintTop_toTopOf="@+id/club_id_edit_text"
+                app:srcCompat="@drawable/ic_qr" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/club_id_edit_text"
+                style="@style/text_input_layout_style"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/edit_text_box_bg"
+                android:hint="@string/enter_club_id"
+                android:inputType="textNoSuggestions"
+                android:maxLength="36"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="10dp"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/join_club_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/join"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:cornerRadius="3dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/club_id_edit_text"
+                app:layout_constraintTop_toBottomOf="@+id/club_id_edit_text" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/public_clubs_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/circular_std_bold"
+        android:text="@string/public_clubs"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="@+id/join_club_text"
+        app:layout_constraintTop_toBottomOf="@id/join_club_card" />
+
+    <ProgressBar
+        android:id="@+id/public_clubs_list_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@id/public_clubs_list"
+        app:layout_constraintEnd_toEndOf="@+id/public_clubs_list"
+        app:layout_constraintStart_toStartOf="@id/public_clubs_list"
+        app:layout_constraintTop_toBottomOf="@id/public_clubs_text" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/public_clubs_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        android:visibility="invisible"
+        tools:visibility="visible"
+        android:paddingBottom="8dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/public_clubs_text"
+        tools:listitem="@layout/clubs_list_item" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

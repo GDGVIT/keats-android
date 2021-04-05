@@ -21,4 +21,8 @@ class AppRepository @Inject constructor(private val apiClient: ApiClient) : Base
     fun updateUserProfile(updateUserRequest: UpdateUserRequest) = makeRequest {
         apiClient.updateUserProfile(updateUserRequest)
     }
+
+    fun getPublicClubsList() = makeRequest {
+        apiClient.getPublicClubsList()
+    }
 }

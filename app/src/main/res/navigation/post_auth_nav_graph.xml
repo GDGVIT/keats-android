@@ -4,10 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/post_auth_nav_graph"
     app:startDestination="@id/clubsListFragment">
-
     <fragment
         android:id="@+id/clubsListFragment"
         android:name="com.dscvit.keats.ui.clubs.ClubsListFragment"
         android:label="fragment_clubs_list"
-        tools:layout="@layout/fragment_clubs_list" />
+        tools:layout="@layout/fragment_clubs_list">
+        <action
+            android:id="@+id/action_clubsListFragment_to_joinClubFragment"
+            app:destination="@id/joinClubFragment" >
+            <argument
+                android:name="scannedClubId"
+                android:defaultValue="Enter Club ID" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/joinClubFragment"
+        android:name="com.dscvit.keats.ui.clubs.JoinClubFragment"
+        android:label="fragment_join_club"
+        tools:layout="@layout/fragment_join_club">
+        <action
+            android:id="@+id/action_joinClubFragment_to_scanQRCodeFragment"
+            app:destination="@id/scanQRCodeFragment" />
+        <argument
+            android:name="scannedClubId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/scanQRCodeFragment"
+        android:name="com.dscvit.keats.ui.clubs.ScanQRCodeFragment"
+        android:label="fragment_scan_qr_code"
+        tools:layout="@layout/fragment_scan_qr_code">
+        <action
+            android:id="@+id/action_scanQRCodeFragment_to_joinClubFragment"
+            app:destination="@id/joinClubFragment" >
+        </action>
+    </fragment>
 </navigation>

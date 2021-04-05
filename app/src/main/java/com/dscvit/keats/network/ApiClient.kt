@@ -22,4 +22,8 @@ class ApiClient @Inject constructor(
     suspend fun updateUserProfile(updateUserRequest: UpdateUserRequest) = getResult {
         api.updateUser(updateUserRequest)
     }
+
+    suspend fun getPublicClubsList() = getResult {
+        api.getPublicClubsList()
+    }
 }

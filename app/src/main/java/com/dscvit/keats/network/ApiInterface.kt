@@ -1,6 +1,7 @@
 package com.dscvit.keats.network
 
 import com.dscvit.keats.model.clubs.ClubsListResponse
+import com.dscvit.keats.model.clubs.PublicClubsListResponse
 import com.dscvit.keats.model.login.LoginRequest
 import com.dscvit.keats.model.login.LoginResponse
 import com.dscvit.keats.model.profile.GetUserProfileResponse
@@ -25,4 +26,7 @@ interface ApiInterface {
 
     @PATCH("api/user/")
     suspend fun updateUser(@Body updateUserRequest: UpdateUserRequest): Response<UpdateUserResponse>
+
+    @GET("api/clubs/list")
+    suspend fun getPublicClubsList(): Response<PublicClubsListResponse>
 }

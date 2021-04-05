@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.dscvit.keats.R
 import com.dscvit.keats.adapter.ClubListAdapter
 import com.dscvit.keats.databinding.FragmentClubsListBinding
@@ -46,6 +47,10 @@ class ClubsListFragment : Fragment(), ClubListAdapter.OnClubListener {
         binding.swipeContainer.setColorSchemeColors(
             ResourcesCompat.getColor(resources, R.color.orange_200, null)
         )
+        binding.joinClub.setOnClickListener {
+            val action = ClubsListFragmentDirections.actionClubsListFragmentToJoinClubFragment()
+            findNavController().navigate(action)
+        }
     }
 
     private fun getClubs(fromSwipeRefresh: Boolean) {

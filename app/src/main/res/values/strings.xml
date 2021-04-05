@@ -35,4 +35,8 @@
     <string name="user_email_icon">User email icon</string>
     <string name="user_phone_icon">User phone icon</string>
     <string name="save_edited_user_details">Save edited user details</string>
+    <string name="enter_club_id">Enter Club ID</string>
+    <string name="scan_qr_code_button_image">scan qr code button image</string>
+    <string name="join">Join</string>
+    <string name="public_clubs">Public Clubs</string>
 </resources>
