@@ -74,6 +74,8 @@ class JoinClubFragment : Fragment(), ClubListAdapter.OnClubListener {
                         Timber.e("Error is: ${it.message}")
                         binding.joinClubProgressBar.hide()
                         binding.joinClubProgressBar.disable()
+                        binding.joinClubButton.show()
+                        binding.joinClubButton.enable()
                     }
                 }
             }

@@ -38,4 +38,6 @@
     <string name="scan_qr_code_button_image">scan qr code button image</string>
     <string name="join">Join</string>
     <string name="public_clubs">Public Clubs</string>
+    <string name="create_club">Create Club</string>
+    <string name="join_club">Join Club</string>
 </resources>

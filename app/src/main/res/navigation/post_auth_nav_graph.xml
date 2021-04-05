@@ -11,7 +11,11 @@
         tools:layout="@layout/fragment_clubs_list">
         <action
             android:id="@+id/action_clubsListFragment_to_joinClubFragment"
-            app:destination="@id/joinClubFragment" >
+            app:destination="@id/joinClubFragment"
+            app:enterAnim="@anim/right_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@anim/right_in"
+            app:popExitAnim="@anim/right_out">
             <argument
                 android:name="scannedClubId"
                 android:defaultValue="Enter Club ID" />
@@ -30,7 +34,11 @@
             app:argType="string" />
         <action
             android:id="@+id/action_joinClubFragment_to_clubsListFragment"
-            app:destination="@id/clubsListFragment" />
+            app:destination="@id/clubsListFragment"
+            app:enterAnim="@anim/left_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@anim/left_in"
+            app:popExitAnim="@anim/left_out" />
     </fragment>
     <fragment
         android:id="@+id/scanQRCodeFragment"

@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_sign_in" >
         <action
             android:id="@+id/action_signInFragment_to_verifyOtpFragment"
-            app:destination="@id/verifyOtpFragment" />
+            app:destination="@id/verifyOtpFragment"
+            app:enterAnim="@anim/right_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@anim/right_in"
+            app:popExitAnim="@anim/right_out" />
     </fragment>
     <fragment
         android:id="@+id/verifyOtpFragment"
