@@ -1,6 +1,8 @@
 package com.dscvit.keats.repository
 
+import com.dscvit.keats.model.clubs.JoinClubRequest
 import com.dscvit.keats.model.login.LoginRequest
+import com.dscvit.keats.model.profile.UpdateUserRequest
 import com.dscvit.keats.network.ApiClient
 import javax.inject.Inject
 
@@ -15,5 +17,17 @@ class AppRepository @Inject constructor(private val apiClient: ApiClient) : Base
 
     fun getUserProfile() = makeRequest {
         apiClient.getUserProfile()
+    }
+
+    fun updateUserProfile(updateUserRequest: UpdateUserRequest) = makeRequest {
+        apiClient.updateUserProfile(updateUserRequest)
+    }
+
+    fun getPublicClubsList() = makeRequest {
+        apiClient.getPublicClubsList()
+    }
+
+    fun joinClub(joinClubRequest: JoinClubRequest) = makeRequest {
+        apiClient.joinCLub(joinClubRequest)
     }
 }

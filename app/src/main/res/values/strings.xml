@@ -23,8 +23,21 @@
     <string name="profile_svg">Profile SVG</string>
     <string name="bio_svg">Bio Svg</string>
     <string name="cover_photo">Cover Photo</string>
-    <string name="club_host_text">Host: %1$s</string>
     <string name="logout_button">Logout Button</string>
     <string name="logout">Logout</string>
     <string name="edit_user_details">Edit User Details</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="enter_your_bio">Enter your bio</string>
+    <string name="enter_your_email_address">Enter your email address</string>
+    <string name="user_profile_icon">User profile icon</string>
+    <string name="user_bio_icon">User bio icon</string>
+    <string name="user_email_icon">User email icon</string>
+    <string name="user_phone_icon">User phone icon</string>
+    <string name="save_edited_user_details">Save edited user details</string>
+    <string name="enter_club_id">Enter Club ID</string>
+    <string name="scan_qr_code_button_image">scan qr code button image</string>
+    <string name="join">Join</string>
+    <string name="public_clubs">Public Clubs</string>
+    <string name="create_club">Create Club</string>
+    <string name="join_club">Join Club</string>
 </resources>

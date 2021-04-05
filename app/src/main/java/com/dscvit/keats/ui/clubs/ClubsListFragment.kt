@@ -4,9 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.view.animation.OvershootInterpolator
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.dscvit.keats.R
 import com.dscvit.keats.adapter.ClubListAdapter
 import com.dscvit.keats.databinding.FragmentClubsListBinding
@@ -25,6 +30,9 @@ class ClubsListFragment : Fragment(), ClubListAdapter.OnClubListener {
     private val viewModel: ClubsListViewModel by viewModels()
     private lateinit var adapter: ClubListAdapter
     private lateinit var binding: FragmentClubsListBinding
+    private lateinit var fabOpenAnimation: Animation
+    private lateinit var fabCloseAnimation: Animation
+    private var isFabMenuOpen = false
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,12 +40,13 @@ class ClubsListFragment : Fragment(), ClubListAdapter.OnClubListener {
     ): View {
         binding = FragmentClubsListBinding.inflate(layoutInflater)
         adapter = ClubListAdapter(requireContext(), this)
+        fabOpenAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.open_fab_anim)
+        fabCloseAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.close_fab_anim)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (requireActivity() as PostAuthActivity).showProfilePic()
         binding.clubsList.adapter = adapter
         getClubs(false)
         binding.swipeContainer.setOnRefreshListener {
@@ -47,6 +56,24 @@ class ClubsListFragment : Fragment(), ClubListAdapter.OnClubListener {
         binding.swipeContainer.setColorSchemeColors(
             ResourcesCompat.getColor(resources, R.color.orange_200, null)
         )
+        binding.joinClub.setOnClickListener {
+            joinClub()
+        }
+        binding.floatingActionCreateOrJoinClub.setOnClickListener {
+            if (isFabMenuOpen)
+                collapseFabMenu()
+            else
+                expandFabMenu()
+        }
+        binding.floatingActionJoinClub.setOnClickListener {
+            joinClub()
+        }
+    }
+
+    private fun joinClub() {
+        isFabMenuOpen = false
+        val action = ClubsListFragmentDirections.actionClubsListFragmentToJoinClubFragment()
+        findNavController().navigate(action)
     }
 
     private fun getClubs(fromSwipeRefresh: Boolean) {
@@ -93,8 +120,8 @@ class ClubsListFragment : Fragment(), ClubListAdapter.OnClubListener {
         binding.progressBar.disable()
         binding.clubsList.enable()
         binding.clubsList.show()
-        binding.floatingActionCreateClub.show()
-        binding.floatingActionCreateClub.enable()
+        binding.floatingActionCreateOrJoinClub.show()
+        binding.floatingActionCreateOrJoinClub.enable()
     }
 
     private fun noClubsShowViews() {
@@ -126,5 +153,25 @@ class ClubsListFragment : Fragment(), ClubListAdapter.OnClubListener {
     override fun onClubClick(position: Int) {
         val clubId = adapter.getClubId(position)
         context?.shortToast(clubId)
+    }
+
+    private fun expandFabMenu() {
+        ViewCompat.animate(binding.floatingActionCreateOrJoinClub).rotation(45.0f).withLayer()
+            .setDuration(300).setInterpolator(OvershootInterpolator(10.0f)).start()
+        binding.createClubLayout.startAnimation(fabOpenAnimation)
+        binding.joinClubLayout.startAnimation(fabOpenAnimation)
+        binding.floatingActionCreateClub.isClickable = true
+        binding.floatingActionJoinClub.isClickable = true
+        isFabMenuOpen = true
+    }
+
+    private fun collapseFabMenu() {
+        ViewCompat.animate(binding.floatingActionCreateOrJoinClub).rotation(0.0f).withLayer()
+            .setDuration(300).setInterpolator(OvershootInterpolator(10.0f)).start()
+        binding.createClubLayout.startAnimation(fabCloseAnimation)
+        binding.joinClubLayout.startAnimation(fabCloseAnimation)
+        binding.floatingActionCreateClub.isClickable = false
+        binding.floatingActionJoinClub.isClickable = false
+        isFabMenuOpen = false
     }
 }

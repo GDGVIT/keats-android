@@ -40,10 +40,8 @@
         app:civ_border_width="3dp"
         app:layout_constraintBottom_toTopOf="@+id/user_info_card"
         app:layout_constraintEnd_toEndOf="@+id/user_info_card"
-        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="@+id/user_info_card"
         app:layout_constraintTop_toTopOf="@+id/user_info_card"
-        app:layout_constraintVertical_bias="0.925"
         tools:visibility="visible" />
 
     <androidx.cardview.widget.CardView
@@ -73,7 +71,31 @@
                 android:contentDescription="@string/edit_user_details"
                 app:srcCompat="@drawable/ic_edit" />
 
-            <LinearLayout
+            <ImageView
+                android:id="@+id/end_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="10dp"
+                android:contentDescription="@string/save_edited_user_details"
+                android:visibility="gone"
+                app:srcCompat="@drawable/ic_done"
+                tools:visibility="visible" />
+
+            <ProgressBar
+                android:id="@+id/updating_profile_progress_bar"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="10dp"
+                android:visibility="gone"
+                app:indicatorColor="@color/purple_500"
+                tools:visibility="visible" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="100dp"
@@ -82,58 +104,208 @@
                 android:paddingEnd="15dp"
                 android:paddingBottom="15dp">
 
-
-                <TextView
-                    android:id="@+id/user_name"
+                <ImageView
+                    android:id="@+id/user_profile_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:drawablePadding="20dp"
+                    android:contentDescription="@string/user_profile_icon"
+                    android:padding="5dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/name_edit_text"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/name_edit_text"
+                    app:srcCompat="@drawable/ic_profile" />
+
+                <ImageView
+                    android:id="@+id/user_bio_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:contentDescription="@string/user_bio_icon"
+                    android:padding="5dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/bio_edit_text"
+                    app:layout_constraintEnd_toEndOf="@+id/user_profile_icon"
+                    app:layout_constraintStart_toStartOf="@+id/user_profile_icon"
+                    app:layout_constraintTop_toTopOf="@+id/bio_edit_text"
+                    app:srcCompat="@drawable/ic_bio" />
+
+                <ImageView
+                    android:id="@+id/user_mail_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:contentDescription="@string/user_email_icon"
+                    android:padding="5dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/email_edit_text"
+                    app:layout_constraintEnd_toEndOf="@+id/user_bio_icon"
+                    app:layout_constraintStart_toStartOf="@+id/user_bio_icon"
+                    app:layout_constraintTop_toTopOf="@+id/email_edit_text"
+                    app:srcCompat="@drawable/ic_mail" />
+
+                <ImageView
+                    android:id="@+id/user_phone_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:contentDescription="@string/user_phone_icon"
+                    android:padding="5dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/phone_number_edit_text"
+                    app:layout_constraintEnd_toEndOf="@+id/user_mail_icon"
+                    app:layout_constraintStart_toStartOf="@+id/user_mail_icon"
+                    app:layout_constraintTop_toTopOf="@+id/phone_number_edit_text"
+                    app:srcCompat="@drawable/ic_phone" />
+
+
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
                     android:padding="5dp"
                     android:text="@string/app_name"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    app:drawableStartCompat="@drawable/ic_profile" />
+                    app:layout_constraintBottom_toBottomOf="@+id/user_profile_icon"
+                    app:layout_constraintStart_toEndOf="@+id/user_profile_icon"
+                    app:layout_constraintTop_toTopOf="@+id/user_profile_icon" />
 
 
                 <TextView
                     android:id="@+id/user_bio"
-                    android:layout_width="wrap_content"
+                    android:layout_width="230dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:drawablePadding="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:maxLength="100"
                     android:padding="5dp"
+                    android:scrollHorizontally="false"
                     android:text="@string/app_name"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    app:drawableStartCompat="@drawable/ic_bio" />
+                    app:layout_constraintBottom_toBottomOf="@+id/user_bio_icon"
+                    app:layout_constraintStart_toStartOf="@+id/user_name"
+                    app:layout_constraintTop_toTopOf="@+id/user_bio_icon" />
 
                 <TextView
                     android:id="@+id/user_email"
-                    android:layout_width="wrap_content"
+                    android:layout_width="230dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:drawablePadding="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:padding="5dp"
                     android:text="@string/app_name"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    app:drawableStartCompat="@drawable/ic_mail" />
-
+                    app:layout_constraintBottom_toBottomOf="@+id/user_mail_icon"
+                    app:layout_constraintStart_toStartOf="@+id/user_bio"
+                    app:layout_constraintTop_toTopOf="@+id/user_mail_icon" />
 
                 <TextView
                     android:id="@+id/user_phone"
-                    android:layout_width="wrap_content"
+                    android:layout_width="230dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:drawablePadding="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:padding="5dp"
                     android:text="@string/app_name"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    app:drawableStartCompat="@drawable/ic_phone" />
+                    app:layout_constraintBottom_toBottomOf="@+id/user_phone_icon"
+                    app:layout_constraintStart_toStartOf="@+id/user_email"
+                    app:layout_constraintTop_toTopOf="@+id/user_phone_icon" />
 
-            </LinearLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/name_edit_text"
+                    style="@style/text_input_layout_style"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_marginStart="1dp"
+                    android:background="@drawable/edit_text_box_bg"
+                    android:hint="@string/enter_your_name"
+                    android:inputType="text"
+                    android:maxLength="100"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:textSize="16sp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toTopOf="@+id/bio_edit_text"
+                    app:layout_constraintStart_toEndOf="@+id/user_profile_icon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="spread_inside"
+                    tools:visibility="invisible" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/bio_edit_text"
+                    style="@style/text_input_layout_style"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/edit_text_box_bg"
+                    android:hint="@string/enter_your_bio"
+                    android:inputType="textMultiLine"
+                    android:maxLength="100"
+                    android:maxLines="3"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:textSize="16sp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toTopOf="@+id/email_edit_text"
+                    app:layout_constraintEnd_toEndOf="@+id/name_edit_text"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/user_bio_icon"
+                    app:layout_constraintStart_toStartOf="@+id/name_edit_text"
+                    app:layout_constraintTop_toBottomOf="@+id/name_edit_text"
+                    tools:visibility="invisible" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/email_edit_text"
+                    style="@style/text_input_layout_style"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_marginStart="15dp"
+                    android:background="@drawable/edit_text_box_bg"
+                    android:hint="@string/enter_your_email_address"
+                    android:inputType="textEmailAddress"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:textSize="16sp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toTopOf="@+id/phone_number_edit_text"
+                    app:layout_constraintEnd_toEndOf="@+id/bio_edit_text"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/user_mail_icon"
+                    app:layout_constraintStart_toStartOf="@+id/bio_edit_text"
+                    app:layout_constraintTop_toBottomOf="@+id/bio_edit_text"
+                    tools:visibility="invisible" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phone_number_edit_text"
+                    style="@style/text_input_layout_style"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_marginStart="18dp"
+                    android:background="@drawable/edit_text_box_bg"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:hint="@string/enter_your_phone_number"
+                    android:inputType="none"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:textSize="16sp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/email_edit_text"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/user_phone_icon"
+                    app:layout_constraintStart_toStartOf="@+id/email_edit_text"
+                    app:layout_constraintTop_toBottomOf="@+id/email_edit_text"
+                    tools:visibility="visible" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
@@ -141,7 +313,6 @@
         android:id="@+id/logout_button"
         android:layout_width="325dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="56dp"
         android:backgroundTint="@color/purple_500"
         android:contentDescription="@string/logout_button"
         android:text="@string/logout"
@@ -152,6 +323,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/user_info_card"
         app:layout_constraintStart_toStartOf="@+id/user_info_card"
+        app:layout_constraintTop_toBottomOf="@+id/user_info_card"
         tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
