@@ -47,7 +47,11 @@ class JoinClubFragment : Fragment(), ClubListAdapter.OnClubListener {
         }
         binding.joinClubButton.setOnClickListener {
             val clubId = binding.clubIdEditText.text.toString()
-            joinClub(clubId)
+            if (clubId == "") {
+                context?.shortToast("Please enter a club ID")
+            } else {
+                joinClub(clubId)
+            }
         }
         binding.publicClubsList.adapter = adapter
         getPublicClubs()
@@ -72,7 +76,17 @@ class JoinClubFragment : Fragment(), ClubListAdapter.OnClubListener {
                         }
                     }
                     Result.Status.ERROR -> {
-                        context?.shortToast(it.message.toString())
+                        when (val err = it.message.toString()) {
+                            "404 Not Found" -> {
+                                context?.shortToast("The value entered is not a valid club ID!")
+                            }
+                            "409 Conflict" -> {
+                                context?.shortToast("You are already a member of this club!")
+                            }
+                            else -> {
+                                context?.shortToast(err)
+                            }
+                        }
                         Timber.e("Error is: ${it.message}")
                         binding.joinClubProgressBar.hide()
                         binding.joinClubProgressBar.disable()
