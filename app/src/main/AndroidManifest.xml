@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Keats">
-        <activity android:name=".ui.activities.UserProfileActivity" />
+        <activity
+            android:name=".ui.activities.UserProfileActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activities.PostAuthActivity"
             android:screenOrientation="portrait" />
