@@ -28,6 +28,7 @@ import com.dscvit.keats.utils.hide
 import com.dscvit.keats.utils.invisible
 import com.dscvit.keats.utils.shortToast
 import com.dscvit.keats.utils.show
+import com.dscvit.keats.utils.validateEmail
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -54,7 +55,11 @@ class UserProfileFragment : Fragment() {
             startEdit()
         }
         binding.endEdit.setOnClickListener {
-            updateDetails()
+            if (!validateEmail(binding.emailEditText.text.toString().trim())) {
+                context?.shortToast("Please enter a valid email id!")
+            } else {
+                updateDetails()
+            }
         }
         binding.phoneNumberEditText.setOnClickListener {
             context?.shortToast("Phone number cannot be edited")
@@ -101,9 +106,9 @@ class UserProfileFragment : Fragment() {
 
     private fun updateDetails() {
         val updateUserRequest = UpdateUserRequest(
-            UserName = binding.nameEditText.text.toString(),
-            UserEmail = binding.emailEditText.text.toString(),
-            UserBio = binding.bioEditText.text.toString(),
+            UserName = binding.nameEditText.text.toString().trim(),
+            UserEmail = binding.emailEditText.text.toString().trim(),
+            UserBio = binding.bioEditText.text.toString().trim(),
         )
         viewModel.updateUserProfile(updateUserRequest).observe(
             viewLifecycleOwner,

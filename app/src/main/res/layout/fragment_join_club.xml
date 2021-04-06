@@ -63,6 +63,7 @@
                     android:paddingTop="10dp"
                     android:paddingEnd="10dp"
                     android:paddingBottom="10dp"
+                    android:textColorHint="@color/white_transparent_70"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -74,6 +75,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
+                    android:background="@drawable/ripple_effect"
                     android:clickable="true"
                     android:contentDescription="@string/scan_qr_code_button_image"
                     android:focusable="true"

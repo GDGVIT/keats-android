@@ -42,7 +42,9 @@ class JoinClubFragment : Fragment(), ClubListAdapter.OnClubListener {
         binding.scanCode.setOnClickListener {
             findNavController().navigate(JoinClubFragmentDirections.actionJoinClubFragmentToScanQRCodeFragment())
         }
-        binding.clubIdEditText.setText(args.scannedClubId)
+        if (args.scannedClubId != "Enter Club ID") {
+            binding.clubIdEditText.setText(args.scannedClubId)
+        }
         binding.joinClubButton.setOnClickListener {
             val clubId = binding.clubIdEditText.text.toString()
             joinClub(clubId)

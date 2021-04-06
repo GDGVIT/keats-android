@@ -13,5 +13,6 @@ object Constants {
     const val PREF_USER_ID = "PREF_USER_ID"
     const val PREF_CURR_CHAT_ROOM = "PREF_CURR_CHAT_ROOM"
     const val SPLASH_SCREEN_DELAY: Long = 500
+    const val PERMISSION_REQUEST = 10
     const val COVER_PHOTO_URL = "https://i.ibb.co/SR0pZDP/keats-cover.png"
 }

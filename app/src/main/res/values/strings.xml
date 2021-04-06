@@ -41,4 +41,5 @@
     <string name="create_club">Create Club</string>
     <string name="join_club">Join Club</string>
     <string name="nothing_to_see_here">Nothing to see here!</string>
+    <string name="qr_code_picker_from_gallery">QR Code picker from gallery</string>
 </resources>
