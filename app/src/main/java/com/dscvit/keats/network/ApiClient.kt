@@ -28,7 +28,11 @@ class ApiClient @Inject constructor(
         api.getPublicClubsList()
     }
 
-    suspend fun joinCLub(joinClubRequest: JoinClubRequest) = getResult {
+    suspend fun joinClub(joinClubRequest: JoinClubRequest) = getResult {
         api.joinClub(joinClubRequest)
+    }
+
+    suspend fun getClubDetails(clubId: String) = getResult {
+        api.getClubDetails(clubId)
     }
 }

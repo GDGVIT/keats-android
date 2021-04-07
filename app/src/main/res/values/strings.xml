@@ -42,4 +42,10 @@
     <string name="join_club">Join Club</string>
     <string name="nothing_to_see_here">Nothing to see here!</string>
     <string name="qr_code_picker_from_gallery">QR Code picker from gallery</string>
+    <string name="upload_pdf">Upload PDF</string>
+    <string name="upload_epub">Upload EPUB</string>
+    <string name="club_qr_code">Club QR Code</string>
+    <string name="your_qr_code">Your QR Code</string>
+    <string name="qr_code_of_the_club">QR Code of the Club</string>
+    <string name="show_qr_code">Show QR Code</string>
 </resources>

@@ -80,7 +80,7 @@ class ScanQRCodeFragment : Fragment() {
     }
 
     private fun decodeImage(inputStream: InputStream?) {
-        val action: NavDirections = if (inputStream == null) {
+        val action: NavDirections? = if (inputStream == null) {
             context?.shortToast("No Image Selected")
             ScanQRCodeFragmentDirections.actionScanQRCodeFragmentToJoinClubFragment()
         } else {
@@ -91,9 +91,11 @@ class ScanQRCodeFragment : Fragment() {
                 )
             } else {
                 context?.shortToast(decodedClubId)
-                ScanQRCodeFragmentDirections.actionScanQRCodeFragmentToJoinClubFragment()
+                null
             }
         }
-        findNavController().navigate(action)
+        if (action != null) {
+            findNavController().navigate(action)
+        }
     }
 }

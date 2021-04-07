@@ -28,6 +28,10 @@ class AppRepository @Inject constructor(private val apiClient: ApiClient) : Base
     }
 
     fun joinClub(joinClubRequest: JoinClubRequest) = makeRequest {
-        apiClient.joinCLub(joinClubRequest)
+        apiClient.joinClub(joinClubRequest)
+    }
+
+    fun getClubDetails(clubId: String) = makeRequest {
+        apiClient.getClubDetails(clubId)
     }
 }

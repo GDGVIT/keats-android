@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:cardBackgroundColor="@color/black_two"
+    app:cardCornerRadius="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_one">
+
+        <TextView
+            android:id="@+id/your_qr_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="20dp"
+            android:fontFamily="@font/circular_std_bold"
+            android:padding="5dp"
+            android:text="@string/your_qr_code"
+            android:textColor="@color/white"
+            android:textSize="28sp" />
+
+        <ImageView
+            android:id="@+id/qr_code"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_below="@id/your_qr_text"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:contentDescription="@string/qr_code_of_the_club"
+            app:srcCompat="@mipmap/ic_launcher" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
