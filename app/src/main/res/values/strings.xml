@@ -48,4 +48,5 @@
     <string name="your_qr_code">Your QR Code</string>
     <string name="qr_code_of_the_club">QR Code of the Club</string>
     <string name="show_qr_code">Show QR Code</string>
+    <string name="share_qr_code">Share QR Code</string>
 </resources>
