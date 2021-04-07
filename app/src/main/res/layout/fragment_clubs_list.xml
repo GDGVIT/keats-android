@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/default_svg_when_no_clubs"
         android:visibility="gone"
+        android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +26,7 @@
         android:id="@+id/clubs_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/circular_std_bold"
         android:text="@string/clubs"
@@ -39,7 +40,9 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="10dp"
+        android:background="@color/black_one"
+        android:backgroundTint="@color/black_one"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/clubs_text"
@@ -50,6 +53,8 @@
             android:id="@+id/clubs_list"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:background="@color/black_one"
+            android:backgroundTint="@color/black_one"
             android:clipToPadding="false"
             android:paddingTop="8dp"
             android:paddingBottom="100dp"
@@ -58,7 +63,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/clubs_text"
             app:layout_constraintTop_toBottomOf="@+id/clubs_text"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.0"
+            tools:listitem="@layout/clubs_list_item" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <TextView

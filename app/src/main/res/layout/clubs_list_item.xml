@@ -5,7 +5,7 @@
     android:id="@+id/main_club_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
+    android:layout_marginBottom="10dp"
     android:background="@drawable/club_list_item_bg_one"
     android:elevation="100dp"
     android:padding="8dp">

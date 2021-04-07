@@ -55,7 +55,10 @@ class UserProfileFragment : Fragment() {
             startEdit()
         }
         binding.endEdit.setOnClickListener {
-            if (!validateEmail(binding.emailEditText.text.toString().trim())) {
+            if (!validateEmail(
+                    binding.emailEditText.text.toString().trim()
+                ) && binding.emailEditText.text.toString().trim() != ""
+            ) {
                 context?.shortToast("Please enter a valid email id!")
             } else {
                 updateDetails()
