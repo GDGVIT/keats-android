@@ -39,9 +39,9 @@
             android:paddingTop="15dp"
             android:paddingBottom="15dp">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/club_id_edit_text_layout"
-                android:layout_width="344dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:background="@drawable/edit_text_box_bg"
@@ -53,7 +53,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/club_id_edit_text"
                     style="@style/text_input_layout_style"
-                    android:layout_width="300dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:background="@drawable/edit_text_box_bg"
@@ -65,6 +65,8 @@
                     android:paddingBottom="10dp"
                     android:textColorHint="@color/white_transparent_70"
                     android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/scan_code"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -79,15 +81,19 @@
                     android:clickable="true"
                     android:contentDescription="@string/scan_qr_code_button_image"
                     android:focusable="true"
+                    app:layout_constraintBottom_toBottomOf="@id/club_id_edit_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/club_id_edit_text"
                     app:srcCompat="@drawable/ic_qr" />
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/join_club_button"
-                android:layout_width="344dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="10dp"
+                android:letterSpacing="0.01"
                 android:text="@string/join"
                 android:textAllCaps="false"
                 android:textColor="@color/white"

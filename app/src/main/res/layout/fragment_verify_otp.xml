@@ -25,12 +25,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:padding="3dp"
         android:text="@string/please_enter_your_otp_to_login"
         android:textColor="@color/white"
         android:textSize="23sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
+        android:layout_marginStart="16dp"
         app:layout_constraintStart_toStartOf="@+id/top_keats_logo_svg"
         app:layout_constraintTop_toBottomOf="@+id/top_keats_logo_svg" />
 
@@ -39,13 +37,11 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/edit_text_box_bg"
         app:boxBackgroundColor="@color/box_stroke"
         app:boxStrokeColor="@color/box_stroke"
         app:hintEnabled="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="@+id/enter_otp_text"
         app:layout_constraintTop_toBottomOf="@+id/enter_otp_text">
 
@@ -72,28 +68,23 @@
         android:layout_height="wrap_content"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
+        android:layout_marginTop="5dp"
         android:text="@string/verify_otp"
+        android:letterSpacing="0.01"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="@+id/enter_otp_text"
-        app:layout_constraintTop_toBottomOf="@+id/otp_text_input_layout"
-        app:layout_constraintVertical_bias="0.06" />
+        app:layout_constraintStart_toStartOf="@+id/otp_text_input_layout"
+        app:layout_constraintTop_toBottomOf="@+id/otp_text_input_layout" />
 
     <ProgressBar
         android:id="@+id/verify_otp_progress_bar"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="@+id/enter_otp_text"
+        app:layout_constraintStart_toStartOf="@+id/otp_text_input_layout"
         app:layout_constraintTop_toBottomOf="@+id/otp_text_input_layout"
-        app:layout_constraintVertical_bias="0.06"
         tools:visibility="visible" />
 
 

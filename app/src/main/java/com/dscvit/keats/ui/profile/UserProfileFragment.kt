@@ -64,6 +64,9 @@ class UserProfileFragment : Fragment() {
         binding.phoneNumberEditText.setOnClickListener {
             context?.shortToast("Phone number cannot be edited")
         }
+        binding.backButton.setOnClickListener {
+            activity?.finish()
+        }
     }
 
     private fun loadUserprofile() {
@@ -189,6 +192,8 @@ class UserProfileFragment : Fragment() {
     private fun showUserProfileViews(user: UserEntity) {
         binding.progressBar.hide()
         binding.progressBar.disable()
+        binding.backButton.show()
+        binding.backButton.enable()
         binding.logoutButton.show()
         binding.logoutButton.enable()
         binding.coverPhoto.show()

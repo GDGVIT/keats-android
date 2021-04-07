@@ -17,6 +17,20 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:background="@drawable/ripple_effect"
+        android:contentDescription="@string/back_button"
+        android:elevation="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back" />
+
+    <ImageView
         android:id="@+id/cover_photo"
         android:layout_width="0dp"
         android:layout_height="240dp"
@@ -318,6 +332,7 @@
         android:layout_height="60dp"
         android:backgroundTint="@color/purple_500"
         android:contentDescription="@string/logout_button"
+        android:letterSpacing="0.01"
         android:text="@string/logout"
         android:textAllCaps="false"
         android:textSize="16sp"
