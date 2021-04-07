@@ -71,9 +71,8 @@
         android:textColor="@color/white"
         android:textSize="21sp"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/join_club"
+        app:layout_constraintStart_toStartOf="@+id/create_club"
         app:layout_constraintTop_toBottomOf="@+id/lying_down_reading_svg"
         tools:visibility="visible" />
 
@@ -83,6 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
+        android:letterSpacing="0.01"
         android:text="@string/create_a_club"
         android:textAllCaps="false"
         android:visibility="gone"
@@ -99,6 +99,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
+        android:letterSpacing="0.01"
         android:text="@string/join_a_club"
         android:textAllCaps="false"
         android:textColor="@color/white"
