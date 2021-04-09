@@ -7,5 +7,5 @@ data class GetClubDetailsData(
     @Json(name = "club")
     val Club: ClubEntity,
     @Json(name = "users")
-    val Users: List<UserEntity>?
+    val Users: List<UserEntity>
 )

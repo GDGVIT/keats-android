@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.core.content.edit
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
@@ -37,12 +39,14 @@ class UserProfileFragment : Fragment() {
 
     private val viewModel: UserProfileViewModel by viewModels()
     private lateinit var binding: FragmentUserProfileBinding
+    private lateinit var openAnimation: Animation
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentUserProfileBinding.inflate(layoutInflater)
+        openAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.open_anim)
         return binding.root
     }
 
@@ -196,12 +200,16 @@ class UserProfileFragment : Fragment() {
         binding.progressBar.disable()
         binding.backButton.show()
         binding.backButton.enable()
+        binding.logoutButton.startAnimation(openAnimation)
         binding.logoutButton.show()
         binding.logoutButton.enable()
+        binding.coverPhoto.startAnimation(openAnimation)
         binding.coverPhoto.show()
         binding.coverPhoto.enable()
+        binding.profilePhoto.startAnimation(openAnimation)
         binding.profilePhoto.show()
         binding.profilePhoto.enable()
+        binding.userInfoCard.startAnimation(openAnimation)
         binding.userInfoCard.show()
         binding.userInfoCard.enable()
         binding.coverPhoto.show()

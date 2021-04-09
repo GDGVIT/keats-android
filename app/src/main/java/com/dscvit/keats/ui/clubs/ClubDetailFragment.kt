@@ -166,6 +166,17 @@ class ClubDetailFragment : Fragment() {
 
     private fun showClubDetails(data: GetClubDetailsData) {
         binding.clubNameHeading.text = data.Club.ClubName
+        binding.hostName.text = getString(R.string.host_club_display, data.Club.HostName)
+        binding.noOfPeople.text = if (data.Users.size == 1) {
+            getString(R.string.no_of_members_club_details, data.Users.size.toString(), "")
+        } else {
+            getString(R.string.no_of_members_club_details, data.Users.size.toString(), "s")
+        }
+        binding.clubStatus.text = if (data.Club.Private) {
+            getString(R.string.club_type_private)
+        } else {
+            getString(R.string.club_type_public)
+        }
         val clubImg = binding.clubPhotoDetailsPage
         val imgUrl =
             data.Club.ClubPic.toUri().buildUpon().scheme("https")

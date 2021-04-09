@@ -51,4 +51,7 @@
     <string name="share_qr_code">Share QR Code</string>
     <string name="back_button">Back Button</string>
     <string name="cancel_editing">Cancel Editing</string>
+    <string name="club_details_photo">Club Details Photo</string>
+    <string name="host_club_display"><u>Host: %1$s</u></string>
+    <string name="no_of_members_club_details">%1$s member%2$s</string>
 </resources>

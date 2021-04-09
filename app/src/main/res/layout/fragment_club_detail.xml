@@ -25,28 +25,64 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/club_photo_details_page"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/club_details_photo_card"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_alignParentStart="true"
-                android:layout_margin="10dp"
-                android:scaleType="fitXY"
+                android:layout_margin="15dp"
+                android:background="@color/black_two"
+                app:cardCornerRadius="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@mipmap/ic_launcher" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/club_photo_details_page"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:contentDescription="@string/club_details_photo"
+                    android:scaleType="fitXY"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@mipmap/ic_launcher" />
+            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/host_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_margin="10dp"
+                android:fontFamily="@font/circular_std_book_italic"
                 android:textColor="@color/white"
-                android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@id/club_photo_details_page"
-                app:layout_constraintTop_toTopOf="@id/club_photo_details_page"
-                tools:text="Host: Hishaam" />
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@id/club_details_photo_card"
+                app:layout_constraintTop_toTopOf="@id/club_details_photo_card"
+                tools:text="Host: Sheldon" />
+
+            <TextView
+                android:id="@+id/no_of_people"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/host_name"
+                app:layout_constraintTop_toBottomOf="@+id/host_name"
+                tools:text="15 members" />
+
+            <TextView
+                android:id="@+id/club_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/white_transparent_70"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@id/club_details_photo_card"
+                app:layout_constraintStart_toStartOf="@+id/no_of_people"
+                app:layout_constraintTop_toBottomOf="@+id/no_of_people"
+                tools:text="Private" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
