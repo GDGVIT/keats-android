@@ -8,10 +8,10 @@
 
     <ProgressBar
         android:id="@+id/progress_bar"
-        android:elevation="100dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"
+        android:elevation="100dp" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -324,6 +324,7 @@
                             android:inputType="none"
                             android:paddingStart="10dp"
                             android:paddingEnd="10dp"
+                            android:textColor="@color/white_transparent_70"
                             android:textColorHint="@color/white_transparent_70"
                             android:textSize="16sp"
                             android:visibility="invisible"

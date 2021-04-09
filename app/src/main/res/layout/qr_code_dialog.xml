@@ -7,7 +7,7 @@
     app:cardBackgroundColor="@color/black_two"
     app:cardCornerRadius="10dp">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black_one">
@@ -22,17 +22,23 @@
             android:padding="5dp"
             android:text="@string/your_qr_code"
             android:textColor="@color/white"
-            android:textSize="28sp" />
+            android:textSize="28sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:layout_below="@id/your_qr_text"
             android:layout_centerHorizontal="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            app:cardCornerRadius="5dp">
+            android:layout_margin="20dp"
+            app:cardCornerRadius="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/your_qr_text">
 
             <ImageView
                 android:id="@+id/qr_code"
@@ -42,5 +48,5 @@
                 android:contentDescription="@string/qr_code_of_the_club"
                 app:srcCompat="@mipmap/ic_launcher" />
         </androidx.cardview.widget.CardView>
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
