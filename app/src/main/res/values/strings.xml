@@ -50,4 +50,5 @@
     <string name="show_qr_code">Show QR Code</string>
     <string name="share_qr_code">Share QR Code</string>
     <string name="back_button">Back Button</string>
+    <string name="cancel_editing">Cancel Editing</string>
 </resources>

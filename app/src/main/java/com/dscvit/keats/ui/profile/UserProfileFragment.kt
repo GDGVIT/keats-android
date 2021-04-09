@@ -30,6 +30,7 @@ import com.dscvit.keats.utils.shortToast
 import com.dscvit.keats.utils.show
 import com.dscvit.keats.utils.validateEmail
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class UserProfileFragment : Fragment() {
@@ -55,9 +56,8 @@ class UserProfileFragment : Fragment() {
             startEdit()
         }
         binding.endEdit.setOnClickListener {
-            if (!validateEmail(
-                    binding.emailEditText.text.toString().trim()
-                ) && binding.emailEditText.text.toString().trim() != ""
+            if (!validateEmail(binding.emailEditText.text.toString().trim()) &&
+                binding.emailEditText.text.toString().trim() != ""
             ) {
                 context?.shortToast("Please enter a valid email id!")
             } else {
@@ -70,6 +70,24 @@ class UserProfileFragment : Fragment() {
         binding.backButton.setOnClickListener {
             activity?.finish()
         }
+        binding.cancelEdit.setOnClickListener {
+            cancelEdit()
+        }
+    }
+
+    private fun cancelEdit() {
+        binding.endEdit.hide()
+        binding.endEdit.disable()
+        binding.startEdit.show()
+        binding.startEdit.enable()
+        binding.cancelEdit.hide()
+        binding.cancelEdit.disable()
+        binding.nameEditText.setText(binding.userName.text)
+        binding.bioEditText.setText(binding.userBio.text)
+        binding.emailEditText.setText(binding.userEmail.text)
+        binding.phoneNumberEditText.setText(binding.userPhone.text)
+        hideEditTexts()
+        showTextViews()
     }
 
     private fun loadUserprofile() {
@@ -87,6 +105,8 @@ class UserProfileFragment : Fragment() {
                         }
                     }
                     Result.Status.ERROR -> {
+                        Timber.e("Error is: ${it.message}")
+                        activity?.finish()
                         binding.progressBar.hide()
                         binding.progressBar.disable()
                     }
@@ -123,6 +143,8 @@ class UserProfileFragment : Fragment() {
                     Result.Status.LOADING -> {
                         binding.endEdit.hide()
                         binding.endEdit.disable()
+                        binding.cancelEdit.hide()
+                        binding.cancelEdit.disable()
                         binding.updatingProfileProgressBar.show()
                         binding.updatingProfileProgressBar.enable()
                     }
@@ -137,6 +159,7 @@ class UserProfileFragment : Fragment() {
                         }
                     }
                     Result.Status.ERROR -> {
+                        Timber.e("Error is: ${it.message}")
                         context?.shortToast("Error in updating! Retry again")
                         binding.updatingProfileProgressBar.hide()
                         binding.updatingProfileProgressBar.disable()
@@ -147,49 +170,25 @@ class UserProfileFragment : Fragment() {
     }
 
     private fun endEditViews() {
-        binding.userName.show()
-        binding.userName.enable()
-        binding.userBio.show()
-        binding.userBio.enable()
-        binding.userEmail.show()
-        binding.userEmail.enable()
-        binding.userPhone.show()
-        binding.userPhone.enable()
+        showTextViews()
         binding.startEdit.show()
         binding.startEdit.enable()
+        binding.cancelEdit.hide()
+        binding.cancelEdit.disable()
         binding.updatingProfileProgressBar.hide()
         binding.updatingProfileProgressBar.disable()
-        binding.nameEditText.invisible()
-        binding.nameEditText.disable()
-        binding.bioEditText.invisible()
-        binding.bioEditText.disable()
-        binding.emailEditText.invisible()
-        binding.emailEditText.disable()
-        binding.phoneNumberEditText.invisible()
-        binding.phoneNumberEditText.disable()
+        hideEditTexts()
     }
 
     private fun startEdit() {
-        binding.userName.hide()
-        binding.userName.disable()
-        binding.userBio.hide()
-        binding.userBio.disable()
-        binding.userEmail.hide()
-        binding.userEmail.disable()
-        binding.userPhone.hide()
-        binding.userPhone.disable()
+        hideTextViews()
         binding.startEdit.hide()
         binding.startEdit.disable()
         binding.endEdit.show()
         binding.endEdit.enable()
-        binding.nameEditText.show()
-        binding.nameEditText.enable()
-        binding.bioEditText.show()
-        binding.bioEditText.enable()
-        binding.emailEditText.show()
-        binding.emailEditText.enable()
-        binding.phoneNumberEditText.show()
-        binding.phoneNumberEditText.enable()
+        binding.cancelEdit.show()
+        binding.cancelEdit.enable()
+        showEditTexts()
     }
 
     private fun showUserProfileViews(user: UserEntity) {
@@ -232,5 +231,49 @@ class UserProfileFragment : Fragment() {
                     .error(R.drawable.ic_default_photo)
             )
             .into(profilePicImg)
+    }
+
+    private fun showEditTexts() {
+        binding.nameEditText.show()
+        binding.nameEditText.enable()
+        binding.bioEditText.show()
+        binding.bioEditText.enable()
+        binding.emailEditText.show()
+        binding.emailEditText.enable()
+        binding.phoneNumberEditText.show()
+        binding.phoneNumberEditText.enable()
+    }
+
+    private fun hideEditTexts() {
+        binding.nameEditText.invisible()
+        binding.nameEditText.disable()
+        binding.bioEditText.invisible()
+        binding.bioEditText.disable()
+        binding.emailEditText.invisible()
+        binding.emailEditText.disable()
+        binding.phoneNumberEditText.invisible()
+        binding.phoneNumberEditText.disable()
+    }
+
+    private fun showTextViews() {
+        binding.userName.show()
+        binding.userName.enable()
+        binding.userBio.show()
+        binding.userBio.enable()
+        binding.userEmail.show()
+        binding.userEmail.enable()
+        binding.userPhone.show()
+        binding.userPhone.enable()
+    }
+
+    private fun hideTextViews() {
+        binding.userName.hide()
+        binding.userName.disable()
+        binding.userBio.hide()
+        binding.userBio.disable()
+        binding.userEmail.hide()
+        binding.userEmail.disable()
+        binding.userPhone.hide()
+        binding.userPhone.disable()
     }
 }
