@@ -4,6 +4,8 @@ import com.dscvit.keats.model.clubs.ClubsListResponse
 import com.dscvit.keats.model.clubs.GetClubDetailsResponse
 import com.dscvit.keats.model.clubs.JoinClubRequest
 import com.dscvit.keats.model.clubs.JoinClubResponse
+import com.dscvit.keats.model.clubs.KickMemberRequest
+import com.dscvit.keats.model.clubs.KickMemberResponse
 import com.dscvit.keats.model.clubs.PublicClubsListResponse
 import com.dscvit.keats.model.login.LoginRequest
 import com.dscvit.keats.model.login.LoginResponse
@@ -39,4 +41,7 @@ interface ApiInterface {
 
     @GET("api/clubs")
     suspend fun getClubDetails(@Query("club_id") clubId: String): Response<GetClubDetailsResponse>
+
+    @POST("api/clubs/kickuser")
+    suspend fun kickMember(@Body kickMemberRequest: KickMemberRequest): Response<KickMemberResponse>
 }

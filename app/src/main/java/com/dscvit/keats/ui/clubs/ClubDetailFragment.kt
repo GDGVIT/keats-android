@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.OvershootInterpolator
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import androidx.core.view.ViewCompat
@@ -30,12 +31,14 @@ import com.dscvit.keats.databinding.MemberDetailDialogBinding
 import com.dscvit.keats.databinding.QrCodeDialogBinding
 import com.dscvit.keats.model.Result
 import com.dscvit.keats.model.clubs.GetClubDetailsData
+import com.dscvit.keats.model.clubs.KickMemberRequest
 import com.dscvit.keats.utils.Constants
 import com.dscvit.keats.utils.PreferenceHelper
 import com.dscvit.keats.utils.disable
 import com.dscvit.keats.utils.enable
 import com.dscvit.keats.utils.hide
 import com.dscvit.keats.utils.longToast
+import com.dscvit.keats.utils.shortToast
 import com.dscvit.keats.utils.show
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
@@ -58,6 +61,7 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
     private lateinit var adapter: MemberListAdapter
     private var isHost = false
     private var hostId = ""
+    private var clubId = ""
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -181,6 +185,7 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
             isHost = true
         }
         hostId = data.Club.HostId
+        clubId = data.Club.ClubId
         binding.membersListHeading.show()
         binding.membersListHeading.enable()
         adapter.submitList(data.Users)
@@ -259,9 +264,36 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
             memberDetails.kickMember.show()
             memberDetails.kickMember.enable()
         }
-        MaterialAlertDialogBuilder(requireContext())
+        val dialog = MaterialAlertDialogBuilder(requireContext())
             .setView(memberDetails.root)
             .setBackground(ColorDrawable(Color.TRANSPARENT))
             .show()
+        memberDetails.kickMember.setOnClickListener {
+            kickMember(details.UserId, dialog)
+        }
+    }
+
+    private fun kickMember(userId: String, dialog: AlertDialog) {
+        val kickMemberRequest = KickMemberRequest(
+            ClubId = clubId,
+            UserId = userId
+        )
+        viewModel.kickMember(kickMemberRequest).observe(
+            viewLifecycleOwner,
+            {
+                when (it.status) {
+                    Result.Status.LOADING -> {
+                    }
+                    Result.Status.SUCCESS -> {
+                        dialog.dismiss()
+                        context?.shortToast("Member Removed Successfully")
+                    }
+                    Result.Status.ERROR -> {
+                        dialog.dismiss()
+                        context?.shortToast("There was error in removing the member")
+                    }
+                }
+            }
+        )
     }
 }

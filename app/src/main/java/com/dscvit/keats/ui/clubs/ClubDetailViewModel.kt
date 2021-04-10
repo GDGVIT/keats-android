@@ -3,6 +3,7 @@ package com.dscvit.keats.ui.clubs
 import android.graphics.Bitmap
 import android.graphics.Color
 import androidx.lifecycle.ViewModel
+import com.dscvit.keats.model.clubs.KickMemberRequest
 import com.dscvit.keats.repository.AppRepository
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
@@ -15,6 +16,8 @@ import javax.inject.Inject
 class ClubDetailViewModel @Inject constructor(private val repo: AppRepository) : ViewModel() {
 
     fun getClubDetails(clubId: String) = repo.getClubDetails(clubId)
+
+    fun kickMember(kickMemberRequest: KickMemberRequest) = repo.kickMember(kickMemberRequest)
 
     @Throws(WriterException::class)
     fun encodeAsBitmap(str: String): Bitmap? {
