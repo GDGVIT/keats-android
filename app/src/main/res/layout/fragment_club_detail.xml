@@ -165,6 +165,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="16dp"
+        android:elevation="5dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@id/upload_book_button"
         app:layout_constraintEnd_toEndOf="parent">
@@ -202,6 +203,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
+        android:elevation="5dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@id/upload_pdf_layout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -248,17 +250,19 @@
         tools:visibility="visible" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/recycler_view_card"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/black_two"
+        android:visibility="gone"
         app:cardBackgroundColor="@color/black_two"
         app:cardCornerRadius="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/members_list_heading"
-        app:layout_constraintTop_toBottomOf="@id/members_list_heading">
+        app:layout_constraintTop_toBottomOf="@id/members_list_heading"
+        tools:visibility="visible">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/members_list"
@@ -266,8 +270,6 @@
             android:layout_height="match_parent"
             android:background="@color/black_two"
             android:backgroundTint="@color/black_two"
-            android:clipToPadding="false"
-            android:paddingBottom="50dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/members_list_item" />
     </androidx.cardview.widget.CardView>

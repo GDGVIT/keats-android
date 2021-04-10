@@ -3,6 +3,7 @@ package com.dscvit.keats.adapter
 import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
@@ -15,23 +16,29 @@ import com.dscvit.keats.R
 import com.dscvit.keats.databinding.MembersListItemBinding
 import com.dscvit.keats.model.profile.UserEntity
 
-class MemberListAdapter(val context: Context) :
+class MemberListAdapter(val context: Context, private val onMemberListener: OnMemberListener) :
     ListAdapter<UserEntity, MemberListAdapter.ViewHolder>(MemberListDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent)
+        return ViewHolder.from(parent, onMemberListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        return holder.bind(context, item)
+        return holder.bind(item, context)
+    }
+
+    fun getMemberDetails(position: Int): UserEntity {
+        return getItem(position)
     }
 
     class ViewHolder(
         private var binding: MembersListItemBinding,
-    ) : RecyclerView.ViewHolder(binding.root) {
+        private val onMemberListener: OnMemberListener
+    ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
-        fun bind(context: Context, user: UserEntity) {
+        fun bind(user: UserEntity, context: Context) {
+            binding.mainMemberCard.setOnClickListener(this)
             binding.memberName.text = user.UserName
             val userImg = binding.memberProfilePhoto
             val imgUrl = user.ProfilePic.toUri().buildUpon().scheme("https").build()
@@ -53,12 +60,20 @@ class MemberListAdapter(val context: Context) :
         }
 
         companion object {
-            fun from(parent: ViewGroup): ViewHolder {
+            fun from(parent: ViewGroup, onMemberListener: OnMemberListener): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = MembersListItemBinding.inflate(layoutInflater, parent, false)
-                return ViewHolder(binding)
+                return ViewHolder(binding, onMemberListener)
             }
         }
+
+        override fun onClick(v: View?) {
+            onMemberListener.onMemberClick(adapterPosition)
+        }
+    }
+
+    interface OnMemberListener {
+        fun onMemberClick(position: Int)
     }
 }
 

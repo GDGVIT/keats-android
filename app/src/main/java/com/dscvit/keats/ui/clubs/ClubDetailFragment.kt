@@ -32,6 +32,7 @@ import com.dscvit.keats.utils.disable
 import com.dscvit.keats.utils.enable
 import com.dscvit.keats.utils.hide
 import com.dscvit.keats.utils.longToast
+import com.dscvit.keats.utils.shortToast
 import com.dscvit.keats.utils.show
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,7 +42,7 @@ import java.io.FileOutputStream
 import java.io.OutputStream
 
 @AndroidEntryPoint
-class ClubDetailFragment : Fragment() {
+class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
 
     private lateinit var binding: FragmentClubDetailBinding
     private val viewModel: ClubDetailViewModel by viewModels()
@@ -58,7 +59,7 @@ class ClubDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentClubDetailBinding.inflate(layoutInflater)
-        adapter = MemberListAdapter(requireContext())
+        adapter = MemberListAdapter(requireContext(), this)
         fabOpenAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.open_fab_anim)
         fabCloseAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.close_fab_anim)
         openAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.open_anim)
@@ -204,6 +205,9 @@ class ClubDetailFragment : Fragment() {
                     .error(R.drawable.ic_broken_image)
             )
             .into(clubImg)
+        binding.recyclerViewCard.startAnimation(openAnimation)
+        binding.recyclerViewCard.show()
+        binding.recyclerViewCard.enable()
         binding.clubNameHeading.show()
         binding.clubNameHeading.enable()
         binding.clubDetailsCard.startAnimation(openAnimation)
@@ -213,5 +217,10 @@ class ClubDetailFragment : Fragment() {
         binding.showQr.enable()
         binding.shareQr.show()
         binding.shareQr.enable()
+    }
+
+    override fun onMemberClick(position: Int) {
+        val details = adapter.getMemberDetails(position)
+        context?.shortToast(details.toString())
     }
 }
