@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:cardBackgroundColor="@color/black_two"
+    app:cardCornerRadius="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_two">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/member_image_card"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="30dp"
+            android:layout_marginTop="100dp"
+            app:cardCornerRadius="100dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/member_profile_photo_img_dialog"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:contentDescription="@string/member_profile_photo"
+                app:srcCompat="@mipmap/ic_launcher" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/member_bio_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toEndOf="@+id/member_image_card"
+            app:layout_constraintStart_toStartOf="@+id/member_image_card"
+            app:layout_constraintTop_toBottomOf="@+id/member_name_dialog" />
+
+        <TextView
+            android:id="@+id/member_email_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="@+id/member_image_card"
+            app:layout_constraintStart_toStartOf="@+id/member_image_card"
+            app:layout_constraintTop_toBottomOf="@+id/member_bio_dialog" />
+
+        <TextView
+            android:id="@+id/member_name_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/circular_std_bold"
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toEndOf="@+id/member_image_card"
+            app:layout_constraintStart_toStartOf="@+id/member_image_card"
+            app:layout_constraintTop_toBottomOf="@+id/member_image_card" />
+
+        <TextView
+            android:id="@+id/member_phone_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="@+id/member_image_card"
+            app:layout_constraintStart_toStartOf="@+id/member_image_card"
+            app:layout_constraintTop_toBottomOf="@+id/member_email_dialog" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/kick_member"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/purple_500"
+            android:letterSpacing="0.01"
+            android:text="@string/remove_member_string"
+            android:textAllCaps="false"
+            android:textSize="15sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/member_phone_dialog"
+            app:layout_constraintStart_toStartOf="@id/member_phone_dialog"
+            app:layout_constraintTop_toBottomOf="@id/member_phone_dialog" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

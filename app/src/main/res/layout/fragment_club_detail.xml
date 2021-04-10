@@ -13,6 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:layout_marginTop="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         android:visibility="gone"
         app:cardBackgroundColor="@color/black_two"
         app:cardCornerRadius="4dp"
@@ -49,11 +52,10 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/host_name"
+                android:id="@+id/club_name_details_page"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/circular_std_book_italic"
+                android:layout_marginStart="10dp"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@id/club_details_photo_card"
@@ -67,21 +69,18 @@
                 android:layout_marginTop="10dp"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@+id/host_name"
-                app:layout_constraintTop_toBottomOf="@+id/host_name"
+                app:layout_constraintStart_toStartOf="@+id/club_name_details_page"
+                app:layout_constraintTop_toBottomOf="@+id/club_name_details_page"
                 tools:text="15 members" />
 
             <TextView
                 android:id="@+id/club_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
                 android:textColor="@color/white_transparent_70"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@id/club_details_photo_card"
                 app:layout_constraintStart_toStartOf="@+id/no_of_people"
-                app:layout_constraintTop_toBottomOf="@+id/no_of_people"
                 tools:text="Private" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -106,12 +105,12 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/circular_std_bold"
+        android:text="@string/club_text"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Club Name"
         tools:visibility="visible" />
 
     <ImageView

@@ -40,7 +40,8 @@ class MemberListAdapter(val context: Context, private val onMemberListener: OnMe
         fun bind(user: UserEntity, context: Context) {
             binding.mainMemberCard.setOnClickListener(this)
             binding.memberName.text = user.UserName
-            val userImg = binding.memberProfilePhoto
+            binding.memberBio.text = user.UserBio
+            val userImg = binding.memberProfilePhotoImg
             val imgUrl = user.ProfilePic.toUri().buildUpon().scheme("https").build()
             val circularProgressDrawable = CircularProgressDrawable(context)
             circularProgressDrawable.strokeWidth = 5f

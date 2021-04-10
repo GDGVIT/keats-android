@@ -55,4 +55,7 @@
     <string name="host_club_display"><u>Host: %1$s</u></string>
     <string name="no_of_members_club_details">%1$s member%2$s</string>
     <string name="members_club_details_text">Members</string>
+    <string name="club_text">Club</string>
+    <string name="member_profile_photo">Member Profile Photo</string>
+    <string name="remove_member_string">Remove</string>
 </resources>

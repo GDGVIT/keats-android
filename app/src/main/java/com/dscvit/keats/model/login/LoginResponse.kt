@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 
 class LoginResponse(
     @Json(name = "data")
-    val Token: String,
+    val Data: LoginResponseData,
     @Json(name = "status")
     val Status: String
 )
