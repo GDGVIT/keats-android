@@ -189,6 +189,15 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
     }
 
     private fun expandFabMenu() {
+        binding.memberListRefresh.alpha = 0.5F
+        binding.membersListHeading.alpha = 0.5F
+        binding.clubDetailsCard.alpha = 0.5F
+        binding.clubNameHeading.alpha = 0.5F
+        binding.shareQr.alpha = 0.5F
+        binding.showQr.alpha = 0.5F
+        binding.clubDetailsCard.disable()
+        binding.shareQr.disable()
+        binding.showQr.disable()
         ViewCompat.animate(binding.uploadBookButton).rotation(45.0f).withLayer()
             .setDuration(300).setInterpolator(OvershootInterpolator(10.0f)).start()
         binding.uploadPdfLayout.startAnimation(fabOpenAnimation)
@@ -199,6 +208,15 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
     }
 
     private fun collapseFabMenu() {
+        binding.memberListRefresh.alpha = 1F
+        binding.membersListHeading.alpha = 1F
+        binding.clubDetailsCard.alpha = 1F
+        binding.clubNameHeading.alpha = 1F
+        binding.shareQr.alpha = 1F
+        binding.showQr.alpha = 1F
+        binding.clubDetailsCard.enable()
+        binding.shareQr.enable()
+        binding.showQr.enable()
         ViewCompat.animate(binding.uploadBookButton).rotation(0.0f).withLayer()
             .setDuration(300).setInterpolator(OvershootInterpolator(10.0f)).start()
         binding.uploadPdfLayout.startAnimation(fabCloseAnimation)
@@ -268,6 +286,9 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
     }
 
     override fun onMemberClick(position: Int) {
+        if (isFabMenuOpen) {
+            return
+        }
         val details = adapter.getMemberDetails(position)
         val memberDetails = MemberDetailDialogBinding.inflate(layoutInflater)
         memberDetails.memberNameDialog.text = details.UserName

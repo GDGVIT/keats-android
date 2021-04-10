@@ -70,7 +70,9 @@ class ClubsListFragment : Fragment(), ClubListAdapter.OnClubListener {
     }
 
     private fun joinClub() {
-        isFabMenuOpen = false
+        if (isFabMenuOpen) {
+            collapseFabMenu()
+        }
         val action = ClubsListFragmentDirections.actionClubsListFragmentToJoinClubFragment()
         findNavController().navigate(action)
     }
@@ -151,11 +153,19 @@ class ClubsListFragment : Fragment(), ClubListAdapter.OnClubListener {
 
     override fun onClubClick(position: Int) {
         val clubId = adapter.getClubId(position)
+        if (isFabMenuOpen) {
+            return
+        }
         val action = ClubsListFragmentDirections.actionClubsListFragmentToClubDetailFragment(clubId)
         findNavController().navigate(action)
     }
 
     private fun expandFabMenu() {
+        binding.swipeContainer.alpha = 0.5F
+        binding.clubsText.alpha = 0.5F
+        binding.createClubLayout.alpha = 1F
+        binding.joinClubLayout.alpha = 1F
+        binding.floatingActionCreateOrJoinClub.alpha = 1F
         ViewCompat.animate(binding.floatingActionCreateOrJoinClub).rotation(45.0f).withLayer()
             .setDuration(300).setInterpolator(OvershootInterpolator(10.0f)).start()
         binding.createClubLayout.startAnimation(fabOpenAnimation)
@@ -166,6 +176,8 @@ class ClubsListFragment : Fragment(), ClubListAdapter.OnClubListener {
     }
 
     private fun collapseFabMenu() {
+        binding.swipeContainer.alpha = 1F
+        binding.clubsText.alpha = 1F
         ViewCompat.animate(binding.floatingActionCreateOrJoinClub).rotation(0.0f).withLayer()
             .setDuration(300).setInterpolator(OvershootInterpolator(10.0f)).start()
         binding.createClubLayout.startAnimation(fabCloseAnimation)
