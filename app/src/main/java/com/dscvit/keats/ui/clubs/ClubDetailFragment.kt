@@ -23,6 +23,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.dscvit.keats.BuildConfig
 import com.dscvit.keats.R
+import com.dscvit.keats.adapter.MemberListAdapter
 import com.dscvit.keats.databinding.FragmentClubDetailBinding
 import com.dscvit.keats.databinding.QrCodeDialogBinding
 import com.dscvit.keats.model.Result
@@ -50,12 +51,14 @@ class ClubDetailFragment : Fragment() {
     private lateinit var openAnimation: Animation
     private var isFabMenuOpen = false
     private lateinit var qrCode: Bitmap
+    private lateinit var adapter: MemberListAdapter
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentClubDetailBinding.inflate(layoutInflater)
+        adapter = MemberListAdapter(requireContext())
         fabOpenAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.open_fab_anim)
         fabCloseAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.close_fab_anim)
         openAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.open_anim)
@@ -64,6 +67,7 @@ class ClubDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.membersList.adapter = adapter
         getClubDetails(args.clubId)
         val a = viewModel.encodeAsBitmap(args.clubId)
         if (a != null) {
@@ -165,6 +169,9 @@ class ClubDetailFragment : Fragment() {
     }
 
     private fun showClubDetails(data: GetClubDetailsData) {
+        binding.membersListHeading.show()
+        binding.membersListHeading.enable()
+        adapter.submitList(data.Users)
         binding.clubNameHeading.text = data.Club.ClubName
         binding.hostName.text = getString(R.string.host_club_display, data.Club.HostName)
         binding.noOfPeople.text = if (data.Users.size == 1) {
