@@ -15,6 +15,7 @@ import android.view.animation.AnimationUtils
 import android.view.animation.OvershootInterpolator
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.FileProvider
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.net.toUri
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
@@ -95,6 +96,35 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
         binding.shareQr.setOnClickListener {
             shareQR()
         }
+        binding.memberListRefresh.setColorSchemeColors(
+            ResourcesCompat.getColor(resources, R.color.orange_200, null)
+        )
+        binding.memberListRefresh.setOnRefreshListener {
+            refreshMembers()
+            binding.memberListRefresh.isRefreshing = false
+        }
+    }
+
+    private fun refreshMembers() {
+        viewModel.getClubDetails(clubId).observe(
+            viewLifecycleOwner,
+            {
+                when (it.status) {
+                    Result.Status.LOADING -> {
+                    }
+                    Result.Status.SUCCESS -> {
+                        binding.clubDetailsProgressBar.hide()
+                        binding.clubDetailsProgressBar.disable()
+                        if (it.data?.Status == "success") {
+                            adapter.submitList(it.data.Data.Users)
+                        }
+                    }
+                    Result.Status.ERROR -> {
+                        context?.longToast(it.message.toString())
+                    }
+                }
+            }
+        )
     }
 
     private fun shareQR() {
@@ -223,6 +253,9 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
         binding.membersList.startAnimation(openAnimation)
         binding.membersList.show()
         binding.membersList.enable()
+        binding.memberListRefresh.startAnimation(openAnimation)
+        binding.memberListRefresh.show()
+        binding.memberListRefresh.enable()
         binding.clubNameHeading.show()
         binding.clubNameHeading.enable()
         binding.clubDetailsCard.startAnimation(openAnimation)
@@ -286,6 +319,7 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
                     }
                     Result.Status.SUCCESS -> {
                         dialog.dismiss()
+                        refreshMembers()
                         context?.shortToast("Member Removed Successfully")
                     }
                     Result.Status.ERROR -> {
