@@ -40,4 +40,22 @@
     <string name="public_clubs">Public Clubs</string>
     <string name="create_club">Create Club</string>
     <string name="join_club">Join Club</string>
+    <string name="nothing_to_see_here">Nothing to see here!</string>
+    <string name="qr_code_picker_from_gallery">QR Code picker from gallery</string>
+    <string name="upload_pdf">Upload PDF</string>
+    <string name="upload_epub">Upload EPUB</string>
+    <string name="club_qr_code">Club QR Code</string>
+    <string name="your_qr_code">Your QR Code</string>
+    <string name="qr_code_of_the_club">QR Code of the Club</string>
+    <string name="show_qr_code">Show QR Code</string>
+    <string name="share_qr_code">Share QR Code</string>
+    <string name="back_button">Back Button</string>
+    <string name="cancel_editing">Cancel Editing</string>
+    <string name="club_details_photo">Club Details Photo</string>
+    <string name="host_club_display"><u>Host: %1$s</u></string>
+    <string name="no_of_members_club_details">%1$s member%2$s</string>
+    <string name="members_club_details_text">Members</string>
+    <string name="club_text">Club</string>
+    <string name="member_profile_photo">Member Profile Photo</string>
+    <string name="remove_member_string">Remove</string>
 </resources>

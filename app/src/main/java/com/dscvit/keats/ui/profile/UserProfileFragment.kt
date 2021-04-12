@@ -1,12 +1,20 @@
 package com.dscvit.keats.ui.profile
 
+import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.edit
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
@@ -28,19 +36,28 @@ import com.dscvit.keats.utils.hide
 import com.dscvit.keats.utils.invisible
 import com.dscvit.keats.utils.shortToast
 import com.dscvit.keats.utils.show
+import com.dscvit.keats.utils.validateEmail
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import timber.log.Timber
+import java.io.InputStream
 
 @AndroidEntryPoint
 class UserProfileFragment : Fragment() {
 
     private val viewModel: UserProfileViewModel by viewModels()
     private lateinit var binding: FragmentUserProfileBinding
+    private lateinit var openAnimation: Animation
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentUserProfileBinding.inflate(layoutInflater)
+        openAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.open_anim)
         return binding.root
     }
 
@@ -54,11 +71,97 @@ class UserProfileFragment : Fragment() {
             startEdit()
         }
         binding.endEdit.setOnClickListener {
-            updateDetails()
+            if (!validateEmail(binding.emailEditText.text.toString().trim()) &&
+                binding.emailEditText.text.toString().trim() != ""
+            ) {
+                context?.shortToast("Please enter a valid email id!")
+            } else {
+                updateDetails()
+            }
         }
         binding.phoneNumberEditText.setOnClickListener {
             context?.shortToast("Phone number cannot be edited")
         }
+        binding.backButton.setOnClickListener {
+            activity?.finish()
+        }
+        binding.cancelEdit.setOnClickListener {
+            cancelEdit()
+        }
+        val startForResult =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    val body = getBodyToUpload(result)
+                    body?.let {
+                        uploadFile(it)
+                    }
+                }
+            }
+        binding.profilePhoto.setOnClickListener {
+//            pickImage(startForResult)
+            context?.shortToast("The file upload feature is still in progress")
+        }
+    }
+
+    private fun getBodyToUpload(result: ActivityResult): MultipartBody.Part? {
+        val image = result.data?.dataString
+        val imageUri = Uri.parse(image)
+        val inputStream: InputStream? =
+            (requireActivity()).contentResolver.openInputStream(imageUri)
+        val reqFile: RequestBody? =
+            inputStream?.readBytes()?.toRequestBody(result.data?.type?.toMediaTypeOrNull())
+        return reqFile?.let {
+            MultipartBody.Part.createFormData(
+                "file",
+                "file.${result.data?.type?.split("/")?.get(1)}",
+                it
+            )
+        }
+    }
+
+    private fun uploadFile(body: MultipartBody.Part) {
+        viewModel.uploadFile(body).observe(
+            viewLifecycleOwner,
+            {
+                when (it.status) {
+                    Result.Status.LOADING -> {
+                    }
+                    Result.Status.SUCCESS -> {
+                        if (it.data?.Status == "success") {
+                            context?.shortToast(it.data.File)
+                            Timber.i(it.data.File)
+                        }
+                    }
+                    Result.Status.ERROR -> {
+                        context?.shortToast(it.message.toString())
+                        Timber.e("Error is: ${it.message}")
+                    }
+                }
+            }
+        )
+    }
+
+    private fun pickImage(startForResult: ActivityResultLauncher<Intent>) {
+        val galleryIntent = Intent(
+            Intent.ACTION_PICK,
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        )
+        startForResult.launch(galleryIntent)
+    }
+
+    private fun cancelEdit() {
+        binding.endEdit.hide()
+        binding.endEdit.disable()
+        binding.startEdit.show()
+        binding.startEdit.enable()
+        binding.cancelEdit.hide()
+        binding.cancelEdit.disable()
+        binding.nameEditText.setText(binding.userName.text)
+        binding.bioEditText.setText(binding.userBio.text)
+        binding.emailEditText.setText(binding.userEmail.text)
+        binding.phoneNumberEditText.setText(binding.userPhone.text)
+        hideEditTexts()
+        showTextViews()
     }
 
     private fun loadUserprofile() {
@@ -76,6 +179,8 @@ class UserProfileFragment : Fragment() {
                         }
                     }
                     Result.Status.ERROR -> {
+                        Timber.e("Error is: ${it.message}")
+                        activity?.finish()
                         binding.progressBar.hide()
                         binding.progressBar.disable()
                     }
@@ -101,9 +206,9 @@ class UserProfileFragment : Fragment() {
 
     private fun updateDetails() {
         val updateUserRequest = UpdateUserRequest(
-            UserName = binding.nameEditText.text.toString(),
-            UserEmail = binding.emailEditText.text.toString(),
-            UserBio = binding.bioEditText.text.toString(),
+            UserName = binding.nameEditText.text.toString().trim(),
+            UserEmail = binding.emailEditText.text.toString().trim(),
+            UserBio = binding.bioEditText.text.toString().trim(),
         )
         viewModel.updateUserProfile(updateUserRequest).observe(
             viewLifecycleOwner,
@@ -112,6 +217,8 @@ class UserProfileFragment : Fragment() {
                     Result.Status.LOADING -> {
                         binding.endEdit.hide()
                         binding.endEdit.disable()
+                        binding.cancelEdit.hide()
+                        binding.cancelEdit.disable()
                         binding.updatingProfileProgressBar.show()
                         binding.updatingProfileProgressBar.enable()
                     }
@@ -126,6 +233,7 @@ class UserProfileFragment : Fragment() {
                         }
                     }
                     Result.Status.ERROR -> {
+                        Timber.e("Error is: ${it.message}")
                         context?.shortToast("Error in updating! Retry again")
                         binding.updatingProfileProgressBar.hide()
                         binding.updatingProfileProgressBar.disable()
@@ -136,60 +244,42 @@ class UserProfileFragment : Fragment() {
     }
 
     private fun endEditViews() {
-        binding.userName.show()
-        binding.userName.enable()
-        binding.userBio.show()
-        binding.userBio.enable()
-        binding.userEmail.show()
-        binding.userEmail.enable()
-        binding.userPhone.show()
-        binding.userPhone.enable()
+        showTextViews()
         binding.startEdit.show()
         binding.startEdit.enable()
+        binding.cancelEdit.hide()
+        binding.cancelEdit.disable()
         binding.updatingProfileProgressBar.hide()
         binding.updatingProfileProgressBar.disable()
-        binding.nameEditText.invisible()
-        binding.nameEditText.disable()
-        binding.bioEditText.invisible()
-        binding.bioEditText.disable()
-        binding.emailEditText.invisible()
-        binding.emailEditText.disable()
-        binding.phoneNumberEditText.invisible()
-        binding.phoneNumberEditText.disable()
+        hideEditTexts()
     }
 
     private fun startEdit() {
-        binding.userName.hide()
-        binding.userName.disable()
-        binding.userBio.hide()
-        binding.userBio.disable()
-        binding.userEmail.hide()
-        binding.userEmail.disable()
-        binding.userPhone.hide()
-        binding.userPhone.disable()
+        hideTextViews()
         binding.startEdit.hide()
         binding.startEdit.disable()
         binding.endEdit.show()
         binding.endEdit.enable()
-        binding.nameEditText.show()
-        binding.nameEditText.enable()
-        binding.bioEditText.show()
-        binding.bioEditText.enable()
-        binding.emailEditText.show()
-        binding.emailEditText.enable()
-        binding.phoneNumberEditText.show()
-        binding.phoneNumberEditText.enable()
+        binding.cancelEdit.show()
+        binding.cancelEdit.enable()
+        showEditTexts()
     }
 
     private fun showUserProfileViews(user: UserEntity) {
         binding.progressBar.hide()
         binding.progressBar.disable()
+        binding.backButton.show()
+        binding.backButton.enable()
+        binding.logoutButton.startAnimation(openAnimation)
         binding.logoutButton.show()
         binding.logoutButton.enable()
+        binding.coverPhoto.startAnimation(openAnimation)
         binding.coverPhoto.show()
         binding.coverPhoto.enable()
+        binding.profilePhoto.startAnimation(openAnimation)
         binding.profilePhoto.show()
         binding.profilePhoto.enable()
+        binding.userInfoCard.startAnimation(openAnimation)
         binding.userInfoCard.show()
         binding.userInfoCard.enable()
         binding.coverPhoto.show()
@@ -219,5 +309,49 @@ class UserProfileFragment : Fragment() {
                     .error(R.drawable.ic_default_photo)
             )
             .into(profilePicImg)
+    }
+
+    private fun showEditTexts() {
+        binding.nameEditText.show()
+        binding.nameEditText.enable()
+        binding.bioEditText.show()
+        binding.bioEditText.enable()
+        binding.emailEditText.show()
+        binding.emailEditText.enable()
+        binding.phoneNumberEditText.show()
+        binding.phoneNumberEditText.enable()
+    }
+
+    private fun hideEditTexts() {
+        binding.nameEditText.invisible()
+        binding.nameEditText.disable()
+        binding.bioEditText.invisible()
+        binding.bioEditText.disable()
+        binding.emailEditText.invisible()
+        binding.emailEditText.disable()
+        binding.phoneNumberEditText.invisible()
+        binding.phoneNumberEditText.disable()
+    }
+
+    private fun showTextViews() {
+        binding.userName.show()
+        binding.userName.enable()
+        binding.userBio.show()
+        binding.userBio.enable()
+        binding.userEmail.show()
+        binding.userEmail.enable()
+        binding.userPhone.show()
+        binding.userPhone.enable()
+    }
+
+    private fun hideTextViews() {
+        binding.userName.hide()
+        binding.userName.disable()
+        binding.userBio.hide()
+        binding.userBio.disable()
+        binding.userEmail.hide()
+        binding.userEmail.disable()
+        binding.userPhone.hide()
+        binding.userPhone.disable()
     }
 }

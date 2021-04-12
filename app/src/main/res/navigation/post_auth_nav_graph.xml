@@ -22,6 +22,17 @@
                 android:name="scannedClubId"
                 android:defaultValue="Enter Club ID" />
         </action>
+        <action
+            android:id="@+id/action_clubsListFragment_to_clubDetailFragment"
+            app:destination="@id/clubDetailFragment"
+            app:enterAnim="@anim/right_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@anim/right_in"
+            app:popExitAnim="@anim/right_out"
+            app:popUpTo="@id/clubsListFragment"
+            app:popUpToInclusive="false">
+            <argument android:name="clubId" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/joinClubFragment"
@@ -55,6 +66,18 @@
             android:id="@+id/action_scanQRCodeFragment_to_joinClubFragment"
             app:destination="@id/joinClubFragment"
             app:popUpTo="@id/joinClubFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true" >
+            <argument
+                android:name="scannedClubId"
+                android:defaultValue="Enter Club ID" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/clubDetailFragment"
+        android:name="com.dscvit.keats.ui.clubs.ClubDetailFragment"
+        android:label="fragment_club_detail"
+        tools:layout="@layout/fragment_club_detail" >
+        <argument android:name="clubId"
+            app:argType="string" />
     </fragment>
 </navigation>

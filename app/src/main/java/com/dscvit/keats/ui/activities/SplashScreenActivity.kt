@@ -12,10 +12,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.dscvit.keats.databinding.ActivitySplashScreenBinding
 import com.dscvit.keats.utils.Constants
+import com.dscvit.keats.utils.Constants.PERMISSION_REQUEST
 import com.dscvit.keats.utils.PreferenceHelper
 import dagger.hilt.android.AndroidEntryPoint
-
-private const val PERMISSION_REQUEST = 10
 
 @AndroidEntryPoint
 class SplashScreenActivity : AppCompatActivity() {
@@ -23,6 +22,7 @@ class SplashScreenActivity : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
     private var permissions = arrayOf(
         Manifest.permission.CAMERA,
+        Manifest.permission.READ_EXTERNAL_STORAGE
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

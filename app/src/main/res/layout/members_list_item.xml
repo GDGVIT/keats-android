@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_member_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="4dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="4dp"
+    android:background="@drawable/member_item_list_bg"
+    android:padding="2dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@id/member_profile_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:cardBackgroundColor="@color/black_two"
+        app:cardCornerRadius="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/member_profile_photo_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/member_profile_photo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@mipmap/ic_launcher" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/member_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@id/member_profile_photo"
+        app:layout_constraintTop_toTopOf="@+id/member_profile_photo"
+        tools:text="Sheldon Cooper" />
+
+    <TextView
+        android:id="@+id/member_bio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:maxLength="40"
+        android:maxLines="1"
+        android:textColor="@color/white_transparent_70"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/member_profile_photo"
+        app:layout_constraintStart_toStartOf="@id/member_name"
+        app:layout_constraintTop_toBottomOf="@id/member_name"
+        tools:text="I am the smartest man on the planet" />
+</androidx.constraintlayout.widget.ConstraintLayout>

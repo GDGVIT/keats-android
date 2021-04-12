@@ -8,6 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="white_transparent_70">#70FFFFFF</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="ripple_club_item">#70423F51</color>
     <color name="box_stroke">#333540</color>
     <color name="black_one">#141622</color>
     <color name="black_two">#222632</color>

@@ -1,10 +1,10 @@
-package com.dscvit.keats.model.login
+package com.dscvit.keats.model.clubs
 
 import com.squareup.moshi.Json
 
-class LoginResponse(
+data class UploadFileResponse(
     @Json(name = "data")
-    val Data: LoginResponseData,
+    val File: String,
     @Json(name = "status")
     val Status: String
 )

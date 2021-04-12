@@ -20,7 +20,6 @@ import com.dscvit.keats.ui.activities.PostAuthActivity
 import com.dscvit.keats.utils.disable
 import com.dscvit.keats.utils.enable
 import com.dscvit.keats.utils.hide
-import com.dscvit.keats.utils.shortToast
 import com.dscvit.keats.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -71,7 +70,9 @@ class ClubsListFragment : Fragment(), ClubListAdapter.OnClubListener {
     }
 
     private fun joinClub() {
-        isFabMenuOpen = false
+        if (isFabMenuOpen) {
+            collapseFabMenu()
+        }
         val action = ClubsListFragmentDirections.actionClubsListFragmentToJoinClubFragment()
         findNavController().navigate(action)
     }
@@ -152,7 +153,11 @@ class ClubsListFragment : Fragment(), ClubListAdapter.OnClubListener {
 
     override fun onClubClick(position: Int) {
         val clubId = adapter.getClubId(position)
-        context?.shortToast(clubId)
+        if (isFabMenuOpen) {
+            return
+        }
+        val action = ClubsListFragmentDirections.actionClubsListFragmentToClubDetailFragment(clubId)
+        findNavController().navigate(action)
     }
 
     private fun expandFabMenu() {

@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.dscvit.keats.R
 import com.dscvit.keats.adapter.ClubListAdapter
 import com.dscvit.keats.databinding.FragmentJoinClubBinding
 import com.dscvit.keats.model.Result
@@ -27,6 +30,7 @@ class JoinClubFragment : Fragment(), ClubListAdapter.OnClubListener {
     private val viewModel: JoinClubViewModel by viewModels()
     private val args: JoinClubFragmentArgs by navArgs()
     private lateinit var adapter: ClubListAdapter
+    private lateinit var openAnimation: Animation
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,18 +38,26 @@ class JoinClubFragment : Fragment(), ClubListAdapter.OnClubListener {
     ): View {
         binding = FragmentJoinClubBinding.inflate(layoutInflater)
         adapter = ClubListAdapter(requireContext(), this)
+        openAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.open_anim)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.joinClubCard.startAnimation(openAnimation)
         binding.scanCode.setOnClickListener {
             findNavController().navigate(JoinClubFragmentDirections.actionJoinClubFragmentToScanQRCodeFragment())
         }
-        binding.clubIdEditText.setText(args.scannedClubId)
+        if (args.scannedClubId != "Enter Club ID") {
+            binding.clubIdEditText.setText(args.scannedClubId)
+        }
         binding.joinClubButton.setOnClickListener {
             val clubId = binding.clubIdEditText.text.toString()
-            joinClub(clubId)
+            if (clubId == "") {
+                context?.shortToast("Please enter a club ID")
+            } else {
+                joinClub(clubId)
+            }
         }
         binding.publicClubsList.adapter = adapter
         getPublicClubs()
@@ -70,7 +82,17 @@ class JoinClubFragment : Fragment(), ClubListAdapter.OnClubListener {
                         }
                     }
                     Result.Status.ERROR -> {
-                        context?.shortToast(it.message.toString())
+                        when (val err = it.message.toString()) {
+                            "404 Not Found" -> {
+                                context?.shortToast("The value entered is not a valid club ID!")
+                            }
+                            "409 Conflict" -> {
+                                context?.shortToast("You are already a member of this club!")
+                            }
+                            else -> {
+                                context?.shortToast(err)
+                            }
+                        }
                         Timber.e("Error is: ${it.message}")
                         binding.joinClubProgressBar.hide()
                         binding.joinClubProgressBar.disable()
@@ -92,18 +114,23 @@ class JoinClubFragment : Fragment(), ClubListAdapter.OnClubListener {
                         binding.publicClubsListProgressBar.enable()
                     }
                     Result.Status.SUCCESS -> {
+                        binding.publicClubsListProgressBar.hide()
+                        binding.publicClubsListProgressBar.disable()
                         if (it.data?.Status == "success") {
                             val clubs = it.data.Clubs
                             if (clubs != null) {
                                 adapter.submitList(clubs)
                             }
-                            binding.publicClubsListProgressBar.hide()
-                            binding.publicClubsListProgressBar.disable()
                             binding.publicClubsList.show()
                             binding.publicClubsList.enable()
                         }
                     }
                     Result.Status.ERROR -> {
+                        val status = it.message.toString()
+                        if (status == "404 Not Found") {
+                            binding.noClubsText.show()
+                            binding.noClubsText.enable()
+                        }
                         binding.publicClubsListProgressBar.hide()
                         binding.publicClubsListProgressBar.disable()
                     }
