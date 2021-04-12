@@ -27,8 +27,8 @@ class ClubDetailViewModel @Inject constructor(private val repo: AppRepository) :
             result = MultiFormatWriter().encode(
                 str,
                 BarcodeFormat.QR_CODE,
-                300,
-                300,
+                250,
+                250,
                 null
             )
             val w = result.width
@@ -41,7 +41,7 @@ class ClubDetailViewModel @Inject constructor(private val repo: AppRepository) :
                 }
             }
             bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
-            bitmap.setPixels(pixels, 0, 300, 0, 0, w, h)
+            bitmap.setPixels(pixels, 0, 250, 0, 0, w, h)
         } catch (iae: Exception) {
             iae.printStackTrace()
             return null

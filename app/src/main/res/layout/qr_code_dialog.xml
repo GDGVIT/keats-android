@@ -29,8 +29,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
             android:layout_below="@id/your_qr_text"
             android:layout_centerHorizontal="true"
             android:layout_margin="20dp"
@@ -42,8 +42,8 @@
 
             <ImageView
                 android:id="@+id/qr_code"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
                 android:layout_gravity="center"
                 android:contentDescription="@string/qr_code_of_the_club"
                 app:srcCompat="@mipmap/ic_launcher" />

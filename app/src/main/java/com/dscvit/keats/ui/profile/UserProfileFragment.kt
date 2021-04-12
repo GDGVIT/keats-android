@@ -1,14 +1,20 @@
 package com.dscvit.keats.ui.profile
 
+import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.edit
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
@@ -32,7 +38,12 @@ import com.dscvit.keats.utils.shortToast
 import com.dscvit.keats.utils.show
 import com.dscvit.keats.utils.validateEmail
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import timber.log.Timber
+import java.io.InputStream
 
 @AndroidEntryPoint
 class UserProfileFragment : Fragment() {
@@ -77,6 +88,65 @@ class UserProfileFragment : Fragment() {
         binding.cancelEdit.setOnClickListener {
             cancelEdit()
         }
+        val startForResult =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    val body = getBodyToUpload(result)
+                    body?.let {
+                        uploadFile(it)
+                    }
+                }
+            }
+        binding.profilePhoto.setOnClickListener {
+//            pickImage(startForResult)
+            context?.shortToast("The file upload feature is still in progress")
+        }
+    }
+
+    private fun getBodyToUpload(result: ActivityResult): MultipartBody.Part? {
+        val image = result.data?.dataString
+        val imageUri = Uri.parse(image)
+        val inputStream: InputStream? =
+            (requireActivity()).contentResolver.openInputStream(imageUri)
+        val reqFile: RequestBody? =
+            inputStream?.readBytes()?.toRequestBody(result.data?.type?.toMediaTypeOrNull())
+        return reqFile?.let {
+            MultipartBody.Part.createFormData(
+                "file",
+                "file.${result.data?.type?.split("/")?.get(1)}",
+                it
+            )
+        }
+    }
+
+    private fun uploadFile(body: MultipartBody.Part) {
+        viewModel.uploadFile(body).observe(
+            viewLifecycleOwner,
+            {
+                when (it.status) {
+                    Result.Status.LOADING -> {
+                    }
+                    Result.Status.SUCCESS -> {
+                        if (it.data?.Status == "success") {
+                            context?.shortToast(it.data.File)
+                            Timber.i(it.data.File)
+                        }
+                    }
+                    Result.Status.ERROR -> {
+                        context?.shortToast(it.message.toString())
+                        Timber.e("Error is: ${it.message}")
+                    }
+                }
+            }
+        )
+    }
+
+    private fun pickImage(startForResult: ActivityResultLauncher<Intent>) {
+        val galleryIntent = Intent(
+            Intent.ACTION_PICK,
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        )
+        startForResult.launch(galleryIntent)
     }
 
     private fun cancelEdit() {

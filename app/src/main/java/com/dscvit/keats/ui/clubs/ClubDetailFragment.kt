@@ -189,12 +189,6 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
     }
 
     private fun expandFabMenu() {
-        binding.memberListRefresh.alpha = 0.5F
-        binding.membersListHeading.alpha = 0.5F
-        binding.clubDetailsCard.alpha = 0.5F
-        binding.clubNameHeading.alpha = 0.5F
-        binding.shareQr.alpha = 0.5F
-        binding.showQr.alpha = 0.5F
         binding.clubDetailsCard.disable()
         binding.shareQr.disable()
         binding.showQr.disable()
@@ -208,12 +202,6 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
     }
 
     private fun collapseFabMenu() {
-        binding.memberListRefresh.alpha = 1F
-        binding.membersListHeading.alpha = 1F
-        binding.clubDetailsCard.alpha = 1F
-        binding.clubNameHeading.alpha = 1F
-        binding.shareQr.alpha = 1F
-        binding.showQr.alpha = 1F
         binding.clubDetailsCard.enable()
         binding.shareQr.enable()
         binding.showQr.enable()

@@ -13,13 +13,13 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@id/member_profile_photo"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         app:cardBackgroundColor="@color/black_two"
-        app:cardCornerRadius="50dp"
+        app:cardCornerRadius="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

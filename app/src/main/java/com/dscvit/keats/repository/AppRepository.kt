@@ -5,6 +5,7 @@ import com.dscvit.keats.model.clubs.KickMemberRequest
 import com.dscvit.keats.model.login.LoginRequest
 import com.dscvit.keats.model.profile.UpdateUserRequest
 import com.dscvit.keats.network.ApiClient
+import okhttp3.MultipartBody
 import javax.inject.Inject
 
 class AppRepository @Inject constructor(private val apiClient: ApiClient) : BaseRepo() {
@@ -38,5 +39,9 @@ class AppRepository @Inject constructor(private val apiClient: ApiClient) : Base
 
     fun kickMember(kickMemberRequest: KickMemberRequest) = makeRequest {
         apiClient.kickMember(kickMemberRequest)
+    }
+
+    fun uploadFile(file: MultipartBody.Part) = makeRequest {
+        apiClient.uploadFile(file)
     }
 }

@@ -7,16 +7,20 @@ import com.dscvit.keats.model.clubs.JoinClubResponse
 import com.dscvit.keats.model.clubs.KickMemberRequest
 import com.dscvit.keats.model.clubs.KickMemberResponse
 import com.dscvit.keats.model.clubs.PublicClubsListResponse
+import com.dscvit.keats.model.clubs.UploadFileResponse
 import com.dscvit.keats.model.login.LoginRequest
 import com.dscvit.keats.model.login.LoginResponse
 import com.dscvit.keats.model.profile.GetUserProfileResponse
 import com.dscvit.keats.model.profile.UpdateUserRequest
 import com.dscvit.keats.model.profile.UpdateUserResponse
+import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.PATCH
 import retrofit2.http.POST
+import retrofit2.http.Part
 import retrofit2.http.Query
 
 interface ApiInterface {
@@ -44,4 +48,8 @@ interface ApiInterface {
 
     @POST("api/clubs/kickuser")
     suspend fun kickMember(@Body kickMemberRequest: KickMemberRequest): Response<KickMemberResponse>
+
+    @Multipart
+    @POST("api/uploadfile")
+    suspend fun uploadFile(@Part file: MultipartBody.Part): Response<UploadFileResponse>
 }

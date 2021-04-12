@@ -4,6 +4,7 @@ import com.dscvit.keats.model.clubs.JoinClubRequest
 import com.dscvit.keats.model.clubs.KickMemberRequest
 import com.dscvit.keats.model.login.LoginRequest
 import com.dscvit.keats.model.profile.UpdateUserRequest
+import okhttp3.MultipartBody
 import javax.inject.Inject
 
 class ApiClient @Inject constructor(
@@ -39,5 +40,9 @@ class ApiClient @Inject constructor(
 
     suspend fun kickMember(kickMemberRequest: KickMemberRequest) = getResult {
         api.kickMember(kickMemberRequest)
+    }
+
+    suspend fun uploadFile(file: MultipartBody.Part) = getResult {
+        api.uploadFile(file)
     }
 }
