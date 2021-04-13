@@ -50,6 +50,7 @@ class UserProfileFragment : Fragment() {
 
     private val viewModel: UserProfileViewModel by viewModels()
     private lateinit var binding: FragmentUserProfileBinding
+    private var userProfileUrl = ""
     private lateinit var openAnimation: Animation
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -98,8 +99,7 @@ class UserProfileFragment : Fragment() {
                 }
             }
         binding.profilePhoto.setOnClickListener {
-//            pickImage(startForResult)
-            context?.shortToast("The file upload feature is still in progress")
+            pickImage(startForResult)
         }
     }
 
@@ -130,6 +130,7 @@ class UserProfileFragment : Fragment() {
                         if (it.data?.Status == "success") {
                             context?.shortToast(it.data.File)
                             Timber.i(it.data.File)
+                            userProfileUrl = it.data.File
                         }
                     }
                     Result.Status.ERROR -> {
@@ -292,8 +293,9 @@ class UserProfileFragment : Fragment() {
         binding.bioEditText.setText(user.UserBio)
         binding.emailEditText.setText(user.Email)
         binding.phoneNumberEditText.setText(user.PhoneNumber)
+        userProfileUrl = user.ProfilePic
         val profilePicImg = binding.profilePhoto
-        val imgUri = user.ProfilePic.toUri().buildUpon().scheme("https").build()
+        val imgUri = userProfileUrl.toUri().buildUpon().scheme("https").build()
         val circularProgressDrawable = CircularProgressDrawable(requireContext())
         circularProgressDrawable.strokeWidth = 5f
         circularProgressDrawable.centerRadius = 30f
