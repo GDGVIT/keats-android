@@ -33,6 +33,9 @@
             app:popUpToInclusive="false">
             <argument android:name="clubId" />
         </action>
+        <action
+            android:id="@+id/action_clubsListFragment_to_createClubFragment"
+            app:destination="@id/createClubFragment" />
     </fragment>
     <fragment
         android:id="@+id/joinClubFragment"
@@ -79,5 +82,14 @@
         tools:layout="@layout/fragment_club_detail" >
         <argument android:name="clubId"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/createClubFragment"
+        android:name="com.dscvit.keats.ui.clubs.CreateClubFragment"
+        android:label="fragment_create_club"
+        tools:layout="@layout/fragment_create_club" >
+        <action
+            android:id="@+id/action_createClubFragment_to_clubsListFragment"
+            app:destination="@id/clubsListFragment" />
     </fragment>
 </navigation>
