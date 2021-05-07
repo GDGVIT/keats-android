@@ -67,6 +67,9 @@ class ClubsListFragment : Fragment(), ClubListAdapter.OnClubListener {
         binding.floatingActionJoinClub.setOnClickListener {
             joinClub()
         }
+        binding.floatingActionCreateClub.setOnClickListener {
+            createClub()
+        }
     }
 
     private fun joinClub() {
@@ -74,6 +77,14 @@ class ClubsListFragment : Fragment(), ClubListAdapter.OnClubListener {
             collapseFabMenu()
         }
         val action = ClubsListFragmentDirections.actionClubsListFragmentToJoinClubFragment()
+        findNavController().navigate(action)
+    }
+
+    private fun createClub() {
+        if (isFabMenuOpen) {
+            collapseFabMenu()
+        }
+        val action = ClubsListFragmentDirections.actionClubsListFragmentToCreateClubFragment()
         findNavController().navigate(action)
     }
 
@@ -128,8 +139,8 @@ class ClubsListFragment : Fragment(), ClubListAdapter.OnClubListener {
     private fun noClubsShowViews() {
         binding.progressBar.hide()
         binding.progressBar.disable()
-        binding.lyingDownReadingSvg.show()
-        binding.lyingDownReadingSvg.enable()
+        binding.bookshelf.show()
+        binding.bookshelf.enable()
         binding.joinFirstBookClubText.show()
         binding.joinFirstBookClubText.enable()
         binding.createClub.show()
@@ -143,9 +154,9 @@ class ClubsListFragment : Fragment(), ClubListAdapter.OnClubListener {
         binding.progressBar.disable()
         binding.clubsList.disable()
         binding.clubsList.hide()
-        binding.lyingDownReadingSvg.setImageResource(R.drawable.ic_error_book)
-        binding.lyingDownReadingSvg.enable()
-        binding.lyingDownReadingSvg.show()
+        binding.bookshelf.setImageResource(R.drawable.ic_error_book)
+        binding.bookshelf.enable()
+        binding.bookshelf.show()
         binding.joinFirstBookClubText.text = getString(R.string.error_text)
         binding.joinFirstBookClubText.enable()
         binding.joinFirstBookClubText.show()

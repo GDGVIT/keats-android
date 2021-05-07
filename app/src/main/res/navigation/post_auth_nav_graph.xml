@@ -25,17 +25,23 @@
         <action
             android:id="@+id/action_clubsListFragment_to_clubDetailFragment"
             app:destination="@id/clubDetailFragment"
-            app:enterAnim="@anim/right_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@anim/right_in"
-            app:popExitAnim="@anim/right_out"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit"
             app:popUpTo="@id/clubsListFragment"
             app:popUpToInclusive="false">
             <argument android:name="clubId" />
         </action>
         <action
             android:id="@+id/action_clubsListFragment_to_createClubFragment"
-            app:destination="@id/createClubFragment" />
+            app:destination="@id/createClubFragment"
+            app:enterAnim="@anim/right_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@anim/right_in"
+            app:popExitAnim="@anim/right_out"
+            app:popUpTo="@id/clubsListFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/joinClubFragment"
@@ -69,7 +75,7 @@
             android:id="@+id/action_scanQRCodeFragment_to_joinClubFragment"
             app:destination="@id/joinClubFragment"
             app:popUpTo="@id/joinClubFragment"
-            app:popUpToInclusive="true" >
+            app:popUpToInclusive="true">
             <argument
                 android:name="scannedClubId"
                 android:defaultValue="Enter Club ID" />
@@ -79,15 +85,16 @@
         android:id="@+id/clubDetailFragment"
         android:name="com.dscvit.keats.ui.clubs.ClubDetailFragment"
         android:label="fragment_club_detail"
-        tools:layout="@layout/fragment_club_detail" >
-        <argument android:name="clubId"
+        tools:layout="@layout/fragment_club_detail">
+        <argument
+            android:name="clubId"
             app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/createClubFragment"
         android:name="com.dscvit.keats.ui.clubs.CreateClubFragment"
         android:label="fragment_create_club"
-        tools:layout="@layout/fragment_create_club" >
+        tools:layout="@layout/fragment_create_club">
         <action
             android:id="@+id/action_createClubFragment_to_clubsListFragment"
             app:destination="@id/clubsListFragment" />
