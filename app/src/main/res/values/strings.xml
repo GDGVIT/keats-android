@@ -58,4 +58,5 @@
     <string name="club_text">Club</string>
     <string name="member_profile_photo">Member Profile Photo</string>
     <string name="remove_member_string">Remove</string>
+    <string name="upload_photo">Upload Photo</string>
 </resources>
