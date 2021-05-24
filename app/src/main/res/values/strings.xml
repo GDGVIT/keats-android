@@ -59,4 +59,11 @@
     <string name="member_profile_photo">Member Profile Photo</string>
     <string name="remove_member_string">Remove</string>
     <string name="upload_photo">Upload Photo</string>
+    <string name="create_new_club">Create New Club</string>
+    <string name="private_club_type">Private</string>
+    <string name="club_image">Club Image</string>
+    <string name="enter_club_name">Enter Club Name</string>
+    <string name="upload_book_button_text">Upload Book</string>
+    <string name="continue_text">Continue</string>
+    <string name="upload_club_image_button">Upload Club Image Button</string>
 </resources>
