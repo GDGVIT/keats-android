@@ -96,7 +96,12 @@
         android:label="fragment_create_club"
         tools:layout="@layout/fragment_create_club">
         <action
-            android:id="@+id/action_createClubFragment_to_clubsListFragment"
-            app:destination="@id/clubsListFragment" />
+            android:id="@+id/action_createClubFragment_to_clubDetailFragment"
+            app:destination="@id/clubDetailFragment"
+            app:enterAnim="@anim/right_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@anim/right_in"
+            app:popExitAnim="@anim/right_out"
+            app:popUpTo="@id/clubsListFragment" />
     </fragment>
 </navigation>

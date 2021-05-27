@@ -31,6 +31,22 @@ class ApiClient @Inject constructor(
         api.updateUser(username = username, bio = bio, email = email, profilePic = profilePic)
     }
 
+    suspend fun createClub(
+        clubName: RequestBody,
+        clubStatus: RequestBody,
+        pageSync: RequestBody,
+        clubPic: MultipartBody.Part?,
+        clubBook: MultipartBody.Part?
+    ) = getResult {
+        api.createClub(
+            clubName = clubName,
+            clubStatus = clubStatus,
+            pageSync = pageSync,
+            clubPic = clubPic,
+            clubBook = clubBook
+        )
+    }
+
     suspend fun getPublicClubsList() = getResult {
         api.getPublicClubsList()
     }

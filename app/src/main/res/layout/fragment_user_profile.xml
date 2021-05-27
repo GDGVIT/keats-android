@@ -73,15 +73,15 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:clickable="false"
+                android:contentDescription="@string/upload_photo"
                 android:elevation="10dp"
-                android:src="@drawable/ic_upload"
+                android:src="@drawable/ic_upload_alt"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toTopOf="@+id/user_info_card"
                 app:layout_constraintEnd_toEndOf="@+id/user_info_card"
                 app:layout_constraintStart_toStartOf="@+id/user_info_card"
                 app:layout_constraintTop_toTopOf="@+id/user_info_card"
-                tools:visibility="visible"
-                android:contentDescription="@string/upload_photo" />
+                tools:visibility="visible" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/user_info_card"
