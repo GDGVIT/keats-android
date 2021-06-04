@@ -80,6 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="50dp"
+            android:maxLength="25"
             android:background="@drawable/edit_text_box_bg"
             android:hint="@string/enter_club_name"
             android:inputType="textNoSuggestions"
