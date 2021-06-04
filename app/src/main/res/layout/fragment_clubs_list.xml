@@ -8,7 +8,7 @@
     tools:context=".ui.clubs.ClubsListFragment">
 
     <ImageView
-        android:id="@+id/lying_down_reading_svg"
+        android:id="@+id/bookshelf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/default_svg_when_no_clubs"
@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.37"
-        app:srcCompat="@drawable/ic_reading"
+        app:srcCompat="@drawable/ic_bookshelf"
         tools:visibility="visible" />
 
     <TextView
@@ -79,7 +79,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/join_club"
         app:layout_constraintStart_toStartOf="@+id/create_club"
-        app:layout_constraintTop_toBottomOf="@+id/lying_down_reading_svg"
+        app:layout_constraintTop_toBottomOf="@+id/bookshelf"
         tools:visibility="visible" />
 
     <Button

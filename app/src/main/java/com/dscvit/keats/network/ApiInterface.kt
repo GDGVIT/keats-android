@@ -1,6 +1,7 @@
 package com.dscvit.keats.network
 
 import com.dscvit.keats.model.clubs.ClubsListResponse
+import com.dscvit.keats.model.clubs.CreateClubResponse
 import com.dscvit.keats.model.clubs.GetClubDetailsResponse
 import com.dscvit.keats.model.clubs.JoinClubRequest
 import com.dscvit.keats.model.clubs.JoinClubResponse
@@ -11,9 +12,9 @@ import com.dscvit.keats.model.clubs.UploadFileResponse
 import com.dscvit.keats.model.login.LoginRequest
 import com.dscvit.keats.model.login.LoginResponse
 import com.dscvit.keats.model.profile.GetUserProfileResponse
-import com.dscvit.keats.model.profile.UpdateUserRequest
 import com.dscvit.keats.model.profile.UpdateUserResponse
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -34,8 +35,24 @@ interface ApiInterface {
     @GET("api/user/clubs")
     suspend fun getClubs(): Response<ClubsListResponse>
 
+    @Multipart
     @PATCH("api/user/")
-    suspend fun updateUser(@Body updateUserRequest: UpdateUserRequest): Response<UpdateUserResponse>
+    suspend fun updateUser(
+        @Part("username") username: RequestBody,
+        @Part("bio") bio: RequestBody,
+        @Part("email") email: RequestBody,
+        @Part profilePic: MultipartBody.Part?
+    ): Response<UpdateUserResponse>
+
+    @Multipart
+    @POST("api/clubs/create")
+    suspend fun createClub(
+        @Part("clubname") clubName: RequestBody,
+        @Part("private") clubStatus: RequestBody,
+        @Part("page_sync") pageSync: RequestBody,
+        @Part clubPic: MultipartBody.Part?,
+        @Part clubBook: MultipartBody.Part?
+    ): Response<CreateClubResponse>
 
     @GET("api/clubs/list")
     suspend fun getPublicClubsList(): Response<PublicClubsListResponse>

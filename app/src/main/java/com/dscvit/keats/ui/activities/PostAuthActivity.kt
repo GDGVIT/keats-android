@@ -5,6 +5,9 @@ import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -15,13 +18,20 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class PostAuthActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPostAuthBinding
+    private val navController by lazy {
+        (supportFragmentManager.findFragmentById(R.id.post_auth_nav_host_fragment) as NavHostFragment).findNavController()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPostAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
         openUserProfile()
+        setSupportActionBar(binding.toolbar)
+        setupActionBarWithNavController(navController)
     }
+
+    override fun onSupportNavigateUp() = navController.navigateUp()
 
     fun setProfilePhoto(profileImageUrl: String) {
         val circularProgressDrawable = CircularProgressDrawable(this)

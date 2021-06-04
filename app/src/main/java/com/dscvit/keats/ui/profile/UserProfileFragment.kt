@@ -25,7 +25,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.dscvit.keats.R
 import com.dscvit.keats.databinding.FragmentUserProfileBinding
 import com.dscvit.keats.model.Result
-import com.dscvit.keats.model.profile.UpdateUserRequest
 import com.dscvit.keats.model.profile.UserEntity
 import com.dscvit.keats.ui.activities.PreAuthActivity
 import com.dscvit.keats.utils.Constants
@@ -50,6 +49,8 @@ class UserProfileFragment : Fragment() {
 
     private val viewModel: UserProfileViewModel by viewModels()
     private lateinit var binding: FragmentUserProfileBinding
+    private var userProfileUrl = ""
+    private var userProfileMultipart: MultipartBody.Part? = null
     private lateinit var openAnimation: Animation
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -91,54 +92,32 @@ class UserProfileFragment : Fragment() {
         val startForResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
                 if (result.resultCode == Activity.RESULT_OK) {
-                    val body = getBodyToUpload(result)
+                    val body = getMultipartImageFromDevice(result)
                     body?.let {
-                        uploadFile(it)
+                        userProfileMultipart = it
                     }
                 }
             }
         binding.profilePhoto.setOnClickListener {
-//            pickImage(startForResult)
-            context?.shortToast("The file upload feature is still in progress")
+            pickImage(startForResult)
         }
     }
 
-    private fun getBodyToUpload(result: ActivityResult): MultipartBody.Part? {
+    private fun getMultipartImageFromDevice(result: ActivityResult): MultipartBody.Part? {
         val image = result.data?.dataString
         val imageUri = Uri.parse(image)
+        binding.profilePhoto.setImageURI(imageUri)
         val inputStream: InputStream? =
             (requireActivity()).contentResolver.openInputStream(imageUri)
         val reqFile: RequestBody? =
             inputStream?.readBytes()?.toRequestBody(result.data?.type?.toMediaTypeOrNull())
         return reqFile?.let {
             MultipartBody.Part.createFormData(
-                "file",
+                "profile_pic",
                 "file.${result.data?.type?.split("/")?.get(1)}",
                 it
             )
         }
-    }
-
-    private fun uploadFile(body: MultipartBody.Part) {
-        viewModel.uploadFile(body).observe(
-            viewLifecycleOwner,
-            {
-                when (it.status) {
-                    Result.Status.LOADING -> {
-                    }
-                    Result.Status.SUCCESS -> {
-                        if (it.data?.Status == "success") {
-                            context?.shortToast(it.data.File)
-                            Timber.i(it.data.File)
-                        }
-                    }
-                    Result.Status.ERROR -> {
-                        context?.shortToast(it.message.toString())
-                        Timber.e("Error is: ${it.message}")
-                    }
-                }
-            }
-        )
     }
 
     private fun pickImage(startForResult: ActivityResultLauncher<Intent>) {
@@ -152,6 +131,10 @@ class UserProfileFragment : Fragment() {
     private fun cancelEdit() {
         binding.endEdit.hide()
         binding.endEdit.disable()
+        binding.profilePhoto.isClickable = false
+        binding.profilePhoto.alpha = 1.0F
+        binding.profilePhotoUpload.hide()
+        binding.profilePhotoUpload.disable()
         binding.startEdit.show()
         binding.startEdit.enable()
         binding.cancelEdit.hide()
@@ -205,12 +188,15 @@ class UserProfileFragment : Fragment() {
     }
 
     private fun updateDetails() {
-        val updateUserRequest = UpdateUserRequest(
-            UserName = binding.nameEditText.text.toString().trim(),
-            UserEmail = binding.emailEditText.text.toString().trim(),
-            UserBio = binding.bioEditText.text.toString().trim(),
-        )
-        viewModel.updateUserProfile(updateUserRequest).observe(
+        viewModel.updateUserProfile(
+            username = binding.nameEditText.text.toString().trim()
+                .toRequestBody("text/plain".toMediaTypeOrNull()),
+            email = binding.emailEditText.text.toString().trim()
+                .toRequestBody("text/plain".toMediaTypeOrNull()),
+            bio = binding.bioEditText.text.toString().trim()
+                .toRequestBody("text/plain".toMediaTypeOrNull()),
+            profilePic = userProfileMultipart
+        ).observe(
             viewLifecycleOwner,
             {
                 when (it.status) {
@@ -229,6 +215,25 @@ class UserProfileFragment : Fragment() {
                             binding.userBio.text = it.data.User.UserBio
                             binding.userEmail.text = it.data.User.Email
                             binding.userPhone.text = it.data.User.PhoneNumber
+                            val profilePicImg = binding.profilePhoto
+                            val imgUri =
+                                it.data.User.ProfilePic.toUri().buildUpon().scheme("https").build()
+                            val circularProgressDrawable =
+                                CircularProgressDrawable(requireContext())
+                            circularProgressDrawable.strokeWidth = 5f
+                            circularProgressDrawable.centerRadius = 30f
+                            circularProgressDrawable.setColorSchemeColors(
+                                Color.argb(100, 244, 121, 18)
+                            )
+                            circularProgressDrawable.start()
+                            Glide.with(profilePicImg.context)
+                                .load(imgUri)
+                                .apply(
+                                    RequestOptions()
+                                        .placeholder(circularProgressDrawable)
+                                        .error(R.drawable.ic_default_photo)
+                                )
+                                .into(profilePicImg)
                             endEditViews()
                         }
                     }
@@ -245,6 +250,10 @@ class UserProfileFragment : Fragment() {
 
     private fun endEditViews() {
         showTextViews()
+        binding.profilePhoto.isClickable = false
+        binding.profilePhoto.alpha = 1.0F
+        binding.profilePhotoUpload.hide()
+        binding.profilePhotoUpload.disable()
         binding.startEdit.show()
         binding.startEdit.enable()
         binding.cancelEdit.hide()
@@ -263,6 +272,10 @@ class UserProfileFragment : Fragment() {
         binding.cancelEdit.show()
         binding.cancelEdit.enable()
         showEditTexts()
+        binding.profilePhoto.isClickable = true
+        binding.profilePhoto.alpha = 0.5F
+        binding.profilePhotoUpload.show()
+        binding.profilePhotoUpload.enable()
     }
 
     private fun showUserProfileViews(user: UserEntity) {
@@ -292,8 +305,9 @@ class UserProfileFragment : Fragment() {
         binding.bioEditText.setText(user.UserBio)
         binding.emailEditText.setText(user.Email)
         binding.phoneNumberEditText.setText(user.PhoneNumber)
+        userProfileUrl = user.ProfilePic
         val profilePicImg = binding.profilePhoto
-        val imgUri = user.ProfilePic.toUri().buildUpon().scheme("https").build()
+        val imgUri = userProfileUrl.toUri().buildUpon().scheme("https").build()
         val circularProgressDrawable = CircularProgressDrawable(requireContext())
         circularProgressDrawable.strokeWidth = 5f
         circularProgressDrawable.centerRadius = 30f
@@ -309,6 +323,7 @@ class UserProfileFragment : Fragment() {
                     .error(R.drawable.ic_default_photo)
             )
             .into(profilePicImg)
+        profilePicImg.isClickable = false
     }
 
     private fun showEditTexts() {
