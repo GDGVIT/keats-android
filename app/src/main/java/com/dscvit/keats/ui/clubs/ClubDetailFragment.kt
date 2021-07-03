@@ -33,6 +33,7 @@ import com.dscvit.keats.databinding.QrCodeDialogBinding
 import com.dscvit.keats.model.Result
 import com.dscvit.keats.model.clubs.GetClubDetailsData
 import com.dscvit.keats.model.clubs.KickMemberRequest
+import com.dscvit.keats.ui.activities.ReadingActivity
 import com.dscvit.keats.utils.Constants
 import com.dscvit.keats.utils.PreferenceHelper
 import com.dscvit.keats.utils.disable
@@ -63,6 +64,7 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
     private var isHost = false
     private var hostId = ""
     private var clubId = ""
+    private lateinit var sharedPreferences: SharedPreferences
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -102,6 +104,9 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
         binding.memberListRefresh.setOnRefreshListener {
             refreshMembers()
             binding.memberListRefresh.isRefreshing = false
+        }
+        binding.clubDetailsCard.setOnClickListener {
+            startReading()
         }
     }
 
@@ -338,5 +343,11 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
                 }
             }
         )
+    }
+
+    private fun startReading() {
+        val intent = Intent(activity, ReadingActivity::class.java)
+        intent.putExtra("ClubID", clubId)
+        startActivity(intent)
     }
 }

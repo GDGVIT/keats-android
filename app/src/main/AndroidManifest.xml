@@ -16,6 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Keats"
         tools:ignore="AllowBackup">
+        <activity android:name=".ui.activities.ReadingActivity" />
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}"
