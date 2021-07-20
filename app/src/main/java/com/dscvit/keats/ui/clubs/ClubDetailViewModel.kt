@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import androidx.lifecycle.ViewModel
 import com.dscvit.keats.model.clubs.KickMemberRequest
+import com.dscvit.keats.model.clubs.LeaveClubRequest
 import com.dscvit.keats.repository.AppRepository
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
@@ -18,6 +19,8 @@ class ClubDetailViewModel @Inject constructor(private val repo: AppRepository) :
     fun getClubDetails(clubId: String) = repo.getClubDetails(clubId)
 
     fun kickMember(kickMemberRequest: KickMemberRequest) = repo.kickMember(kickMemberRequest)
+
+    fun leaveClub(leaveClubRequest: LeaveClubRequest) = repo.leaveClub(leaveClubRequest)
 
     @Throws(WriterException::class)
     fun encodeAsBitmap(str: String): Bitmap? {

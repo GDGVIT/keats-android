@@ -145,95 +145,6 @@
         app:srcCompat="@drawable/ic_share"
         tools:visibility="visible" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/upload_book_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:contentDescription="@string/create_or_join_club"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:maxImageSize="14dp"
-        app:srcCompat="@drawable/ic_plus" />
-
-    <LinearLayout
-        android:id="@+id/upload_pdf_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="16dp"
-        android:elevation="5dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@id/upload_book_button"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <TextView
-            android:id="@+id/upload_pdf_text_fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:elevation="2dp"
-            android:padding="5dip"
-            android:text="@string/upload_pdf"
-            android:textColor="@android:color/white"
-            android:typeface="normal" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floating_action_upload_pdf"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/upload_pdf"
-            app:fabSize="mini"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:maxImageSize="14dp"
-            app:srcCompat="@drawable/ic_pdf"
-            tools:visibility="visible" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/upload_epub_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"
-        android:elevation="5dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@id/upload_pdf_layout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="@id/upload_book_button">
-
-        <TextView
-            android:id="@+id/upload_epub_text_fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:elevation="2dp"
-            android:padding="5dip"
-            android:text="@string/upload_epub"
-            android:textColor="@android:color/white"
-            android:typeface="normal" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floating_action_upload_epub"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/upload_epub"
-            app:fabSize="mini"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:maxImageSize="14dp"
-            app:srcCompat="@drawable/ic_epub"
-            tools:visibility="visible" />
-    </LinearLayout>
-
     <TextView
         android:id="@+id/members_list_heading"
         android:layout_width="wrap_content"
@@ -254,9 +165,10 @@
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/members_list_recyclerview_bg"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/leave_club_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/members_list_heading"
         app:layout_constraintTop_toBottomOf="@id/members_list_heading"
@@ -276,5 +188,18 @@
             tools:listitem="@layout/members_list_item"
             tools:visibility="visible" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/leave_club_button"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/purple_500"
+        android:letterSpacing="0.01"
+        android:text="@string/leave_club"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/member_list_refresh"
+        app:layout_constraintStart_toStartOf="@+id/member_list_refresh" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

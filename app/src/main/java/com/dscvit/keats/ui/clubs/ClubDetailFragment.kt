@@ -12,14 +12,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.view.animation.OvershootInterpolator
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.FileProvider
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.net.toUri
-import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
@@ -33,6 +32,7 @@ import com.dscvit.keats.databinding.QrCodeDialogBinding
 import com.dscvit.keats.model.Result
 import com.dscvit.keats.model.clubs.GetClubDetailsData
 import com.dscvit.keats.model.clubs.KickMemberRequest
+import com.dscvit.keats.model.clubs.LeaveClubRequest
 import com.dscvit.keats.ui.activities.ReadingActivity
 import com.dscvit.keats.utils.Constants
 import com.dscvit.keats.utils.PreferenceHelper
@@ -64,7 +64,6 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
     private var isHost = false
     private var hostId = ""
     private var clubId = ""
-    private lateinit var sharedPreferences: SharedPreferences
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -86,12 +85,6 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
         if (a != null) {
             qrCode = a
         }
-        binding.uploadBookButton.setOnClickListener {
-            if (isFabMenuOpen)
-                collapseFabMenu()
-            else
-                expandFabMenu()
-        }
         binding.showQr.setOnClickListener {
             showQR()
         }
@@ -107,6 +100,9 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
         }
         binding.clubDetailsCard.setOnClickListener {
             startReading()
+        }
+        binding.leaveClubButton.setOnClickListener {
+            leaveClub()
         }
     }
 
@@ -191,32 +187,6 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
             .setView(qrDialog.root)
             .setBackground(ColorDrawable(Color.TRANSPARENT))
             .show()
-    }
-
-    private fun expandFabMenu() {
-        binding.clubDetailsCard.disable()
-        binding.shareQr.disable()
-        binding.showQr.disable()
-        ViewCompat.animate(binding.uploadBookButton).rotation(45.0f).withLayer()
-            .setDuration(300).setInterpolator(OvershootInterpolator(10.0f)).start()
-        binding.uploadPdfLayout.startAnimation(fabOpenAnimation)
-        binding.uploadEpubLayout.startAnimation(fabOpenAnimation)
-        binding.floatingActionUploadPdf.isClickable = true
-        binding.floatingActionUploadEpub.isClickable = true
-        isFabMenuOpen = true
-    }
-
-    private fun collapseFabMenu() {
-        binding.clubDetailsCard.enable()
-        binding.shareQr.enable()
-        binding.showQr.enable()
-        ViewCompat.animate(binding.uploadBookButton).rotation(0.0f).withLayer()
-            .setDuration(300).setInterpolator(OvershootInterpolator(10.0f)).start()
-        binding.uploadPdfLayout.startAnimation(fabCloseAnimation)
-        binding.uploadEpubLayout.startAnimation(fabCloseAnimation)
-        binding.floatingActionUploadPdf.isClickable = false
-        binding.floatingActionUploadEpub.isClickable = false
-        isFabMenuOpen = false
     }
 
     private fun showClubDetails(data: GetClubDetailsData) {
@@ -349,5 +319,27 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
         val intent = Intent(activity, ReadingActivity::class.java)
         intent.putExtra("ClubID", clubId)
         startActivity(intent)
+    }
+
+    private fun leaveClub() {
+        val leaveClubRequest = LeaveClubRequest(
+            ClubId = clubId
+        )
+        viewModel.leaveClub(leaveClubRequest).observe(
+            viewLifecycleOwner,
+            {
+                when (it.status) {
+                    Result.Status.LOADING -> {
+                    }
+                    Result.Status.SUCCESS -> {
+                        context?.shortToast("Club Left Successfully")
+                        findNavController().navigate(ClubDetailFragmentDirections.actionClubDetailFragmentToClubsListFragment())
+                    }
+                    Result.Status.ERROR -> {
+                        context?.shortToast("There was error in leaving the club")
+                    }
+                }
+            }
+        )
     }
 }

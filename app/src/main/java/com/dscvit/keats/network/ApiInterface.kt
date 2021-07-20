@@ -7,6 +7,8 @@ import com.dscvit.keats.model.clubs.JoinClubRequest
 import com.dscvit.keats.model.clubs.JoinClubResponse
 import com.dscvit.keats.model.clubs.KickMemberRequest
 import com.dscvit.keats.model.clubs.KickMemberResponse
+import com.dscvit.keats.model.clubs.LeaveClubRequest
+import com.dscvit.keats.model.clubs.LeaveClubResponse
 import com.dscvit.keats.model.clubs.PublicClubsListResponse
 import com.dscvit.keats.model.clubs.UploadFileResponse
 import com.dscvit.keats.model.login.LoginRequest
@@ -65,6 +67,9 @@ interface ApiInterface {
 
     @POST("api/clubs/kickuser")
     suspend fun kickMember(@Body kickMemberRequest: KickMemberRequest): Response<KickMemberResponse>
+
+    @POST("api/clubs/leave")
+    suspend fun leaveClub(@Body leaveClubRequest: LeaveClubRequest): Response<LeaveClubResponse>
 
     @Multipart
     @POST("api/uploadfile")

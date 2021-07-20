@@ -2,6 +2,7 @@ package com.dscvit.keats.network
 
 import com.dscvit.keats.model.clubs.JoinClubRequest
 import com.dscvit.keats.model.clubs.KickMemberRequest
+import com.dscvit.keats.model.clubs.LeaveClubRequest
 import com.dscvit.keats.model.login.LoginRequest
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -65,5 +66,9 @@ class ApiClient @Inject constructor(
 
     suspend fun uploadFile(file: MultipartBody.Part) = getResult {
         api.uploadFile(file)
+    }
+
+    suspend fun leaveClub(leaveClubRequest: LeaveClubRequest) = getResult {
+        api.leaveClub(leaveClubRequest)
     }
 }

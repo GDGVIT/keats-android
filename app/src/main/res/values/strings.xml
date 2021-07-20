@@ -66,4 +66,5 @@
     <string name="upload_book_button_text">Upload Book</string>
     <string name="continue_text">Continue</string>
     <string name="upload_club_image_button">Upload Club Image Button</string>
+    <string name="leave_club">Leave Club</string>
 </resources>
