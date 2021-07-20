@@ -15,12 +15,12 @@
 
 ## Features
 - [ ] Uploading PDFs and ePUB
-- [ ] Creating Private and Public Rooms
-- [ ] Commenting things on each page of the book
+- [X] Creating Private and Public Rooms
+- [X] Commenting things on each page of the book
 - [X] Letting people join using Code or QR Code Scan
 - [X] Having a QR Code scanner for joining room
-- [ ] Letting the host change status of room at any time or kick out any one at any time
-- [ ] Letting the room vote kick someone out
+- [X] Letting the host change kick out any one at any time
+- [X] Letting a person leave the room
 
 <br>
 
