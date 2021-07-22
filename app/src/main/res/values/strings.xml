@@ -67,4 +67,9 @@
     <string name="continue_text">Continue</string>
     <string name="upload_club_image_button">Upload Club Image Button</string>
     <string name="leave_club">Leave Club</string>
+    <string name="confirm_to_leave_text">Confirm to leave text</string>
+    <string name="confirm_lower">Confirm</string>
+    <string name="enter_confirm_to_leave_the_club">Please type KEATS to confirm</string>
+    <string name="leave_lower">Leave</string>
+    <string name="are_you_absolutely_sure">Are you absolutely sure?</string>
 </resources>

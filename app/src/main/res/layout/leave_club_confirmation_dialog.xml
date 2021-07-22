@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:cardBackgroundColor="@color/black_two"
+    app:cardCornerRadius="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_two">
+
+        <TextView
+            android:id="@+id/are_you_sure_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:gravity="center"
+            android:maxLines="3"
+            android:text="@string/are_you_absolutely_sure"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/confirm_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            android:gravity="center"
+            android:maxLines="3"
+            android:text="@string/enter_confirm_to_leave_the_club"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@id/are_you_sure_text"
+            app:layout_constraintStart_toStartOf="@+id/are_you_sure_text"
+            app:layout_constraintTop_toBottomOf="@+id/are_you_sure_text" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/confirm_type"
+            style="@style/text_input_layout_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/edit_text_box_bg"
+            android:inputType="textNoSuggestions"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:textColorHint="@color/white_transparent_70"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/confirm_text"
+            app:layout_constraintStart_toStartOf="@+id/confirm_text"
+            app:layout_constraintTop_toBottomOf="@id/confirm_text" />
+
+        <Button
+            android:id="@+id/confirm_leave_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="40dp"
+            android:backgroundTint="@color/purple_500"
+            android:letterSpacing="0.01"
+            android:text="@string/leave_club"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/confirm_type"
+            app:layout_constraintStart_toStartOf="@+id/confirm_type"
+            app:layout_constraintTop_toBottomOf="@id/confirm_type" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
