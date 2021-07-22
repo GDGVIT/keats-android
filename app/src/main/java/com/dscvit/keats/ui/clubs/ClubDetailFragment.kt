@@ -316,7 +316,7 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
 
     private fun leaveClub() {
         val confirmDialog = LeaveClubConfirmationDialogBinding.inflate(layoutInflater)
-        MaterialAlertDialogBuilder(requireContext())
+        val dialog = MaterialAlertDialogBuilder(requireContext())
             .setView(confirmDialog.root)
             .setBackground(ColorDrawable(Color.TRANSPARENT))
             .show()
@@ -332,6 +332,7 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
                             Result.Status.LOADING -> {
                             }
                             Result.Status.SUCCESS -> {
+                                dialog.dismiss()
                                 context?.shortToast("Club Left Successfully")
                                 findNavController().navigate(ClubDetailFragmentDirections.actionClubDetailFragmentToClubsListFragment())
                             }
@@ -342,7 +343,7 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
                     }
                 )
             } else {
-                context?.shortToast("Enter Confirm to leave the club")
+                context?.shortToast("Enter KEATS to leave the club")
             }
         }
     }
