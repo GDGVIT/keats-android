@@ -124,7 +124,7 @@ class FirebaseAuthHelper(
                                             val intent =
                                                 Intent(context, PostAuthActivity::class.java)
                                             activity.startActivity(intent)
-                                            activity.finish()
+                                            activity.finishAffinity()
                                         }
                                     }
                                     Result.Status.ERROR -> {

@@ -27,6 +27,7 @@ class ReadingActivity : AppCompatActivity() {
         webViewSettings.javaScriptEnabled = true
         webViewSettings.javaScriptCanOpenWindowsAutomatically = true
         webViewSettings.domStorageEnabled = true
+        webViewSettings.builtInZoomControls = true
         webView.loadUrl(readUrl)
     }
 }
