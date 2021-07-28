@@ -2,6 +2,7 @@ package com.dscvit.keats.network
 
 import com.dscvit.keats.model.clubs.ClubsListResponse
 import com.dscvit.keats.model.clubs.CreateClubResponse
+import com.dscvit.keats.model.clubs.EditClubResponse
 import com.dscvit.keats.model.clubs.GetClubDetailsResponse
 import com.dscvit.keats.model.clubs.JoinClubRequest
 import com.dscvit.keats.model.clubs.JoinClubResponse
@@ -55,6 +56,16 @@ interface ApiInterface {
         @Part clubPic: MultipartBody.Part?,
         @Part clubBook: MultipartBody.Part?
     ): Response<CreateClubResponse>
+
+    @Multipart
+    @PATCH("api/clubs/update")
+    suspend fun editClub(
+        @Part("id") clubId: RequestBody,
+        @Part("clubname") clubName: RequestBody,
+        @Part("page_no") pageSync: RequestBody,
+        @Part clubPic: MultipartBody.Part?,
+        @Part clubBook: MultipartBody.Part?
+    ): Response<EditClubResponse>
 
     @GET("api/clubs/list")
     suspend fun getPublicClubsList(): Response<PublicClubsListResponse>

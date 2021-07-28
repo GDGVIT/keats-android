@@ -72,4 +72,7 @@
     <string name="enter_confirm_to_leave_the_club">Please type KEATS to confirm</string>
     <string name="leave_lower">Leave</string>
     <string name="are_you_absolutely_sure">Are you absolutely sure?</string>
+    <string name="edit_club_button">Edit Club Button</string>
+    <string name="change_book">Change Book</string>
+    <string name="edit_club_details">Edit Club Details</string>
 </resources>

@@ -48,6 +48,22 @@ class ApiClient @Inject constructor(
         )
     }
 
+    suspend fun editClub(
+        clubId: RequestBody,
+        clubName: RequestBody,
+        pageSync: RequestBody,
+        clubPic: MultipartBody.Part?,
+        clubBook: MultipartBody.Part?
+    ) = getResult {
+        api.editClub(
+            clubId = clubId,
+            clubName = clubName,
+            pageSync = pageSync,
+            clubPic = clubPic,
+            clubBook = clubBook
+        )
+    }
+
     suspend fun getPublicClubsList() = getResult {
         api.getPublicClubsList()
     }

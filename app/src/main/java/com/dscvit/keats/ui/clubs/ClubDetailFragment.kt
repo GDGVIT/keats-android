@@ -62,6 +62,9 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
     private var isHost = false
     private var hostId = ""
     private var clubId = ""
+    private var clubName = ""
+    private var clubPic = ""
+    private var clubPrivate = false
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -99,6 +102,9 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
         }
         binding.leaveClubButton.setOnClickListener {
             leaveClub()
+        }
+        binding.editClubButton.setOnClickListener {
+            editClub()
         }
     }
 
@@ -193,6 +199,9 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
         }
         hostId = data.Club.HostId
         clubId = data.Club.ClubId
+        clubName = data.Club.ClubName
+        clubPrivate = data.Club.Private
+        clubPic = data.Club.ClubPic
         binding.membersListHeading.show()
         binding.membersListHeading.enable()
         adapter.submitList(data.Users)
@@ -242,6 +251,10 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
         binding.showQr.enable()
         binding.shareQr.show()
         binding.shareQr.enable()
+        if (isHost) {
+            binding.editClubButton.show()
+            binding.editClubButton.enable()
+        }
     }
 
     override fun onMemberClick(position: Int) {
@@ -346,5 +359,15 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
                 context?.shortToast("Enter KEATS to leave the club")
             }
         }
+    }
+
+    private fun editClub() {
+        val action = ClubDetailFragmentDirections.actionClubDetailFragmentToEditClubFragment(
+            clubId = clubId,
+            clubName = clubName,
+            clubPicUrl = clubPic,
+            clubPrivate = clubPrivate
+        )
+        findNavController().navigate(action)
     }
 }

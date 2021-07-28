@@ -52,6 +52,22 @@ class AppRepository @Inject constructor(private val apiClient: ApiClient) : Base
         )
     }
 
+    fun editClub(
+        clubId: RequestBody,
+        clubName: RequestBody,
+        pageSync: RequestBody,
+        clubPic: MultipartBody.Part?,
+        clubBook: MultipartBody.Part?
+    ) = makeRequest {
+        apiClient.editClub(
+            clubId = clubId,
+            clubName = clubName,
+            pageSync = pageSync,
+            clubPic = clubPic,
+            clubBook = clubBook
+        )
+    }
+
     fun getPublicClubsList() = makeRequest {
         apiClient.getPublicClubsList()
     }
