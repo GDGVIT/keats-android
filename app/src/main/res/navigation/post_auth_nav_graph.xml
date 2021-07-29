@@ -42,6 +42,13 @@
             app:popExitAnim="@anim/right_out"
             app:popUpTo="@id/clubsListFragment"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_clubsListFragment_to_firstLoginFragment"
+            app:destination="@id/firstLoginFragment"
+            app:enterAnim="@anim/right_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@anim/right_in"
+            app:popExitAnim="@anim/right_out" />
     </fragment>
     <fragment
         android:id="@+id/joinClubFragment"
@@ -141,6 +148,27 @@
             app:argType="boolean" />
         <argument
             android:name="clubPicUrl"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/firstLoginFragment"
+        android:name="com.dscvit.keats.ui.clubs.FirstLoginFragment"
+        android:label="fragment_first_login"
+        tools:layout="@layout/fragment_first_login" >
+        <action
+            android:id="@+id/action_firstLoginFragment_to_clubsListFragment"
+            app:destination="@id/clubsListFragment"
+            app:enterAnim="@anim/right_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@anim/right_in"
+            app:popExitAnim="@anim/right_out"
+            app:popUpTo="@id/post_auth_nav_graph"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="user_id"
+            app:argType="string" />
+        <argument
+            android:name="user_phone"
             app:argType="string" />
     </fragment>
 </navigation>

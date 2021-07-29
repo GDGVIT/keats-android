@@ -14,5 +14,7 @@ data class UserEntity(
     @Json(name = "email")
     val Email: String,
     @Json(name = "bio")
-    val UserBio: String
+    val UserBio: String,
+    @Json(name = "FirstLogin")
+    val firstLogin: Boolean
 )
