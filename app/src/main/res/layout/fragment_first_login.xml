@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_one">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:background="@color/black_one">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black_one"
+            tools:context=".ui.profile.UserProfileFragment">
+
+            <ImageView
+                android:id="@+id/cover_photo"
+                android:layout_width="0dp"
+                android:layout_height="240dp"
+                android:contentDescription="@string/cover_photo"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/curved_toolbar_bg"
+                tools:visibility="visible" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_photo"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:clickable="false"
+                android:elevation="10dp"
+                android:src="@drawable/ic_default_photo"
+                app:civ_border_color="@color/white"
+                app:civ_border_width="3dp"
+                app:layout_constraintBottom_toTopOf="@+id/user_info_card"
+                app:layout_constraintEnd_toEndOf="@+id/user_info_card"
+                app:layout_constraintStart_toStartOf="@+id/user_info_card"
+                app:layout_constraintTop_toTopOf="@+id/user_info_card"
+                tools:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/profile_photo_upload"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:clickable="false"
+                android:contentDescription="@string/upload_photo"
+                android:elevation="10dp"
+                android:src="@drawable/ic_upload_alt"
+                app:layout_constraintBottom_toTopOf="@+id/user_info_card"
+                app:layout_constraintEnd_toEndOf="@+id/user_info_card"
+                app:layout_constraintStart_toStartOf="@+id/user_info_card"
+                app:layout_constraintTop_toTopOf="@+id/user_info_card"
+                tools:visibility="visible" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/user_info_card"
+                android:layout_width="325dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="170dp"
+                app:cardBackgroundColor="@color/black_two"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="100dp"
+                        android:orientation="vertical"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:paddingBottom="15dp">
+
+                        <ImageView
+                            android:id="@+id/user_profile_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:contentDescription="@string/user_profile_icon"
+                            android:padding="5dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/name_edit_text"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/name_edit_text"
+                            app:srcCompat="@drawable/ic_profile" />
+
+                        <ImageView
+                            android:id="@+id/user_bio_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:contentDescription="@string/user_bio_icon"
+                            android:padding="5dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/bio_edit_text"
+                            app:layout_constraintEnd_toEndOf="@+id/user_profile_icon"
+                            app:layout_constraintStart_toStartOf="@+id/user_profile_icon"
+                            app:layout_constraintTop_toTopOf="@+id/bio_edit_text"
+                            app:srcCompat="@drawable/ic_bio" />
+
+                        <ImageView
+                            android:id="@+id/user_mail_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:contentDescription="@string/user_email_icon"
+                            android:padding="5dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/email_edit_text"
+                            app:layout_constraintEnd_toEndOf="@+id/user_bio_icon"
+                            app:layout_constraintStart_toStartOf="@+id/user_bio_icon"
+                            app:layout_constraintTop_toTopOf="@+id/email_edit_text"
+                            app:srcCompat="@drawable/ic_mail" />
+
+                        <ImageView
+                            android:id="@+id/user_phone_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:contentDescription="@string/user_phone_icon"
+                            android:padding="5dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/phone_number_edit_text"
+                            app:layout_constraintEnd_toEndOf="@+id/user_mail_icon"
+                            app:layout_constraintStart_toStartOf="@+id/user_mail_icon"
+                            app:layout_constraintTop_toTopOf="@+id/phone_number_edit_text"
+                            app:srcCompat="@drawable/ic_phone" />
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/name_edit_text"
+                            style="@style/text_input_layout_style"
+                            android:layout_width="230dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:layout_marginStart="1dp"
+                            android:background="@drawable/edit_text_box_bg"
+                            android:hint="@string/enter_your_name"
+                            android:inputType="text"
+                            android:maxLength="100"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:textColorHint="@color/white_transparent_70"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toTopOf="@+id/bio_edit_text"
+                            app:layout_constraintStart_toEndOf="@+id/user_profile_icon"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="spread_inside" />
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/bio_edit_text"
+                            style="@style/text_input_layout_style"
+                            android:layout_width="230dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:layout_marginStart="10dp"
+                            android:background="@drawable/edit_text_box_bg"
+                            android:hint="@string/enter_your_bio"
+                            android:inputType="textMultiLine"
+                            android:maxLength="100"
+                            android:maxLines="3"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:textColorHint="@color/white_transparent_70"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toTopOf="@+id/email_edit_text"
+                            app:layout_constraintEnd_toEndOf="@+id/name_edit_text"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/user_bio_icon"
+                            app:layout_constraintStart_toStartOf="@+id/name_edit_text"
+                            app:layout_constraintTop_toBottomOf="@+id/name_edit_text" />
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/email_edit_text"
+                            style="@style/text_input_layout_style"
+                            android:layout_width="230dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:layout_marginStart="15dp"
+                            android:background="@drawable/edit_text_box_bg"
+                            android:hint="@string/enter_your_email_address"
+                            android:inputType="textEmailAddress"
+                            android:maxLength="50"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:textColorHint="@color/white_transparent_70"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toTopOf="@+id/phone_number_edit_text"
+                            app:layout_constraintEnd_toEndOf="@+id/bio_edit_text"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/user_mail_icon"
+                            app:layout_constraintStart_toStartOf="@+id/bio_edit_text"
+                            app:layout_constraintTop_toBottomOf="@+id/bio_edit_text" />
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/phone_number_edit_text"
+                            style="@style/text_input_layout_style"
+                            android:layout_width="230dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:layout_marginStart="18dp"
+                            android:background="@drawable/edit_text_box_bg"
+                            android:cursorVisible="false"
+                            android:focusable="false"
+                            android:hint="@string/enter_your_phone_number"
+                            android:inputType="none"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:textColor="@color/white_transparent_70"
+                            android:textColorHint="@color/white_transparent_70"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/email_edit_text"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/user_phone_icon"
+                            app:layout_constraintStart_toStartOf="@+id/email_edit_text"
+                            app:layout_constraintTop_toBottomOf="@+id/email_edit_text" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/continue_button"
+                android:layout_width="325dp"
+                android:layout_height="60dp"
+                android:layout_margin="60dp"
+                android:backgroundTint="@color/purple_500"
+                android:contentDescription="@string/logout_button"
+                android:letterSpacing="0.01"
+                android:text="@string/continue_text"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                app:cornerRadius="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/user_info_card"
+                app:layout_constraintStart_toStartOf="@+id/user_info_card"
+                app:layout_constraintTop_toBottomOf="@+id/user_info_card"
+                tools:visibility="visible" />
+
+            <ProgressBar
+                android:id="@+id/continue_loading_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/user_info_card"
+                app:layout_constraintStart_toStartOf="@+id/user_info_card"
+                app:layout_constraintTop_toBottomOf="@+id/user_info_card" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</RelativeLayout>

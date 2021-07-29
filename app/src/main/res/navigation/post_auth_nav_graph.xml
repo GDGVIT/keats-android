@@ -42,6 +42,13 @@
             app:popExitAnim="@anim/right_out"
             app:popUpTo="@id/clubsListFragment"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_clubsListFragment_to_firstLoginFragment"
+            app:destination="@id/firstLoginFragment"
+            app:enterAnim="@anim/right_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@anim/right_in"
+            app:popExitAnim="@anim/right_out" />
     </fragment>
     <fragment
         android:id="@+id/joinClubFragment"
@@ -96,6 +103,13 @@
             app:exitAnim="@anim/fragment_open_exit"
             app:popEnterAnim="@anim/fragment_close_enter"
             app:popExitAnim="@anim/fragment_close_exit" />
+        <action
+            android:id="@+id/action_clubDetailFragment_to_editClubFragment"
+            app:destination="@id/editClubFragment"
+            app:enterAnim="@anim/bottom_up"
+            app:exitAnim="@anim/bottom_down"
+            app:popEnterAnim="@anim/bottom_up"
+            app:popExitAnim="@anim/bottom_down" />
     </fragment>
     <fragment
         android:id="@+id/createClubFragment"
@@ -110,5 +124,51 @@
             app:popEnterAnim="@anim/right_in"
             app:popExitAnim="@anim/right_out"
             app:popUpTo="@id/clubsListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editClubFragment"
+        android:name="com.dscvit.keats.ui.clubs.EditClubFragment"
+        android:label="EditClubFragment" >
+        <action
+            android:id="@+id/action_editClubFragment_to_clubDetailFragment"
+            app:destination="@id/clubDetailFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit"
+            app:popUpTo="@id/clubsListFragment" />
+        <argument
+            android:name="clubId"
+            app:argType="string" />
+        <argument
+            android:name="clubName"
+            app:argType="string" />
+        <argument
+            android:name="clubPrivate"
+            app:argType="boolean" />
+        <argument
+            android:name="clubPicUrl"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/firstLoginFragment"
+        android:name="com.dscvit.keats.ui.clubs.FirstLoginFragment"
+        android:label="fragment_first_login"
+        tools:layout="@layout/fragment_first_login" >
+        <action
+            android:id="@+id/action_firstLoginFragment_to_clubsListFragment"
+            app:destination="@id/clubsListFragment"
+            app:enterAnim="@anim/right_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@anim/right_in"
+            app:popExitAnim="@anim/right_out"
+            app:popUpTo="@id/post_auth_nav_graph"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="user_id"
+            app:argType="string" />
+        <argument
+            android:name="user_phone"
+            app:argType="string" />
     </fragment>
 </navigation>

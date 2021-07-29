@@ -27,6 +27,7 @@ import com.dscvit.keats.BuildConfig
 import com.dscvit.keats.R
 import com.dscvit.keats.adapter.MemberListAdapter
 import com.dscvit.keats.databinding.FragmentClubDetailBinding
+import com.dscvit.keats.databinding.LeaveClubConfirmationDialogBinding
 import com.dscvit.keats.databinding.MemberDetailDialogBinding
 import com.dscvit.keats.databinding.QrCodeDialogBinding
 import com.dscvit.keats.model.Result
@@ -55,15 +56,15 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
     private lateinit var binding: FragmentClubDetailBinding
     private val viewModel: ClubDetailViewModel by viewModels()
     private val args: ClubDetailFragmentArgs by navArgs()
-    private lateinit var fabOpenAnimation: Animation
-    private lateinit var fabCloseAnimation: Animation
     private lateinit var openAnimation: Animation
-    private var isFabMenuOpen = false
     private lateinit var qrCode: Bitmap
     private lateinit var adapter: MemberListAdapter
     private var isHost = false
     private var hostId = ""
     private var clubId = ""
+    private var clubName = ""
+    private var clubPic = ""
+    private var clubPrivate = false
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -71,8 +72,6 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
     ): View {
         binding = FragmentClubDetailBinding.inflate(layoutInflater)
         adapter = MemberListAdapter(requireContext(), this)
-        fabOpenAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.open_fab_anim)
-        fabCloseAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.close_fab_anim)
         openAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.open_anim)
         return binding.root
     }
@@ -103,6 +102,9 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
         }
         binding.leaveClubButton.setOnClickListener {
             leaveClub()
+        }
+        binding.editClubButton.setOnClickListener {
+            editClub()
         }
     }
 
@@ -197,6 +199,9 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
         }
         hostId = data.Club.HostId
         clubId = data.Club.ClubId
+        clubName = data.Club.ClubName
+        clubPrivate = data.Club.Private
+        clubPic = data.Club.ClubPic
         binding.membersListHeading.show()
         binding.membersListHeading.enable()
         adapter.submitList(data.Users)
@@ -246,12 +251,13 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
         binding.showQr.enable()
         binding.shareQr.show()
         binding.shareQr.enable()
+        if (isHost) {
+            binding.editClubButton.show()
+            binding.editClubButton.enable()
+        }
     }
 
     override fun onMemberClick(position: Int) {
-        if (isFabMenuOpen) {
-            return
-        }
         val details = adapter.getMemberDetails(position)
         val memberDetails = MemberDetailDialogBinding.inflate(layoutInflater)
         memberDetails.memberNameDialog.text = details.UserName
@@ -322,24 +328,46 @@ class ClubDetailFragment : Fragment(), MemberListAdapter.OnMemberListener {
     }
 
     private fun leaveClub() {
-        val leaveClubRequest = LeaveClubRequest(
-            ClubId = clubId
-        )
-        viewModel.leaveClub(leaveClubRequest).observe(
-            viewLifecycleOwner,
-            {
-                when (it.status) {
-                    Result.Status.LOADING -> {
+        val confirmDialog = LeaveClubConfirmationDialogBinding.inflate(layoutInflater)
+        val dialog = MaterialAlertDialogBuilder(requireContext())
+            .setView(confirmDialog.root)
+            .setBackground(ColorDrawable(Color.TRANSPARENT))
+            .show()
+        confirmDialog.confirmLeaveButton.setOnClickListener {
+            if (confirmDialog.confirmType.text.toString() == "KEATS") {
+                val leaveClubRequest = LeaveClubRequest(
+                    ClubId = clubId
+                )
+                viewModel.leaveClub(leaveClubRequest).observe(
+                    viewLifecycleOwner,
+                    {
+                        when (it.status) {
+                            Result.Status.LOADING -> {
+                            }
+                            Result.Status.SUCCESS -> {
+                                dialog.dismiss()
+                                context?.shortToast("Club Left Successfully")
+                                findNavController().navigate(ClubDetailFragmentDirections.actionClubDetailFragmentToClubsListFragment())
+                            }
+                            Result.Status.ERROR -> {
+                                context?.shortToast("There was error in leaving the club")
+                            }
+                        }
                     }
-                    Result.Status.SUCCESS -> {
-                        context?.shortToast("Club Left Successfully")
-                        findNavController().navigate(ClubDetailFragmentDirections.actionClubDetailFragmentToClubsListFragment())
-                    }
-                    Result.Status.ERROR -> {
-                        context?.shortToast("There was error in leaving the club")
-                    }
-                }
+                )
+            } else {
+                context?.shortToast("Enter KEATS to leave the club")
             }
+        }
+    }
+
+    private fun editClub() {
+        val action = ClubDetailFragmentDirections.actionClubDetailFragmentToEditClubFragment(
+            clubId = clubId,
+            clubName = clubName,
+            clubPicUrl = clubPic,
+            clubPrivate = clubPrivate
         )
+        findNavController().navigate(action)
     }
 }

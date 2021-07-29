@@ -113,6 +113,14 @@ class ClubsListFragment : Fragment(), ClubListAdapter.OnClubListener {
                                     binding.clubsList.hide()
                                 }
                             }
+                            if (it.data.Data.User.firstLogin) {
+                                findNavController().navigate(
+                                    ClubsListFragmentDirections.actionClubsListFragmentToFirstLoginFragment(
+                                        userId = it.data.Data.User.UserId,
+                                        userPhone = it.data.Data.User.PhoneNumber,
+                                    )
+                                )
+                            }
                         }
                     }
                     Result.Status.ERROR -> {

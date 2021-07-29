@@ -59,6 +59,7 @@
                 android:layout_width="160dp"
                 android:layout_height="160dp"
                 android:contentDescription="@string/club_image"
+                android:scaleType="fitXY"
                 android:src="@drawable/ic_girlreading" />
         </com.google.android.material.card.MaterialCardView>
 
@@ -80,10 +81,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="50dp"
-            android:maxLength="25"
             android:background="@drawable/edit_text_box_bg"
             android:hint="@string/enter_club_name"
             android:inputType="textNoSuggestions"
+            android:maxLength="25"
             android:paddingStart="10dp"
             android:paddingTop="10dp"
             android:paddingEnd="10dp"

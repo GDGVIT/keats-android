@@ -75,7 +75,20 @@ class CreateClubFragment : Fragment() {
             pickBook(startForResultClubBook)
         }
         binding.createClubButton.setOnClickListener {
-            createClub()
+            when {
+                binding.clubNameEditText.text.toString() == "" -> {
+                    context?.shortToast("Please enter a club name")
+                }
+                viewModel.clubBookMultipart == null -> {
+                    context?.shortToast("Please select a book")
+                }
+                viewModel.clubPicMultipart == null -> {
+                    context?.shortToast("Please select a club profile photo")
+                }
+                else -> {
+                    createClub()
+                }
+            }
         }
     }
 
