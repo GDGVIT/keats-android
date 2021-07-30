@@ -58,6 +58,9 @@ class ClubsListFragment : Fragment(), ClubListAdapter.OnClubListener {
         binding.joinClub.setOnClickListener {
             joinClub()
         }
+        binding.createClub.setOnClickListener {
+            createClub()
+        }
         binding.floatingActionCreateOrJoinClub.setOnClickListener {
             if (isFabMenuOpen)
                 collapseFabMenu()
