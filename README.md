@@ -56,7 +56,7 @@ By democratizing access to collaborative reading experiences, Keats empowers edu
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](https://github.com/GDGVIT/keats-android/blob/master/LICENSE)
 [![Download APK](https://img.shields.io/badge/Download-APK-success?style=for-the-badge&logo=android)](./app/release/app-release.apk)
 [![API Level](https://img.shields.io/badge/API-21%2B-brightgreen?style=for-the-badge&logo=android)](https://android-arsenal.com/api?level=21)
-[![DSC VIT](https://img.shields.io/badge/DSC-VIT-blue?style=for-the-badge)](https://dsc.community.dev/vellore-institute-of-technology/)
+[![DSC VIT](https://img.shields.io/badge/DSC-VIT-blue?style=for-the-badge)](https://dscvit.com)
 
 ## 🏗️ Architecture & Technology Stack
 
