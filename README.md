@@ -147,26 +147,11 @@ We welcome contributions from the community! Please read our [Contributing Guide
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 👥 Contributors
+## Developer
 
-<table>
-    <tr align="center">
-        <td>
-            <strong>Md Hishaam Akhtar</strong>
-            <p align="center">
-                <img src="https://user-images.githubusercontent.com/58990970/103586688-9cde9700-4f0b-11eb-915c-0d8b9a555159.JPG" width="150" height="150" alt="Md Hishaam Akhtar">
-            </p>
-            <p align="center">
-                <a href="https://github.com/mdhishaamakhtar">
-                    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" width="100"/>
-                </a>
-                <a href="https://www.linkedin.com/in/mdhishaamakhtar">
-                    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" width="100"/>
-                </a>
-            </p>
-        </td>
-    </tr>
-</table>
+**Md Hishaam Akhtar**  
+GitHub: [@mdhishaamakhtar](https://github.com/mdhishaamakhtar)  
+LinkedIn: [@mdhishaamakhtar](https://www.linkedin.com/in/mdhishaamakhtar)
 
 ## 🎯 Project Status
 
