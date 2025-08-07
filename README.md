@@ -6,25 +6,6 @@
     <h4 align="center">A collaborative book reading platform that brings readers together through shared literary experiences</h4>
 </p>
 
-<div align="center">
-
-[![License](https://img.shields.io/github/license/GDGVIT/keats-android?color=blue&style=flat-square)](https://github.com/GDGVIT/keats-android/blob/master/LICENSE)
-[![Download APK](https://img.shields.io/badge/Download-APK-success?style=flat-square&logo=android)](./app/release/app-release.apk)
-[![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat-square)](https://android-arsenal.com/api?level=21)
-[![DSC VIT](https://img.shields.io/badge/DSC-VIT-blue?style=flat-square)](https://dsc.community.dev/vellore-institute-of-technology/)
-
-</div>
-
-<div align="center">
-
-[![Kotlin](https://img.shields.io/badge/Kotlin-7F52FF?style=flat-square&logo=kotlin&logoColor=white)](https://kotlin.link/)
-[![Android](https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=android&logoColor=white)](https://developer.android.com/)
-[![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=firebase&logoColor=black)](https://firebase.google.com/)
-[![Retrofit](https://img.shields.io/badge/Retrofit-009639?style=flat-square&logo=square&logoColor=white)](https://square.github.io/retrofit/)
-[![Architecture Components](https://img.shields.io/badge/Architecture%20Components-4285F4?style=flat-square&logo=android&logoColor=white)](https://developer.android.com/topic/libraries/architecture)
-
-</div>
-
 ---
 
 ## 📖 About
@@ -60,6 +41,22 @@ By democratizing access to collaborative reading experiences, Keats empowers edu
 - **Fostering Critical Thinking**: Collaborative annotation and discussion features develop analytical skills essential for civic engagement and informed citizenship
 - **Building Empathy**: Shared reading experiences across diverse communities promote cultural understanding and emotional intelligence
 - **Supporting Multilingual Learning**: The platform's architecture supports diverse linguistic communities, promoting inclusive education and cultural preservation
+
+## Core Technologies
+
+[![Kotlin](https://img.shields.io/badge/Kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlin.link/)
+[![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/)
+[![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/)
+[![Retrofit](https://img.shields.io/badge/Retrofit-009639?style=for-the-badge&logo=square&logoColor=white)](https://square.github.io/retrofit/)
+[![Material Design](https://img.shields.io/badge/Material%20Design-757575?style=for-the-badge&logo=material-design&logoColor=white)](https://material.io/)
+[![Hilt](https://img.shields.io/badge/Hilt-2496ED?style=for-the-badge&logo=android&logoColor=white)](https://dagger.dev/hilt/)
+
+## Documentation Resources
+
+[![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](https://github.com/GDGVIT/keats-android/blob/master/LICENSE)
+[![Download APK](https://img.shields.io/badge/Download-APK-success?style=for-the-badge&logo=android)](./app/release/app-release.apk)
+[![API Level](https://img.shields.io/badge/API-21%2B-brightgreen?style=for-the-badge&logo=android)](https://android-arsenal.com/api?level=21)
+[![DSC VIT](https://img.shields.io/badge/DSC-VIT-blue?style=for-the-badge)](https://dsc.community.dev/vellore-institute-of-technology/)
 
 ## 🏗️ Architecture & Technology Stack
 
