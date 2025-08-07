@@ -1,42 +1,24 @@
 <p align="center">
-<a href="https://dscvit.com">
-    <img src="https://user-images.githubusercontent.com/30529572/72455010-fb38d400-37e7-11ea-9c1e-8cdeb5f5906e.png" />
-</a>
+    <a href="https://dscvit.com">
+        <img src="https://user-images.githubusercontent.com/30529572/72455010-fb38d400-37e7-11ea-9c1e-8cdeb5f5906e.png" />
+    </a>
     <h2 align="center">Keats Android</h2>
     <h4 align="center">A collaborative book reading platform that brings readers together through shared literary experiences</h4>
 </p>
 
 <p align="center">
-    <a href="https://github.com/GDGVIT/keats-android/blob/master/LICENSE">
-        <img alt="License" src="https://img.shields.io/github/license/GDGVIT/keats-android?color=blue&style=flat-square">
-    </a>
-    <a href="./app/release/app-release.apk">
-        <img alt="Download APK" src="https://img.shields.io/badge/Download-APK-success?style=flat-square&logo=android">
-    </a>
-    <a href="https://android-arsenal.com/api?level=21">
-        <img alt="API" src="https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat-square">
-    </a>
-    <a href="https://dsc.community.dev/vellore-institute-of-technology/">
-        <img alt="DSC VIT" src="https://img.shields.io/badge/DSC-VIT-blue?style=flat-square">
-    </a>
+    [![License](https://img.shields.io/github/license/GDGVIT/keats-android?color=blue&style=flat-square)](https://github.com/GDGVIT/keats-android/blob/master/LICENSE)
+    [![Download APK](https://img.shields.io/badge/Download-APK-success?style=flat-square&logo=android)](./app/release/app-release.apk)
+    [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat-square)](https://android-arsenal.com/api?level=21)
+    [![DSC VIT](https://img.shields.io/badge/DSC-VIT-blue?style=flat-square)](https://dsc.community.dev/vellore-institute-of-technology/)
 </p>
 
 <p align="center">
-    <a href="https://kotlin.link/">
-        <img alt="Kotlin" src="https://img.shields.io/badge/Kotlin-7F52FF?style=flat-square&logo=kotlin&logoColor=white">
-    </a>
-    <a href="https://developer.android.com/">
-        <img alt="Android" src="https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=android&logoColor=white">
-    </a>
-    <a href="https://firebase.google.com/">
-        <img alt="Firebase" src="https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=firebase&logoColor=black">
-    </a>
-    <a href="https://square.github.io/retrofit/">
-        <img alt="Retrofit" src="https://img.shields.io/badge/Retrofit-009639?style=flat-square&logo=square&logoColor=white">
-    </a>
-    <a href="https://developer.android.com/topic/libraries/architecture">
-        <img alt="Architecture Components" src="https://img.shields.io/badge/Architecture%20Components-4285F4?style=flat-square&logo=android&logoColor=white">
-    </a>
+    [![Kotlin](https://img.shields.io/badge/Kotlin-7F52FF?style=flat-square&logo=kotlin&logoColor=white)](https://kotlin.link/)
+    [![Android](https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=android&logoColor=white)](https://developer.android.com/)
+    [![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=firebase&logoColor=black)](https://firebase.google.com/)
+    [![Retrofit](https://img.shields.io/badge/Retrofit-009639?style=flat-square&logo=square&logoColor=white)](https://square.github.io/retrofit/)
+    [![Architecture Components](https://img.shields.io/badge/Architecture%20Components-4285F4?style=flat-square&logo=android&logoColor=white)](https://developer.android.com/topic/libraries/architecture)
 </p>
 
 ---
@@ -122,7 +104,7 @@ By democratizing access to collaborative reading experiences, Keats empowers edu
    - Navigate to the cloned directory and select it
 
 3. **Configure Firebase**
-   - Create a new Firebase project at [Firebase Console](https://console.firebase.google.com/)
+   - Create a new Firebase project at the [Firebase Console](https://console.firebase.google.com/)
    - Enable Authentication, Storage, and Crashlytics
    - Download `google-services.json` and place it in the `app/` directory
 
