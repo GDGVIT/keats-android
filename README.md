@@ -192,7 +192,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - ✅ **QR Code Integration** - Seamless club joining experience  
 - ✅ **Real-time Comments** - Page-specific annotations and discussions
 - ✅ **Member Moderation** - Administrative controls for club hosts
-- 🔄 **File Upload System** - PDF/ePUB upload functionality (In Progress)
+- ✅ **File Upload System** - PDF/ePUB upload functionality
 - 📋 **Enhanced Reading Experience** - Advanced reader features (Planned)
 
 ## 💬 Support & Community
