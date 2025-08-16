@@ -129,7 +129,7 @@ Update the base API URL in `app/src/main/java/com/dscvit/keats/utils/Constants.k
 ## 🔗 Related Projects
 
 - **[Keats Frontend (Web)](https://github.com/GDGVIT/keats-frontend)** - React-based web interface
-- **[Keats Backend](https://github.com/GDGVIT/keats-backend)** - Node.js API server
+- **[Keats Backend](https://github.com/GDGVIT/keats-backend)** - Go Lang API server
 - **[Keats iOS](https://github.com/GDGVIT/keats-ios)** - Native iOS application
 
 ## 🤝 Contributing
